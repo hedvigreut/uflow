@@ -15,14 +15,10 @@ class App extends Component {
       title: 'Dinner Planner',
     }
   }
-
-  document.addEventListener("DOMContentLoaded", event => {
-    const app = firebase.app();
-    console.log(app)
-
-  });
-
+  
   render() {
+    //var firebase = require("firebase");
+
     return (
       <div className="App">
         <header className="App-header">
