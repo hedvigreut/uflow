@@ -1,0 +1,19 @@
+.App {
+	margin: auto;
+	height: 100%;
+  display: block;
+}
+
+.App-content {
+	margin-top: 10px;
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-bottom: 80px;
+	max-width:;
+	display: flex;
+}
+
+.App-header {
+  text-align: center;
+  padding: 50px;
+}

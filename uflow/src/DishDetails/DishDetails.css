@@ -1,0 +1,17 @@
+h4 {
+  text-align: center;
+}
+
+img {
+  padding-bottom: 20px;
+
+}
+
+p {
+  text-align: justify;
+}
+
+.backButton {
+  display: flex;
+  margin-bottom: 20px;
+}
