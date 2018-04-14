@@ -1,38 +1,32 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Route } from 'react-router-dom';
 import Welcome from './Welcome/Welcome';
 import { modelInstance } from './data/DinnerModel'
-import SelectDish from "./SelectDish/SelectDish";
-import DishDetails from './DishDetails/DishDetails';
-import Overview from "./Overview/Overview";
-import PrintOut from "./PrintOut/PrintOut";
+import Explore from "./Explore/Explore";
+import Profile from "./Profile/Profile";
+import EditProfile from "./Profile/EditProfile";
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: 'Dinner Planner',
+      title: 'U-flow',
     }
   }
 
   render() {
-    //var firebase = require("firebase");
-
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">{this.state.title}</h1>
-        </header>
-        <div className="App-content">
+          {/*<h1 className="App-title">{this.state.title}</h1>*/}
+
           {/* We rended diffrent component based on the path */}
           <Route exact path="/" component={Welcome}/>
-          <Route path="/search" render={() => <SelectDish model={modelInstance}/>}/>
-          <Route path="/dishdetails/:value" render={(props) => <DishDetails model={modelInstance} id={props.match.params.value}/>}/>
-          <Route path="/overview" render={() => <Overview model={modelInstance}/>}/>
-          <Route path="/printout" render={() => <PrintOut model={modelInstance}/>}/>
-        </div>
+          <Route exact path="/explore" render={() => <Explore model={modelInstance}/>}/>
+          <Route path="/profile" render={() => <Profile model={modelInstance}/>}/>
+          <Route path="/edit" render={() => <EditProfile model={modelInstance}/>}/>
 
+        </header>
       </div>
     );
   }

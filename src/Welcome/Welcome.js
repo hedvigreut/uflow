@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Welcome.css';
 import { Link } from 'react-router-dom';
 
 class Welcome extends Component {
@@ -7,11 +6,11 @@ class Welcome extends Component {
     return (
       <div className="Welcome">
         <p>
-            Welcome to the dinner planner React Startup code!
+            Welcome to UFLOW!
         </p>
-        
-        <Link to="/search">
-            <button>Start planning</button>
+
+        <Link to="/explore">
+            <button>Start exploring</button>
         </Link>
       </div>
     );

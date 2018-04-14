@@ -1,0 +1,85 @@
+html,body {
+	font-family: 'Lato', sans-serif;
+	background: grey;
+	
+}
+
+#profilePicture{
+	width: 250px;
+	height: 250px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-top: 30px;
+}
+#profileName{
+	margin-top: 100px;
+	font-size: 50px;
+}
+
+.profileThumbnail{
+	width: 200px;
+	height:130px;
+	border: 0.5px solid #ddd; /* Gray border */
+    border-radius: 3px;  /* Rounded border */
+    padding: 3px; /* Some padding */
+}
+
+.profileThumbnail:hover{
+	width: 200px;
+	height:130px;
+	box-shadow: 0 0 2px 1px rgba(220,220,220,1);
+
+}
+
+#profileVideosAreaLeft{
+	margin-top: 50px;
+	margin-left: -30px;
+}
+
+#profileVideosAreaRight{
+	margin-top: 50px;
+	margin-left: -30px;
+}
+
+#profileVideosAreaLeftBottom{
+	margin-top: 20px;
+}
+
+#editPicture{
+	margin-left: 65px;
+}
+
+.editProfileFields{
+	border: 2px;
+}
+
+.videoCategory{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*background-image:
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+        url('//spin.atomicobject.com/wp-content/uploads/20170324102432/portfolio-tips-feature-image.jpg');*/
+}
+
+.video_area{
+	 position: relative;
+    text-align: center;
+
+}
+/*h4{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}*/
+
+.editProfileButtonArea{
+	margin-top: 30px;
+}
+
+#logo{
+	width: 140px;
+	height: 70px;
+}
