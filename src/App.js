@@ -18,6 +18,21 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAGocayAMdpzxz17dLWbfxb6v_2IGqLPbw",
+      currentDomain: "uflow-b640f.firebaseapp.com",
+      databaseURL: "https://uflow-b640f.firebaseio.com",
+      projectId: "uflow-b640f",
+      storageBucket: "uflow-b640f.appspot.com",
+      messagingSenderId: "889611883337",
+      authDomain: "uflow-b640f.firebaseapp.com"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
+
     firebase.auth().onAuthStateChanged(currentUser => {
       currentUser
         ? this.setState(() => ({ currentUser }))
@@ -26,20 +41,6 @@ class App extends Component {
   }
 
   render() {
-
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyAGocayAMdpzxz17dLWbfxb6v_2IGqLPbw",
-        currentDomain: "uflow-b640f.firebaseapp.com",
-        databaseURL: "https://uflow-b640f.firebaseio.com",
-        projectId: "uflow-b640f",
-        storageBucket: "uflow-b640f.appspot.com",
-        messagingSenderId: "889611883337"
-      };
-
-      if (!firebase.apps.length) {
-        firebase.initializeApp(config);
-      }
 
 
     return (

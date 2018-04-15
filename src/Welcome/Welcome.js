@@ -12,16 +12,19 @@ class Welcome extends Component {
 
       return (
         <div className="Welcome">
+          <div className="col-md-4">
+          </div>
+          <div className="col-md-3">
+            <img src={logo} id="logo" alt="logo"/>
+            <br/>
 
-          <img src={logo} id="logo" alt="logo"/>
-          <br/>
+            <button onClick={() => modelInstance.googleLogin()}>Sign up with Google</button>
 
-          <button onClick={() => modelInstance.googleLogin()}>Sign up with Google</button>
-
-          <p>OR</p>
-          <Link to="/explore">
-              <button>Log in</button>
-          </Link>
+            <p>OR</p>
+            <Link to="/explore">
+                <button>Log in</button>
+            </Link>
+          </div>
         </div>
       );
     }

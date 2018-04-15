@@ -1,7 +1,7 @@
 html,body {
 	font-family: 'Lato', sans-serif;
-	background: grey;
-	
+	background: white;
+
 }
 
 #profilePicture{
@@ -59,7 +59,7 @@ html,body {
     left: 50%;
     transform: translate(-50%, -50%);
     /*background-image:
-        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
         url('//spin.atomicobject.com/wp-content/uploads/20170324102432/portfolio-tips-feature-image.jpg');*/
 }
 

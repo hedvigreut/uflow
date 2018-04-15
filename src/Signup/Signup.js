@@ -16,21 +16,28 @@ class Signup extends Component {
 
       if (currentUser !== null) {
         var name = currentUser.displayName;
+        var email = currentUser.email;
       }
 
 
       return (
         <div className="Signup">
-          <img src={logo} id="logo" alt="logo"/>
-          <br></br>
-          <p>Full name: {name}</p>
-          <br></br>
-          <p>Email: </p>
-          <br></br>
-          <p>Password: </p>
-          <Link to="/profile">
-            <button> Continue </button>
-          </Link>
+          <div className="col-md-4">
+          </div>
+          <div className="col-md-3">
+            <img src={logo} id="logo" alt="logo"/>
+            <br></br>
+            <p>Full name: </p>
+            <input type="text" placeholder={name}/>
+            <br></br>
+            <p>Email: </p>
+            <input type="text" placeholder={email}/>
+            <br></br>
+            <p>Password: </p>
+            <Link to="/profile">
+              <button> Continue </button>
+            </Link>
+          </div>
         </div>
       );
     }
