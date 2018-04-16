@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.jpg';
-import { modelInstance } from '../data/DinnerModel';
+import { modelInstance } from '../data/model';
+import NavBar from "../Navbar/Navbar";
 
 class Welcome extends Component {
 
@@ -12,18 +13,19 @@ class Welcome extends Component {
 
       return (
         <div className="Welcome">
+          <NavBar/>
           <div className="col-md-2">
           </div>
           <div className="col-md-8 jumbotron">
             <div id="welcome">
-              <img src={logo} id="welcomeLogo" alt="logo"/>
+              <img className="img-responsive welcomeLogo" src={logo} alt="logo"/>
               <br/>
 
-              <button onClick={() => modelInstance.googleLogin()}>Sign up with Google</button>
+              <button className="actionButton" onClick={() => modelInstance.googleLogin()}>Sign up with Google</button>
 
-              <p>OR</p>
+              <p id="or">OR</p>
               <Link to="/explore">
-                  <button>Log in</button>
+                  <button className="actionButton">Log in</button>
               </Link>
             </div>
           </div>

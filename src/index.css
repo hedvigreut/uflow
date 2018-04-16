@@ -84,15 +84,30 @@ html,body {
 	height: 70px;
 }
 
-#welcomeLogo {
-	width: 700px;
-	height: 350px;
+.welcomeLogo {
+	padding: 50px;
 }
 
 .jumbotron {
 	background-color: white;
+	height: 100vh;
 }
 
 #welcome {
 	text-align: center;
+}
+
+#signup {
+		text-align: center;
+}
+
+.actionButton {
+	background-color: #c8d9ec;
+	border-radius: 5px;
+	padding: 10px;
+	color: black;
+}
+
+#or {
+	margin: 40px;
 }

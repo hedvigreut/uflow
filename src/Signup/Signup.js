@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.jpg';
-import { modelInstance } from '../data/DinnerModel';
+import { modelInstance } from '../data/model';
+import NavBar from "../Navbar/Navbar";
 
 
 class Signup extends Component {
@@ -21,24 +22,27 @@ class Signup extends Component {
 
 
       return (
-        <div className="Signup">
-          <div className="col-md-4">
+          <div className="Signup container">
+            <NavBar />
+            <div className="col-md-2">
+            </div>
+            <div className="col-md-8 jumbotron" id="signup">
+              <img className="img-responsive welcomeLogo" src={logo} alt="logo"/>
+
+              <h3>Full name: <input type="text" placeholder={name}/></h3>
+              <br></br>
+
+              <h3>Email: <input type="text" placeholder={email}/></h3>
+              <br></br>
+
+              {/*}<h3>Password: <input type="text" placeholder="Ex hello123"/></h3>
+            <br></br>*/}
+
+              <Link to="/profile">
+                <button className="actionButton"> Continue </button>
+              </Link>
+            </div>
           </div>
-          <div className="col-md-3">
-            <img src={logo} id="logo" alt="logo"/>
-            <br></br>
-            <p>Full name: </p>
-            <input type="text" placeholder={name}/>
-            <br></br>
-            <p>Email: </p>
-            <input type="text" placeholder={email}/>
-            <br></br>
-            <p>Password: </p>
-            <Link to="/profile">
-              <button> Continue </button>
-            </Link>
-          </div>
-        </div>
       );
     }
 }

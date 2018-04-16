@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { Route } from 'react-router-dom';
 import Welcome from './Welcome/Welcome';
-import { modelInstance } from './data/DinnerModel';
+import { modelInstance } from './data/model';
 import Explore from "./Explore/Explore";
 import Profile from "./Profile/Profile";
 import EditProfile from "./Profile/EditProfile";
