@@ -80,9 +80,52 @@ html,body {
 }
 
 #logo{
-	width: 140px;
-	height: 70px;
+	margin-top: -25px;
+	padding: 0px;
+	width: 130px;
+	height: 65px;
 }
+
+.navbar{
+	background-color: white;
+	height: 70px;
+	border-width: 2px;
+	color: #d1d1d1;
+	border-color: #d1d1d1;
+	border-bottom: 0px;
+	border-color: transparent;
+}
+
+.input-group{
+	margin-left: 325px;
+}
+.navbarIcons{
+	margin-left: 950px;
+	padding-left: 30px;
+}
+
+.material-icons{
+	margin-top: 15px;
+	margin-right: 40px;
+	font-size: 30px;
+}
+
+.input-group-btn{
+	margin-left: 40px;
+}
+
+.carouselArea{
+	margin-top: 20px;
+	margin-left: 100px;
+}
+
+.youtube{
+	margin-top: 20px;
+	margin-right: 25px;
+	margin-left: 50px;
+
+}
+
 
 .welcomeLogo {
 	padding: 50px;
@@ -110,4 +153,16 @@ html,body {
 
 #or {
 	margin: 40px;
+}
+
+.EditProfile {
+	margin-top: 70px;
+}
+
+.SelectProfile {
+		margin-top: 50px;
+}
+
+.Profile {
+		margin-top: 70px;
 }

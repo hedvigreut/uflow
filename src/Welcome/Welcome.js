@@ -13,7 +13,7 @@ class Welcome extends Component {
 
       return (
         <div className="Welcome">
-          <NavBar/>
+          {/*<NavBar/>*/}
           <div className="col-md-2">
           </div>
           <div className="col-md-8 jumbotron">

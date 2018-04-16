@@ -23,7 +23,7 @@ class Signup extends Component {
 
       return (
           <div className="Signup container">
-            <NavBar />
+            {/*<NavBar />*/}
             <div className="col-md-2">
             </div>
             <div className="col-md-8 jumbotron" id="signup">
@@ -38,7 +38,7 @@ class Signup extends Component {
               {/*}<h3>Password: <input type="text" placeholder="Ex hello123"/></h3>
             <br></br>*/}
 
-              <Link to="/profile">
+              <Link to="/explore">
                 <button className="actionButton"> Continue </button>
               </Link>
             </div>

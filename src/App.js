@@ -7,6 +7,7 @@ import Explore from "./Explore/Explore";
 import Profile from "./Profile/Profile";
 import EditProfile from "./Profile/EditProfile";
 import Signup from "./Signup/Signup";
+import Flow from './Flow/Flow';
 
 class App extends Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class App extends Component {
         ? this.setState(() => ({ currentUser }))
         : this.setState(() => ({ currentUser: null }));
     });
+
   }
 
   render() {
