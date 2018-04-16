@@ -1,6 +1,6 @@
 html,body {
 	font-family: 'Lato', sans-serif;
-	background: white;
+	background: #f0d0b9;
 
 }
 
@@ -82,4 +82,17 @@ html,body {
 #logo{
 	width: 140px;
 	height: 70px;
+}
+
+#welcomeLogo {
+	width: 700px;
+	height: 350px;
+}
+
+.jumbotron {
+	background-color: white;
+}
+
+#welcome {
+	text-align: center;
 }
