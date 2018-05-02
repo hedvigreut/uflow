@@ -1,4 +1,4 @@
-const DinnerModel = function () {
+const Model = function () {
 
   let filter = [];
   var firebase = require("firebase");
@@ -53,4 +53,4 @@ const DinnerModel = function () {
 
 }
 
-export const modelInstance = new DinnerModel();
+export const modelInstance = new Model();
