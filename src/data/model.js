@@ -1,3 +1,4 @@
+//Hejhejhej
 const DinnerModel = function () {
 
   let filter = [];
