@@ -7,10 +7,9 @@ class SelectProfile extends Component {
     return (
       <div className="SelectProfile">
         <h2>This is the Select Profile screen</h2>
-        
+
         {/* We pass the model as property to the Sidebar component */}
         <Profile model={this.props.model}/>
-        {/*<Dishes/>*/}
       </div>
     );
   }

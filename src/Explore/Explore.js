@@ -9,8 +9,6 @@ class Explore extends Component {
         {/* We pass the model as property to the Sidebar component */}
         <Navbar model={this.props.model}/>
         <Flow model={this.props.model}/>
-
-        {/*<Dishes/>*/}
       </div>
     );
   }
