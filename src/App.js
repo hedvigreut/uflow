@@ -33,6 +33,7 @@ class App extends Component {
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
     }
+    var database = firebase.database();
 
     firebase.auth().onAuthStateChanged(currentUser => {
       currentUser
