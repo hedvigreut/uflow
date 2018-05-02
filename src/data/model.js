@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-//Hejhejhej
-const DinnerModel = function () {
-=======
 const Model = function () {
->>>>>>> d4894ba7cc7b9029662dc3c23ae943a9d4e68acf
 
   let filter = [];
   var firebase = require("firebase");
