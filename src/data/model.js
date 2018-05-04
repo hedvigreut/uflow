@@ -4,6 +4,23 @@ const Model = function () {
   var firebase = require("firebase");
   const key = 'AIzaSyAOYG1Ai4mZy6L-ifZgQ8bzS87vA6v3JdA'
 
+  //let userID = 0;
+
+  this.writeUserData = function(email, id, profile_pic, username) {
+    var name = email;
+    name = name.substring(0,username.indexOf("@"));
+    name = name.replace(/[^a-z0-9]+|\s+/gmi, "");
+    console.log(name);
+
+    firebase.database().ref('/users/' + name).set({
+      email: email,
+      id: id,
+      profile_pic : profile_pic,
+      username: name
+    });
+  }
+
+
   this.googleLogin = function() {
       const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -15,6 +32,7 @@ const Model = function () {
           console.log(user)
         })
         .catch(console.log);
+
   }
 
   // API Calls
@@ -53,7 +71,7 @@ const Model = function () {
     filter = newFilter;
     {/*notifyObservers();*/}
   }
-
 }
+
 
 export const modelInstance = new Model();
