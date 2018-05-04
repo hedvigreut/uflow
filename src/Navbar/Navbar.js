@@ -33,7 +33,7 @@ class Navbar extends Component {
       })
     })
 
-    alert(this.state.resultyt);
+    alert("Sökte på: " + this.state.resultyt);
     //search(this.state.filter)
   }
 

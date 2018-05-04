@@ -29,7 +29,7 @@ const Model = function () {
 
   this.getVideos = function () {
     const channelID = 'UCEQi1ZNJiw3YMRwni0OLsTQ'
-    const result = 20;
+    const result = 8;
     var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&channelId=${channelID}&part=snippet,id&order=date&maxResults=${result}`
 
     return this.map(finalURL);
@@ -37,7 +37,6 @@ const Model = function () {
   }
 
   this.search = function (filter) {
-    const channelID = 'UCEQi1ZNJiw3YMRwni0OLsTQ'
     const result = 2;
     var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet,id&order=date&maxResults=${result}`
     console.log("finalurl är: " + finalURL);
