@@ -4,6 +4,23 @@ const Model = function () {
   var firebase = require("firebase");
   const key = 'AIzaSyAOYG1Ai4mZy6L-ifZgQ8bzS87vA6v3JdA'
 
+  //This function is called when a user logs in via Google. It adds the user in
+  //the database.
+  this.writeUserData = function(email, id, profile_pic, username) {
+    var name = email;
+    name = name.substring(0,username.indexOf("@"));
+    name = name.replace(/[^a-z0-9]+|\s+/gmi, "");
+    console.log(name);
+
+    firebase.database().ref('/users/' + name).set({
+      email: email,
+      id: id,
+      profile_pic : profile_pic,
+      username: name
+    });
+  }
+
+
   this.googleLogin = function() {
       const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -15,6 +32,7 @@ const Model = function () {
           console.log(user)
         })
         .catch(console.log);
+
   }
 
   // API Calls
@@ -29,7 +47,7 @@ const Model = function () {
 
   this.getVideos = function () {
     const channelID = 'UCEQi1ZNJiw3YMRwni0OLsTQ'
-    const result = 8;
+    const result = 20;
     var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&channelId=${channelID}&part=snippet,id&order=date&maxResults=${result}`
 
     return this.map(finalURL);
@@ -37,6 +55,7 @@ const Model = function () {
   }
 
   this.search = function (filter) {
+    const channelID = 'UCEQi1ZNJiw3YMRwni0OLsTQ'
     const result = 2;
     var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet,id&order=date&maxResults=${result}`
     console.log("finalurl är: " + finalURL);
@@ -52,7 +71,7 @@ const Model = function () {
     filter = newFilter;
     {/*notifyObservers();*/}
   }
-
 }
+
 
 export const modelInstance = new Model();

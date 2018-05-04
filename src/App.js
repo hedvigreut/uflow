@@ -33,12 +33,17 @@ class App extends Component {
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
     }
+
+    // Get a reference to the database service
     var database = firebase.database();
+    var currentUser = this.state.currentUser;
 
     firebase.auth().onAuthStateChanged(currentUser => {
       currentUser
         ? this.setState(() => ({ currentUser }))
         : this.setState(() => ({ currentUser: null }));
+        modelInstance.writeUserData(currentUser.email, currentUser.uid, currentUser.photoURL, currentUser.email);
+
     });
 
   }
