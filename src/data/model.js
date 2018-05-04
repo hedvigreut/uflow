@@ -4,8 +4,8 @@ const Model = function () {
   var firebase = require("firebase");
   const key = 'AIzaSyAOYG1Ai4mZy6L-ifZgQ8bzS87vA6v3JdA'
 
-  //let userID = 0;
-
+  //This function is called when a user logs in via Google. It adds the user in
+  //the database.
   this.writeUserData = function(email, id, profile_pic, username) {
     var name = email;
     name = name.substring(0,username.indexOf("@"));
