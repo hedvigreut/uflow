@@ -35,9 +35,12 @@ class Flow extends Component {
     })
   }
 
-  onMouseEnterHandler() {
-    console.log("hovvraaar");
+  hoverAnimate() {
+
+    
+
   }
+
 
   render(){
     
@@ -48,7 +51,7 @@ class Flow extends Component {
       <div>
       <div className="col-md-1"></div>
       <div className="carouselArea col-md-10">
-          <iframe width="840" height="472.5" src='https://www.youtube.com/embed/bm_zLDuF7LM' frameBorder="0" allowFullScreen></iframe>  
+          <iframe className="exploreChosenYoutube"width="840" height="472.5" src='https://www.youtube.com/embed/bm_zLDuF7LM' frameBorder="0" allowFullScreen></iframe>  
       </div>
 
           {
@@ -57,7 +60,7 @@ class Flow extends Component {
               <div>
               <div className="youtubeArea">
               <div key={i} className="col-md-2 youtube">
-              <iframe width="280" height="157.5" src={link} frameBorder="0"  onMouseOver={this.onMouseEnterHandler} onMouseEnter={this.onMouseEnterHandler} allowFullScreen >
+              <iframe className="exploreSmallYoutube" id={"exploreSmallYoutube" + i} width="280" height="157.5" src={link} frameBorder="0" onMouseOver={this.hoverAnimate} allowFullScreen >
               </iframe>
               </div>
               </div>

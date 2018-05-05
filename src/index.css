@@ -126,7 +126,6 @@ html,body {
 
 }
 
-
 .welcomeLogo {
 	padding: 50px;
 }
@@ -165,4 +164,53 @@ html,body {
 
 .Profile {
 		margin-top: 70px;
+}
+
+.exploreSmallYoutube{
+    width:280px;
+    height: 157.5px;
+    -webkit-transition-property: height, width;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: height, width;
+    -moz-transition-duration: 1s;
+    transition-property: height, width;
+    transition-duration: 1s;
+    background: red;
+}
+
+.exploreSmallYoutube:hover {
+    width: 392px;
+    height: 220.5px;
+    -webkit-transition-property: height, width;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: height, width;
+    -moz-transition-duration: 1s;
+    transition-property: height, width;
+    transition-duration: 1s;
+    background: red;
+}
+
+
+.exploreSmallYoutube:onMouseLeave {
+    width: 300px;
+    height: 200px;
+    -webkit-transition-property: height, width;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: height, width;
+    -moz-transition-duration: 1s;
+    transition-property: height, width;
+    transition-duration: 1s;
+    background: red;
+}
+
+.exploreSmallYoutube:hover .exploreSmallYoutube{
+    width: 196px;
+    height: 154.35px;
+    -webkit-transition-property: height, width;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: height, width;
+    -moz-transition-duration: 1s;
+    transition-property: height, width;
+    transition-duration: 1s;
+    background: red;
 }
