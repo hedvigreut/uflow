@@ -37,13 +37,13 @@ class Flow extends Component {
 
   hoverAnimate() {
 
-    
+
 
   }
 
 
   render(){
-    
+
 
 
 
@@ -51,7 +51,7 @@ class Flow extends Component {
       <div>
       <div className="col-md-1"></div>
       <div className="carouselArea col-md-10">
-          <iframe className="exploreChosenYoutube"width="840" height="472.5" src='https://www.youtube.com/embed/bm_zLDuF7LM' frameBorder="0" allowFullScreen></iframe>  
+          <iframe className="exploreChosenYoutube"width="840" height="472.5" src='https://www.youtube.com/embed/bm_zLDuF7LM' frameBorder="0" allowFullScreen></iframe>
       </div>
 
           {

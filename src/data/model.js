@@ -1,6 +1,7 @@
 const Model = function () {
 
-  let filter = [];
+  let filter = "";
+  let observers = [];
   var firebase = require("firebase");
   const key = 'AIzaSyAOYG1Ai4mZy6L-ifZgQ8bzS87vA6v3JdA';
 
@@ -90,10 +91,9 @@ const Model = function () {
   }
 
   this.search = function (filter) {
-    const channelID = 'UCEQi1ZNJiw3YMRwni0OLsTQ'
     const result = 2;
-    var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet,id&order=date&maxResults=${result}`
-    console.log("finalurl är: " + finalURL);
+    var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet,id&q=${filter}&order=relevance&maxResults=${result}`;
+    notifyObservers();
     return this.map(finalURL);
 
   }
@@ -104,8 +104,20 @@ const Model = function () {
 
   this.setFilter = function (newFilter) {
     filter = newFilter;
-    {/*notifyObservers();*/}
+    //notifyObservers();
   }
+  this.addObserver = function (observer) {
+    observers.push(observer);
+  };
+
+  this.removeObserver = function (observer) {
+    observers = observers.filter(o => o !== observer);
+  };
+
+  const notifyObservers = function () {
+    observers.forEach(o => o.update());
+  };
+
 }
 
 

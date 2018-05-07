@@ -7,11 +7,19 @@ class Navbar extends Component {
     super(props)
     this.state = {
       resultyt: [],
-      filter: ''
+      filter: this.props.model.getFilter(),
     }
 
     this.handleFilter = this.handleFilter.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+  }
+
+  componentDidMount = () => {
+    this.props.model.addObserver(this)
+  }
+
+  componentWillUnmount() {
+    this.props.model.removeObserver(this)
   }
 
   update() {
@@ -22,7 +30,7 @@ class Navbar extends Component {
 
   handleSearch(event) {
     event.preventDefault();
-    this.props.model.getVideos().then(video => {
+    this.props.model.search(this.props.model.getFilter()).then(video => {
       this.setState({
         status: 'LOADED',
         resultyt: video
@@ -32,14 +40,11 @@ class Navbar extends Component {
         status: 'ERROR'
       })
     })
-
-    alert("Sökte på: " + this.state.resultyt);
-    //search(this.state.filter)
+    //alert("Sökte på: " + this.state.resultyt);
   }
 
-  handleFilter(event) {
+  handleFilter = (event) => {
     this.props.model.setFilter(event.target.value);
-    this.setState({filter: event.target.value});
   }
 
   render() {
