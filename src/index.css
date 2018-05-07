@@ -132,7 +132,7 @@ html,body {
 
 .jumbotron {
 	background-color: white;
-	height: 100vh;
+	height: 100%;
 }
 
 #welcome {
@@ -214,3 +214,10 @@ html,body {
     transition-duration: 1s;
     background: red;
 }
+
+#file {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 25%;
+	}

@@ -34,15 +34,16 @@ class App extends Component {
       firebase.initializeApp(config);
     }
 
-    // Get a reference to the database service
-    var database = firebase.database();
+    modelInstance.createDatabase();
+    modelInstance.createStorage();
+
     var currentUser = this.state.currentUser;
 
     firebase.auth().onAuthStateChanged(currentUser => {
       currentUser
         ? this.setState(() => ({ currentUser }))
         : this.setState(() => ({ currentUser: null }));
-        modelInstance.writeUserData(currentUser.email, currentUser.uid, currentUser.photoURL, currentUser.email);
+        modelInstance.writeUserData(currentUser.email, currentUser.uid, currentUser.photoURL, currentUser.email, currentUser.displayName);
 
     });
 
