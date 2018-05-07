@@ -2,11 +2,45 @@ const Model = function () {
 
   let filter = [];
   var firebase = require("firebase");
-  const key = 'AIzaSyAOYG1Ai4mZy6L-ifZgQ8bzS87vA6v3JdA'
+  const key = 'AIzaSyAOYG1Ai4mZy6L-ifZgQ8bzS87vA6v3JdA';
+
+  this.createDatabase = function() {
+    // Get a reference to the database service
+    var database = firebase.database();
+  }
+
+  this.createStorage = function() {
+    var storage = firebase.storage();
+    var storageRef = firebase.storage().ref();
+    var imagesRef = storageRef.child('images');
+  }
+
+  this.handleFileSelect = function(evt) {
+    var storage = firebase.storage();
+    var storageRef = firebase.storage().ref();
+    var imagesRef = storageRef.child('images');
+      evt.stopPropagation();
+      evt.preventDefault();
+      var file = evt.target.files[0];
+      var metadata = {
+        'contentType': file.type
+      };
+      // Push to child path.
+      // [START oncomplete]
+      storageRef.child('images/' + file.name).put(file, metadata).then(function(snapshot) {
+        console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+        console.log('File metadata:', snapshot.metadata);
+        }).catch(function(error) {
+          // [START onfailure]
+          console.error('Upload failed:', error);
+          // [END onfailure]
+        });
+        // [END oncomplete]
+    }
 
   //This function is called when a user logs in via Google. It adds the user in
   //the database.
-  this.writeUserData = function(email, id, profile_pic, username) {
+  this.writeUserData = function(email, id, profile_pic, username, fullName) {
     var name = email;
     name = name.substring(0,username.indexOf("@"));
     name = name.replace(/[^a-z0-9]+|\s+/gmi, "");
@@ -16,7 +50,8 @@ const Model = function () {
       email: email,
       id: id,
       profile_pic : profile_pic,
-      username: name
+      username: name,
+      fullName: fullName
     });
   }
 
