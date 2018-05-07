@@ -35,12 +35,6 @@ class Flow extends Component {
     })
   }
 
-  hoverAnimate() {
-
-
-
-  }
-
 
   render(){
 
@@ -57,18 +51,16 @@ class Flow extends Component {
           {
             this.state.resultyt.map((link, i) => {
               var frame =
-              <div>
-              <div className="youtubeArea">
-              <div key={i} className="col-md-2 youtube">
-              <iframe className="exploreSmallYoutube" id={"exploreSmallYoutube" + i} width="280" height="157.5" src={link} frameBorder="0" onMouseOver={this.hoverAnimate} allowFullScreen >
+              <iframe className="exploreSmallYoutube col-md-2" id={"exploreSmallYoutube" + i} width="280" height="157.5" src={link} frameBorder="0" onMouseOver={this.hoverAnimate} allowFullScreen >
               </iframe>
-              </div>
-              </div>
-              </div>
               return frame;
             })
           }
+           <div>
+              <div className="youtube col-md-8">
           {this.frame}
+          </div>
+              </div>
 
           </div>
           );

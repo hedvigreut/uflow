@@ -122,7 +122,8 @@ html,body {
 .youtube{
 	margin-top: 20px;
 	margin-right: 25px;
-	margin-left: 50px;
+	margin-left: 0.5%;
+	display: flex;
 
 }
 
@@ -166,53 +167,66 @@ html,body {
 		margin-top: 70px;
 }
 
+/* Flow.js */
+
 .exploreSmallYoutube{
     width:280px;
     height: 157.5px;
+	margin-bottom: 1%;
     -webkit-transition-property: height, width;
-    -webkit-transition-duration: 1s;
+    -webkit-transition-duration: 0.5s;
     -moz-transition-property: height, width;
-    -moz-transition-duration: 1s;
+    -moz-transition-duration: 0.5s;
     transition-property: height, width;
-    transition-duration: 1s;
-    background: red;
+    transition-duration: 0.5s;
 }
 
 .exploreSmallYoutube:hover {
-    width: 392px;
-    height: 220.5px;
+    width: 336px;
+    height: 189px;
     -webkit-transition-property: height, width;
-    -webkit-transition-duration: 1s;
+    -webkit-transition-duration: 0.5s;
     -moz-transition-property: height, width;
-    -moz-transition-duration: 1s;
+    -moz-transition-duration: 0.5s;
     transition-property: height, width;
-    transition-duration: 1s;
-    background: red;
+    transition-duration: 0.5s;
 }
+
+
+.exploreSmallYoutube:hover ~ .exploreSmallYoutube{
+    width: 224px;
+    height: 126px;
+    -webkit-transition-property: height, width;
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-property: height, width;
+    -moz-transition-duration: 0.5s;
+    transition-property: height, width;
+    transition-duration: 0.5s;
+}
+
 
 
 .exploreSmallYoutube:onMouseLeave {
-    width: 300px;
-    height: 200px;
+    width: 280px;
+    height: 157.5px;
     -webkit-transition-property: height, width;
-    -webkit-transition-duration: 1s;
+    -webkit-transition-duration: 0.5s;
     -moz-transition-property: height, width;
-    -moz-transition-duration: 1s;
+    -moz-transition-duration: 0.5s;
     transition-property: height, width;
-    transition-duration: 1s;
-    background: red;
+    transition-duration: 0.5s;
 }
 
-.exploreSmallYoutube:hover .exploreSmallYoutube{
-    width: 196px;
-    height: 154.35px;
+
+.exploreSmallYoutube:onMouseLeave ~ .exploreSmallYoutube{
+    width: 280px;
+    height: 157.5px;
     -webkit-transition-property: height, width;
-    -webkit-transition-duration: 1s;
+    -webkit-transition-duration: 0.5s;
     -moz-transition-property: height, width;
-    -moz-transition-duration: 1s;
+    -moz-transition-duration: 0.5s;
     transition-property: height, width;
-    transition-duration: 1s;
-    background: red;
+    transition-duration: 0.5s;
 }
 
 #file {
@@ -221,3 +235,4 @@ html,body {
 	margin-right: auto;
 	width: 25%;
 	}
+	
