@@ -29,22 +29,25 @@ class Navbar extends Component {
   }
 
   handleSearch(event) {
-    event.preventDefault();
-    this.props.model.search(this.props.model.getFilter()).then(video => {
-      this.setState({
-        status: 'LOADED',
-        resultyt: video
-      })
-    }).catch(() => {
-      this.setState({
-        status: 'ERROR'
-      })
-    })
+     this.props.model.setFilter(this.state.filter);
+     alert("Vi har nu sparat: " + this.props.model.getFilter() + " i modellen");
+     
+    // this.props.model.search(this.props.model.getFilter()).then(video => {
+    //   this.setState({
+    //     status: 'LOADED',
+    //     resultyt: video
+    //   })
+    // }).catch(() => {
+    //   this.setState({
+    //     status: 'ERROR'
+    //   })
+    // })
     //alert("Sökte på: " + this.state.resultyt);
   }
 
   handleFilter = (event) => {
-    this.props.model.setFilter(event.target.value);
+    alert("Vi sparar: " + event.target.value + " i statet");
+    this.state.filter = event.target.value;
   }
 
   render() {

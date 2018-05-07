@@ -22,7 +22,11 @@ class Flow extends Component {
 
   componentDidMount() {
 
-    this.props.model.getVideos().then(video => {
+    this.props.model.addObserver(this);
+
+    alert("Vi har att filter är: " + this.props.model.getFilter());
+
+    this.props.model.getVideos(this.props.model.getFilter()).then(video => {
       this.setState({
         status: 'LOADED',
         resultyt: video,
@@ -35,6 +39,18 @@ class Flow extends Component {
     })
   }
 
+  componentWillUnmount() {
+    this.props.model.removeObserver(this);
+  }
+
+  update() {
+    console.log("update: " + this.props.model.getFilter());
+    this.setState({
+      filter : this.props.model.getFilter()
+    })
+    
+    
+  }
 
   render(){
 
