@@ -89,7 +89,7 @@ const Model = function () {
       console.log("Någon har sökt på: " + filter);
       const result = 5;
       var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet,id&q=${filter}&order=relevance&maxResults=${result}`;
-      notifyObservers();
+      //notifyObservers();
       return this.map(finalURL);
     }
 

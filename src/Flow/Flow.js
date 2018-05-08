@@ -18,13 +18,32 @@ class Flow extends Component {
     this.state = {
       resultyt: []
     };
+
+    this.modalVideo = this.modalVideo.bind(this);
   }
 
   componentDidMount() {
 
     this.props.model.addObserver(this);
+    this.paint();
+    
+  }
 
-    //alert("Vi har att filter är: " + this.props.model.getFilter());
+  componentWillUnmount() {
+    this.props.model.removeObserver(this);
+
+  }
+
+  update() {
+    console.log("update: " + this.props.model.getFilter());
+    this.setState({
+      filter : this.props.model.getFilter()
+    })
+    this.paint();
+    
+  }
+
+  paint() {
 
     this.props.model.getVideos(this.props.model.getFilter()).then(video => {
       this.setState({
@@ -37,19 +56,6 @@ class Flow extends Component {
         status: 'ERROR'
       })
     })
-  }
-
-  componentWillUnmount() {
-    this.props.model.removeObserver(this);
-  }
-
-  update() {
-    console.log("update: " + this.props.model.getFilter());
-    this.setState({
-      filter : this.props.model.getFilter()
-    })
-
-    
   }
 
 
@@ -81,9 +87,14 @@ class Flow extends Component {
 }
 
 modalVideo(event) {
+
   var video = document.createElement("iframe");
-  var button = document.getElementById(event.target.id);
-  var src = document.getElementById(event.target.id).previousSibling.src; 
+  console.log(this.state.resultyt);
+  var index = event.target.attributes.getNamedItem("index").value;
+  //console.log(this.state.resultyt(parseInt(event.target.index)]);
+  var src = this.state.resultyt[index];
+  //console.log(src);
+  //console.log(document.getElementById(event.target.id).previousSibling); 
   video.src = src;
   video.id = "modalVideo";
   var position = document.getElementById("shareVideoArea");
@@ -108,7 +119,7 @@ render(){
         <div className="exploreSmallYoutubeArea col-md-2">
         <iframe className="exploreSmallYoutube row" id= {"exploreSmallYoutube" + i} src={link} frameBorder="0" onMouseOver={this.displayShare} onMouseLeave={this.hideShare} allowFullScreen >
         </iframe>
-         <input className="row exploreSmallYoutubeButton" type="button" id="shareSingleVideo" value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>
+         <input className="row exploreSmallYoutubeButton" type="button" id="shareSingleVideo" index={i} value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>
          </div>
         return frame;
       })
