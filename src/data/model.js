@@ -87,7 +87,7 @@ const Model = function () {
 
     if(filter){
       console.log("Någon har sökt på: " + filter);
-      const result = 5;
+      const result = 12;
       var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet,id&q=${filter}&order=relevance&maxResults=${result}`;
       //notifyObservers();
       return this.map(finalURL);
@@ -95,7 +95,7 @@ const Model = function () {
 
     //console.log("Vi har inte sökt på något!");
     const channelID = 'UCEQi1ZNJiw3YMRwni0OLsTQ'
-    const result = 13;
+    const result = 12;
     var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&channelId=${channelID}&part=snippet,id&order=date&maxResults=${result}`
 
     return this.map(finalURL);

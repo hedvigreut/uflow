@@ -1,6 +1,7 @@
 html,body {
 font-family: 'Lato', sans-serif;
 background: #f0d0b9;
+background-color: #4B4B4B;
 
 }
 
@@ -127,10 +128,6 @@ transform: translate(-50%, -50%);
 	margin-left: 40px;
 }
 
-.carouselArea{
-	margin-top: 20px;
-	margin-left: 90px;
-}
 
 .exploreYoutubeArea{
 	margin-top: 20px;
@@ -282,7 +279,11 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 .exploreSmallYoutubeButton{
 	width: 308px;
 	height: 60px;
-	margin-top: -4px;
+	margin-top: -5px;
+	opacity: 100%;
+	background-color: #3a3a3a;
+	color: #d6d6d6;
+	border: 0.5px solid #262626; 
 
 }
 
@@ -291,7 +292,7 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 }
 
 .modalDescriptionBox{
-	width: 567px;
+	width: 474.32px;
 	height: 100px;
 }
 
@@ -300,8 +301,11 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 }
 
 #modalDescription{
-	margin-top: -5px;
-	margin-left: 10px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	/*margin-left: 65px;*/
+	text-align: center;
+	font-size: 18px;
 }
 
 #message input,
@@ -323,4 +327,35 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
     height: 150px;
     resize: none;
 }
+
+#modalVideo{
+	width: 474.32px;
+	height: 242.55px;
+}
+
+#modalDescriptionBoxShare{
+	font-size: 16px;
+}
+
+.exploreChosenYoutube{
+	border: 0.5px solid #262626;
+	margin-right: 3px;
+}
+
+.promotedArea{
+	margin-top: 20px;
+	margin-left: 90px;
+}
+
+#promotedVideo{
+	width: 840px;
+	height: 472.5px;
+}
+
+#sharePromotedVideo{
+	width: 840px;
+	margin-left: 0px;
+}
+
+
 

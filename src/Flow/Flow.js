@@ -88,36 +88,40 @@ class Flow extends Component {
 
 modalVideo(event) {
 
-  var video = document.createElement("iframe");
-  console.log(this.state.resultyt);
-  var index = event.target.attributes.getNamedItem("index").value;
-  //console.log(this.state.resultyt(parseInt(event.target.index)]);
-  var src = this.state.resultyt[index];
-  //console.log(src);
-  //console.log(document.getElementById(event.target.id).previousSibling); 
-  video.src = src;
-  video.id = "modalVideo";
   var position = document.getElementById("shareVideoArea");
-  //console.log(position);
-  //console.log(video);
+  if(position.firstChild){
+    position.firstChild.remove(); 
+  }
+  var inputField = document.getElementById("modalDescriptionBoxShare");
+  if(inputField.value){
+   inputField.value = [];
+  }
+  var video = document.createElement("iframe");
+  var index = event.target.attributes.getNamedItem("index").value;
+  var src = this.state.resultyt[index];
+  video.src = src;
+  //video.className = "col-md-7";
+  video.id = "modalVideo";
   position.appendChild(video);
 }
 
 render(){
 
+
   return(
     <div>
 
     <div className="col-md-1"></div>
-    <div className="carouselArea col-md-10">
-    <iframe className="exploreChosenYoutube"width="840" height="472.5" src='https://www.youtube.com/embed/bm_zLDuF7LM' frameBorder="0" allowFullScreen></iframe>
+    <div className="promotedArea col-md-10">
+    <iframe className="exploreChosenYoutube" id="promotedVideo" src={this.state.resultyt[0]} frameBorder="0" allowFullScreen></iframe>
+    <input className="row exploreSmallYoutubeButton" type="button" id="sharePromotedVideo" index={0} value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>  
     </div>
 
     {
       this.state.resultyt.map((link, i) => {
         var frame =
         <div className="exploreSmallYoutubeArea col-md-2">
-        <iframe className="exploreSmallYoutube row" id= {"exploreSmallYoutube" + i} src={link} frameBorder="0" onMouseOver={this.displayShare} onMouseLeave={this.hideShare} allowFullScreen >
+        <iframe className="exploreSmallYoutube row" id= {"exploreSmallYoutube " + i} src={link} frameBorder="0" onMouseOver={this.displayShare} onMouseLeave={this.hideShare} allowFullScreen >
         </iframe>
          <input className="row exploreSmallYoutubeButton" type="button" id="shareSingleVideo" index={i} value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>
          </div>
@@ -133,10 +137,16 @@ render(){
     <h4 className="modal-title" id="myModalLabel">Share video</h4>
     </div>
     <div className="modal-body">
+    <div className="col-md-1">
+    </div>
     <div id="shareVideoArea">
     </div>
+    <div className="col-md-1">
+    </div>
     <h5 id="modalDescription">Description</h5>
-    <textarea className="modalDescriptionBox" placeholder="Write a description for this video"></textarea>
+    <div className="col-md-1">
+    </div>
+    <textarea className="modalDescriptionBox" id="modalDescriptionBoxShare" placeholder="Write a description for this video"></textarea>
     </div>
     <div className="modal-footer">
     <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>

@@ -15,11 +15,11 @@ class Navbar extends Component {
   }
 
   componentDidMount = () => {
-    this.props.model.addObserver(this);
+    //this.props.model.addObserver(this);
   }
 
   componentWillUnmount() {
-    this.props.model.removeObserver(this);
+    //this.props.model.removeObserver(this);
   }
 
   update() {
