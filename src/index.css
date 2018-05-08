@@ -132,11 +132,12 @@ transform: translate(-50%, -50%);
 	margin-left: 90px;
 }
 
-.youtube{
+.exploreYoutubeArea{
 	margin-top: 20px;
 	margin-right: 25px;
-	margin-left: 0.5%;
-	display: flex;
+	margin-left: 100px;
+	/*display: flex;*/
+	/*box-sizing: border-box;*/
 
 }
 
@@ -183,6 +184,11 @@ transform: translate(-50%, -50%);
 /* Flow.js */
 
 .exploreSmallYoutube{
+	width: 308px;
+	height: 157.5px;
+}
+
+/*.exploreSmallYoutube{
 	width:280px;
 	height: 157.5px;
 	margin-top: 3%;
@@ -193,9 +199,9 @@ transform: translate(-50%, -50%);
 	-moz-transition-duration: 0.5s;
 	transition-property: height, width;
 	transition-duration: 0.5s;
-}
+}*/
 
-.exploreSmallYoutube:hover {
+/*.exploreSmallYoutube:hover {
 	width: 336px;
 	height: 189px;
 	-webkit-transition-property: height, width;
@@ -259,7 +265,7 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	-moz-transition-duration: 0.5s;
 	transition-property: height, width;
 	transition-duration: 0.5s;
-}
+}*/
 
 #file {
 	display: block;
@@ -268,4 +274,53 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	width: 25%;
 }
 
+.exploreSmallYoutubeArea{
+	margin-right: 69px;
+	margin-left: 25px;
+}
+
+.exploreSmallYoutubeButton{
+	width: 308px;
+	height: 60px;
+	margin-top: -4px;
+
+}
+
+#myModalLabel{
+	text-align: center;
+}
+
+.modalDescriptionBox{
+	width: 567px;
+	height: 100px;
+}
+
+.modal-body{
+	margin-right: 10px;
+}
+
+#modalDescription{
+	margin-top: -5px;
+	margin-left: 10px;
+}
+
+#message input,
+#message textarea {
+    width: 250px;
+    height: 40px;
+    padding: 10px;
+}
+
+#message li input[type=text],
+#message li textarea {
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border: none;
+}
+
+#message li textarea {
+    height: 150px;
+    resize: none;
+}
 

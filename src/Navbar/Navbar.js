@@ -7,7 +7,7 @@ class Navbar extends Component {
     super(props)
     this.state = {
       resultyt: [],
-      filter: this.props.model.getFilter(),
+      filter: []
     }
 
     this.handleFilter = this.handleFilter.bind(this);
@@ -15,11 +15,11 @@ class Navbar extends Component {
   }
 
   componentDidMount = () => {
-    this.props.model.addObserver(this)
+    this.props.model.addObserver(this);
   }
 
   componentWillUnmount() {
-    this.props.model.removeObserver(this)
+    this.props.model.removeObserver(this);
   }
 
   update() {

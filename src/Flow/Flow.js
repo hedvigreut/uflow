@@ -52,33 +52,100 @@ class Flow extends Component {
     
   }
 
-  render(){
 
-    return(
-      <div>
+  displayShare(event) {
 
-      <div className="col-md-1"></div>
-      <div className="carouselArea col-md-10">
-          <iframe className="exploreChosenYoutube"width="840" height="472.5" src='https://www.youtube.com/embed/bm_zLDuF7LM' frameBorder="0" allowFullScreen></iframe>
-      </div>
+    //var button = document.createElement("input");
+    //button.type = "button";
+    //button.id = "shareButton";
+    //button.value="Share on Uflow";
+    
+    //var here = document.getElementById(event.target.id);
+    //var parentDiv = document.getElementsByClassName("youtube col-md-8");
+    //document.body.appendChild(button);
+    //console.log(here);
 
-          {
-            this.state.resultyt.map((link, i) => {
-              var frame =
-              <iframe className="exploreSmallYoutube col-md-2" id={"exploreSmallYoutube" + i} width="280" height="157.5" src={link} frameBorder="0" onMouseOver={this.hoverAnimate} allowFullScreen >
-              </iframe>
-              return frame;
-            })
-          }
-           <div>
-              <div className="youtube col-md-8">
-          {this.frame}
-          </div>
-              </div>
+    //document.body.insertBefore(here, div);
+    
 
-          </div>
-          );
   }
+
+
+  hideShare() {
+
+  //var oldChild = node.removeChild(child);
+  //var button = document.getElementById("shareButton");
+  //console.log(document.getElementById("shareButton"));
+  //document.body.removeChild(button);
+  //console.log("hej");
+}
+
+modalVideo(event) {
+  var video = document.createElement("iframe");
+  var button = document.getElementById(event.target.id);
+  var src = document.getElementById(event.target.id).previousSibling.src; 
+  video.src = src;
+  video.id = "modalVideo";
+  var position = document.getElementById("shareVideoArea");
+  //console.log(position);
+  //console.log(video);
+  position.appendChild(video);
+}
+
+render(){
+
+  return(
+    <div>
+
+    <div className="col-md-1"></div>
+    <div className="carouselArea col-md-10">
+    <iframe className="exploreChosenYoutube"width="840" height="472.5" src='https://www.youtube.com/embed/bm_zLDuF7LM' frameBorder="0" allowFullScreen></iframe>
+    </div>
+
+    {
+      this.state.resultyt.map((link, i) => {
+        var frame =
+        <div className="exploreSmallYoutubeArea col-md-2">
+        <iframe className="exploreSmallYoutube row" id= {"exploreSmallYoutube" + i} src={link} frameBorder="0" onMouseOver={this.displayShare} onMouseLeave={this.hideShare} allowFullScreen >
+        </iframe>
+         <input className="row exploreSmallYoutubeButton" type="button" id="shareSingleVideo" value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>
+         </div>
+        return frame;
+      })
+    }
+    <div>
+    <div id="shareModal" className="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div className="modal-dialog">
+    <div className="modal-content">
+    <div className="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+    <h4 className="modal-title" id="myModalLabel">Share video</h4>
+    </div>
+    <div className="modal-body">
+    <div id="shareVideoArea">
+    </div>
+    <h5 id="modalDescription">Description</h5>
+    <textarea className="modalDescriptionBox" placeholder="Write a description for this video"></textarea>
+    </div>
+    <div className="modal-footer">
+    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" className="btn btn-primary">Share this on Uflow</button>
+    </div>
+    </div>
+    </div>
+    </div>
+
+     <div className="col-md-3">
+     </div>
+
+    <div className="exploreYoutubeArea col-md-8">
+    {this.frame}
+    </div>
+    </div>
+
+    </div>
+    );
+}
 }
 
 export default Flow;
