@@ -83,19 +83,19 @@ const Model = function () {
 
   this.getVideos = function (filter) {
 
-    console.log("parametern är: " + filter);
+    //console.log("parametern är: " + filter);
 
     if(filter){
       console.log("Någon har sökt på: " + filter);
-      const result = 2;
+      const result = 5;
       var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet,id&q=${filter}&order=relevance&maxResults=${result}`;
       notifyObservers();
       return this.map(finalURL);
     }
 
-    console.log("Vi har inte sökt på något!");
+    //console.log("Vi har inte sökt på något!");
     const channelID = 'UCEQi1ZNJiw3YMRwni0OLsTQ'
-    const result = 10;
+    const result = 13;
     var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&channelId=${channelID}&part=snippet,id&order=date&maxResults=${result}`
 
     return this.map(finalURL);
