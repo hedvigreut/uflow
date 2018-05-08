@@ -1,60 +1,122 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from "../Navbar/Navbar";
+import { modelInstance } from '../data/model';
+import firebase from 'firebase';
 
 class Profile extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      profile_pic: null,
+      profile_videos: ['https://www.youtube.com/embed/sjyghgaE3wY', 'https://www.youtube.com/embed/zlgtkA6cORk', 'https://www.youtube.com/embed/c2NmyoXBXmE'],
+      texts: ['Den här videon var rolig och därför ville jag dela den.', 'Zara Larsson <3333', 'Pluggtips!']
+    };
+}
 
+  componentDidMount() {
+
+    /*this.props.model.getVideos().then(video => {
+      this.setState({
+        status: 'LOADED',
+        resultyt: video,
+
+      })
+    }).catch(() => {
+      this.setState({
+        status: 'ERROR'
+      })
+    })*/
+    modelInstance.createApp()
+    firebase.auth().onAuthStateChanged(user => {
+      firebase.database().ref('/users/' + user.uid).once('value', snapshot => {
+        this.setState({currentUser: snapshot.val()})
+      })
+      var flow_videos = [];
+      firebase.database().ref('/shares/' + user.uid).once('value', snapshot => {
+        var key = Object.keys(snapshot.val());
+        key.map((key) =>
+          firebase.database().ref('/shares/' + user.uid + '/' + key).once('value', videos => {
+            flow_videos.push(videos.val());
+            this.setState({profile_videos: flow_videos});
+          })
+        );
+      })
+    })
+
+  }
+
+  shareVideo(video) {
+    if (this.state.currentUser !== null) {
+      modelInstance.shareVideo(video, this.props.currentUser.uid);
+    }
   }
 
   render() {
+    var currentUser = this.state.currentUser;
+
+    if (currentUser !== undefined) {
+      console.log(currentUser)
+      var profile_pic = currentUser.profile_pic;
+      var username = currentUser.email;
+      username = username.substring(0,username.indexOf("@"));
+      username = username.replace(/[^a-z0-9]+|\s+/gmi, "");
+      var ID = currentUser.id;
+      var videos = currentUser.shares;
+    }
+
+
     return (
       <div className="Profile">
         <NavBar />
-        <div className="row" id="profileNamePictureArea">
 
-          <div className="col-md-3">
-          </div>
-
-          <div className="col-md-3">
-            <h3 id="profileName"> - Sabina von Essen <Link to="/edit"><span className="glyphicon glyphicon-cog"></span></Link></h3>
-          </div>
-
-          <div className="col-md-3">
-            <img id="profilePicture" src="https://scontent.farn2-1.fna.fbcdn.net/v/t1.0-9/27867080_10215445099425634_5129961030307661455_n.jpg?_nc_cat=0&oh=a3ba5a28308030d0194c0056085ef359&oe=5B6AB599" alt="profilePicture" />
-          </div>
-
+        <div className="col-md-1">
         </div>
 
-        <div className="row" id="profileVideosAreaLeft">
-          <div className="col-md-2" id="profileVideosAreaLeft">
+        <div className="col-md-10 jumbotron">
+          <div className="row" id="profileNamePictureArea">
+            <div className="col-md-7">
+              <h3 id="profileName"> {username} <Link to="/edit"><span className="glyphicon glyphicon-cog"></span></Link></h3>
+            </div>
+
+            <div className="col-md-5">
+              <img id="profilePicture" src={profile_pic} alt="profilePicture" />
+            </div>
           </div>
 
-          <img className="col-md-2 profileThumbnail" id="leftVideo1" src="https://78.media.tumblr.com/cd5d7bb32855c96b3372d47d66f93f24/tumblr_p70g2nSFoY1qzd0p8o1_1280.jpg" alt="leftVideo1" />
-          <img className="col-md-2 profileThumbnail" id="leftVideo2" src="https://78.media.tumblr.com/747c6db68cf14d45eacf1c54d958bf4d/tumblr_p72xovrMDq1qeluflo1_1280.jpg" alt="leftVideo2" />
-          <div className="col-md-1" id="">
-          </div>
-          <img className="col-md-2 profileThumbnail" id="rightVideo1" src="https://78.media.tumblr.com/8dc1fd1e525e0e53b06e767f57784291/tumblr_p709z7P91V1qzd0p8o1_1280.gif" alt="rightVideo1" />
-          <img className="col-md-2 profileThumbnail" id="rightVideo2" src="https://78.media.tumblr.com/4d17c37edd9412526710464582fe5b84/tumblr_p72tekDhPv1qeb24eo1_1280.jpg" alt="rightVideo2" />
+          <div id="profileFlow">
+            {
+              this.state.profile_videos.map((link, i) => {
 
+                var frame =
+                <div>
+                  <br></br>
+                <div className="youtubePost">
+                  <div className="youtubePostHead row">
+                    <img id="profilePictureSmall" className="col-md-6" src={profile_pic} alt="profilePictureSmall" />
+                    <h2 className="col-md-6">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h2>
+                  </div>
+
+                  <div className="col-md-1"></div>
+                  <div className="col-md-10">
+                    <iframe className='profileVideo col-md-12' height="472.5" key={'video' + i} src={link} frameBorder="0" allowFullScreen >
+                    </iframe>
+                    <div className="col-md-12">
+                    <button className="shareButton" onClick={ () => {this.shareVideo(link)}}>Share on uflow</button>
+                    </div>
+                  </div>
+                </div>
+                <br></br>
+                </div>
+                return frame;
+              })
+            }
+          </div>
         </div>
-        <div className="row" id="profileVideosAreaRight">
-          <div className="col-md-3">
-          </div>
-          <img className="col-md-2 profileThumbnail" id="leftVideo3" src="https://78.media.tumblr.com/b8097c1c1e06270f91abb315e3a166a3/tumblr_p70fnmyMXL1qzd0p8o3_540.jpg" alt="leftVideo3" />
-          <img className="col-md-2 profileThumbnail" id="leftVideo4" src="https://78.media.tumblr.com/ec671a96350ab39ee511fc8c6e186865/tumblr_ouzw2ehN271qzwmsso1_1280.jpg" alt="leftVideo4" />
-          <div className="col-md-1" id="profileVideosAreaLeftTop">
-          </div>
-          <img className="col-md-2 profileThumbnail" id="rightVideo7" src="https://78.media.tumblr.com/166d90b17e314b876d1a8f9a259aafa6/tumblr_p70fhgKz8T1qzd0p8o1_1280.jpg" alt="rightVideo7" />
-          <img className="col-md-2 profileThumbnail" id="rightVideo8" src="https://78.media.tumblr.com/00952a18f21c02c56101629228e52de3/tumblr_p70f6yyq7x1qzd0p8o1_1280.jpg" alt="rightVideo8" />
-
-        </div>
-
-      </div>
-    );
-  }
+    </div>
+  );
+}
 }
 
 export default Profile;

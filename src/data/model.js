@@ -5,10 +5,29 @@ const Model = function () {
   var firebase = require("firebase");
   const key = 'AIzaSyAOYG1Ai4mZy6L-ifZgQ8bzS87vA6v3JdA';
 
+  var config = {
+    apiKey: "AIzaSyAGocayAMdpzxz17dLWbfxb6v_2IGqLPbw",
+    currentDomain: "uflow-b640f.firebaseapp.com",
+    databaseURL: "https://uflow-b640f.firebaseio.com",
+    projectId: "uflow-b640f",
+    storageBucket: "uflow-b640f.appspot.com",
+    messagingSenderId: "889611883337",
+    authDomain: "uflow-b640f.firebaseapp.com"
+  };
+
+  this.createApp = function() {
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
+  }
+
+
   this.createDatabase = function() {
     // Get a reference to the database service
     var database = firebase.database();
   }
+
 
   this.createStorage = function() {
     var storage = firebase.storage();
@@ -42,19 +61,35 @@ const Model = function () {
   //This function is called when a user logs in via Google. It adds the user in
   //the database.
   this.writeUserData = function(email, id, profile_pic, username, fullName) {
-    var name = email;
-    name = name.substring(0,username.indexOf("@"));
-    name = name.replace(/[^a-z0-9]+|\s+/gmi, "");
-    console.log(name);
+      var name = email;
+      name = name.substring(0,username.indexOf("@"));
+      name = name.replace(/[^a-z0-9]+|\s+/gmi, "");
+      console.log(name);
 
-    firebase.database().ref('/users/' + name).set({
-      email: email,
-      id: id,
-      profile_pic : profile_pic,
-      username: name,
-      fullName: fullName
-    });
-  }
+      firebase.database().ref('/users/' + id).set({
+        email: email,
+        id: id,
+        profile_pic : profile_pic,
+        username: name,
+        fullName: fullName,
+      });
+
+    }
+
+    this.shareVideo = function(video, id) {
+
+      this.createApp();
+      var sharesRef = firebase.database().ref('shares/' + id);
+
+      var newShareKey = firebase.database().ref().child('shares').push().key;
+
+      // Write the new post's data simultaneously in the posts list and the user's post list.
+      var updates = {};
+      //updates['/shares/' + newShareKey] = video;
+      updates['/shares/' + id + '/' + newShareKey] = video;
+      firebase.database().ref().update(updates);
+    }
+
 
 
   this.googleLogin = function() {

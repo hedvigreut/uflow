@@ -12,9 +12,28 @@ border-radius: 50%;
 object-fit: cover;
 margin-top: 30px;
 }
+
+#profilePictureSmall {
+	width: 160px;
+	height: 130px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
 #profileName{
-margin-top: 100px;
-font-size: 50px;
+	margin-top: 200px;
+	font-size: 45px;
+}
+
+#profileNamePictureArea {
+	text-align: center;
+	display: block;
+	margin: 0px;
+
+}
+
+.glyphicon {
+	float: right;
 }
 
 .profileThumbnail{
@@ -175,7 +194,7 @@ transform: translate(-50%, -50%);
 }
 
 .Profile {
-	margin-top: 70px;
+		margin-top: 0px;
 }
 
 /* Flow.js */
@@ -269,7 +288,7 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	margin-left: auto;
 	margin-right: auto;
 	width: 25%;
-}
+	}
 
 .exploreSmallYoutubeArea{
 	margin-right: 69px;
@@ -328,6 +347,7 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
     resize: none;
 }
 
+<<<<<<< Updated upstream
 #modalVideo{
 	width: 474.32px;
 	height: 242.55px;
@@ -359,3 +379,30 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 
 
 
+=======
+.profileVideo {
+	text-align: center;
+}
+
+.youtubePostHead {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.youtubePost {
+	margin-left:55px;
+}
+
+.postText {
+	font-style: italic;
+}
+
+.shareButton {
+	display: block;
+	background-color: #c8d9ec;
+	border-radius: 5px;
+	padding: 10px;
+	color: black;
+	width: 100%;
+}
+>>>>>>> Stashed changes

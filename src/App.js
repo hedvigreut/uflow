@@ -20,19 +20,7 @@ class App extends Component {
 
   componentDidMount() {
     // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyAGocayAMdpzxz17dLWbfxb6v_2IGqLPbw",
-      currentDomain: "uflow-b640f.firebaseapp.com",
-      databaseURL: "https://uflow-b640f.firebaseio.com",
-      projectId: "uflow-b640f",
-      storageBucket: "uflow-b640f.appspot.com",
-      messagingSenderId: "889611883337",
-      authDomain: "uflow-b640f.firebaseapp.com"
-    };
-
-    if (!firebase.apps.length) {
-      firebase.initializeApp(config);
-    }
+    modelInstance.createApp();
 
     modelInstance.createDatabase();
     modelInstance.createStorage();
@@ -44,14 +32,11 @@ class App extends Component {
         ? this.setState(() => ({ currentUser }))
         : this.setState(() => ({ currentUser: null }));
         modelInstance.writeUserData(currentUser.email, currentUser.uid, currentUser.photoURL, currentUser.email, currentUser.displayName);
-
     });
 
   }
 
   render() {
-
-
     return (
       <div className="App">
         <header className="App-header">
