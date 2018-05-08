@@ -29,24 +29,14 @@ class Navbar extends Component {
   }
 
   handleSearch(event) {
+    event.preventDefault();
      this.props.model.setFilter(this.state.filter);
-     alert("Vi har nu sparat: " + this.props.model.getFilter() + " i modellen");
-     
-    // this.props.model.search(this.props.model.getFilter()).then(video => {
-    //   this.setState({
-    //     status: 'LOADED',
-    //     resultyt: video
-    //   })
-    // }).catch(() => {
-    //   this.setState({
-    //     status: 'ERROR'
-    //   })
-    // })
-    //alert("Sökte på: " + this.state.resultyt);
+     //alert("Vi har nu sparat: " + this.props.model.getFilter() + " i modellen");
+
   }
 
   handleFilter = (event) => {
-    alert("Vi sparar: " + event.target.value + " i statet");
+    //alert("Vi sparar: " + event.target.value + " i statet");
     this.state.filter = event.target.value;
   }
 
@@ -65,7 +55,7 @@ class Navbar extends Component {
               <form className="navbar-form navbar-left" onSubmit={this.handleSearch}>
                 <a className="navbar-brand" href="/explore"><img src={NavLogo} id="logo" alt="logo"/></a>
                 <div className="input-group">
-                  <input type="text" className="form-control" placeholder="Search for a video or a user" value={this.state.value} onChange={this.handleFilter} name="search" />
+                  <input type="text" className="form-control" placeholder="Search for a video or a user" onChange={this.handleFilter} name="search" />
                   <div className="input-group-btn">
                     <button className="btn btn-default" type="submit" value="Submit">
                       <i className="glyphicon glyphicon-search"></i>

@@ -24,7 +24,7 @@ class Flow extends Component {
 
     this.props.model.addObserver(this);
 
-    alert("Vi har att filter är: " + this.props.model.getFilter());
+    //alert("Vi har att filter är: " + this.props.model.getFilter());
 
     this.props.model.getVideos(this.props.model.getFilter()).then(video => {
       this.setState({
@@ -48,17 +48,15 @@ class Flow extends Component {
     this.setState({
       filter : this.props.model.getFilter()
     })
-    
+
     
   }
 
   render(){
 
-
-
-
     return(
       <div>
+
       <div className="col-md-1"></div>
       <div className="carouselArea col-md-10">
           <iframe className="exploreChosenYoutube"width="840" height="472.5" src='https://www.youtube.com/embed/bm_zLDuF7LM' frameBorder="0" allowFullScreen></iframe>
