@@ -90,9 +90,6 @@ const Model = function () {
       firebase.database().ref().update(updates);
     }
 
-    this.follow = function() {
-      
-    }
 
 
   this.googleLogin = function() {
@@ -120,25 +117,16 @@ const Model = function () {
   }
 
   this.getVideos = function (filter) {
-
-    
+    const result = 12;
     if(filter){
-  
       var youtubeURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet,id&q=${filter}&order=relevance&maxResults=${result}`;
+      var firebaseURL = ["hej","hejsan", "hejdå"];
+
       var resYoutube = this.map(youtubeURL);
-      //firebase stuff here
-      //var firebaseURL = ...
-      var resFirebase = ["hej","hejsan", "hejdå"];
-      var resArray = [[], []];
-      resArray[[1]] = resYoutube;
-      resArray[[2]] = resFirebase;
-      // ...
+      //resFirebase = ....
       var res = resYoutube;
       return res;
     }
-
-    const result = 12;
-    //console.log("Vi har inte sökt på något!");
     const channelID = 'UCEQi1ZNJiw3YMRwni0OLsTQ'
     var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&channelId=${channelID}&part=snippet,id&order=date&maxResults=${result}`
 

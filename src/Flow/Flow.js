@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Slide } from 'react-slideshow-image';
 import { modelInstance } from '../data/model';
 
+
 class Flow extends Component {
 
   constructor(props){
@@ -44,12 +45,10 @@ class Flow extends Component {
 
   paint() {
 
-    this.props.model.getVideos(this.props.model.getFilter()).then(array => {
+    this.props.model.getVideos(this.props.model.getFilter()).then(video => {
       this.setState({
         status: 'LOADED',
-        //resultyt: array[[0]],
-       // userinfo: array[[1]]
-       resultyt: array
+        resultyt: video,
 
       })
     }).catch(() => {
@@ -101,9 +100,7 @@ modalVideo(event) {
   var index = event.target.attributes.getNamedItem("index").value;
   var src = this.state.resultyt[index];
   video.src = src;
-  this.setState({
-    currentVideo: src,
-    currentText: inputField.value})
+  this.setState({currentVideo: src})
   //video.className = "col-md-7";
   video.id = "modalVideo";
   position.appendChild(video);
