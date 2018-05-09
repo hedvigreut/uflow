@@ -376,9 +376,11 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	text-align: center;
 }
 
-.youtubePostHead {
+.youtubePost {
+	color: #ededed;
 	display: block;
 	margin-bottom: 5px;
+
 }
 
 .youtubePost {
@@ -405,4 +407,14 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	border: 0.5px solid #262626;
 }
 
+.friendFlowArea{
+	margin-top: 100px;
+}
 
+.youtubePostHead {
+	margin-bottom: 30px;
+}
+
+.youtubePostVideo{
+	margin-bottom: 30px;
+}

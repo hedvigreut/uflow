@@ -31,11 +31,11 @@ class Navbar extends Component {
   handleSearch(event) {
     event.preventDefault();
     this.props.model.setFilter(this.state.filter);
-    alert("Vi har nu sparat: " + this.props.model.getFilter() + " i modellen");
+    //alert("Vi har nu sparat: " + this.props.model.getFilter() + " i modellen");
   }
 
   handleFilter = (event) => {
-    alert("Vi sparar: " + event.target.value + " i statet");
+    //alert("Vi sparar: " + event.target.value + " i statet");
     this.state.filter = event.target.value;
   }
 
@@ -65,7 +65,7 @@ class Navbar extends Component {
 
               <div className="navbarIcons">
                 <a href="/explore"><i className="material-icons">explore</i></a>
-                <i className="material-icons">people</i>
+                <a href="/friendflow"><i className="material-icons">people</i></a>
                 <a href="/profile"><i className="material-icons">person</i></a>
               </div>
             </div>

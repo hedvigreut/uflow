@@ -59,7 +59,6 @@ class Profile extends Component {
         )
       })
     })
-
   }
 
   shareVideo(video) {
@@ -89,7 +88,7 @@ class Profile extends Component {
         <div className="col-md-1">
         </div>
 
-        <div className="col-md-10 jumbotron">
+        <div className="col-md-10">
           <div className="row" id="profileNamePictureArea">
             <div className="col-md-7">
               <h3 id="profileName"> {username} <Link to="/edit"><span className="glyphicon glyphicon-cog"></span></Link></h3>
