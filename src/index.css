@@ -302,7 +302,7 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	opacity: 100%;
 	background-color: #3a3a3a;
 	color: #d6d6d6;
-	border: 0.5px solid #262626; 
+	border: 0.5px solid #262626;
 
 }
 
@@ -403,4 +403,3 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	color: black;
 	width: 100%;
 }
-
