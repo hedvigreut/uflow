@@ -30,13 +30,12 @@ class Navbar extends Component {
 
   handleSearch(event) {
     event.preventDefault();
-     this.props.model.setFilter(this.state.filter);
-     //alert("Vi har nu sparat: " + this.props.model.getFilter() + " i modellen");
-
+    this.props.model.setFilter(this.state.filter);
+    alert("Vi har nu sparat: " + this.props.model.getFilter() + " i modellen");
   }
 
   handleFilter = (event) => {
-    //alert("Vi sparar: " + event.target.value + " i statet");
+    alert("Vi sparar: " + event.target.value + " i statet");
     this.state.filter = event.target.value;
   }
 
