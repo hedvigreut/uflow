@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  Redirect
-} from 'react-router-dom'
+import { Route } from 'react-router-dom';
 import Welcome from './Welcome/Welcome';
 import { modelInstance } from './data/model';
 import Explore from "./Explore/Explore";
@@ -14,7 +8,6 @@ import Profile from "./Profile/Profile";
 import EditProfile from "./Profile/EditProfile";
 import Signup from "./Signup/Signup";
 import Flow from './Flow/Flow';
-import FriendFlow from './FriendFlow/FriendFlow';
 
 class App extends Component {
   constructor(props) {
@@ -53,7 +46,6 @@ class App extends Component {
           <Route exact path="/" render={() => <Welcome model={modelInstance} currentUser={this.state.currentUser}/>}/>
           <Route path="/signup" render={() => <Signup model={modelInstance} currentUser={this.state.currentUser}/>}/>
           <Route path="/explore" render={() => <Explore model={modelInstance} currentUser={this.state.currentUser}/>}/>
-          <Route path="/friendflow" render={() => <FriendFlow model={modelInstance} currentUser={this.state.currentUser}/>}/>
           <Route path="/profile" render={() => <Profile model={modelInstance} currentUser={this.state.currentUser}/>}/>
           <Route path="/edit" render={() => <EditProfile model={modelInstance} currentUser={this.state.currentUser}/>}/>
 
