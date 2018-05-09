@@ -32,10 +32,6 @@ margin-top: 30px;
 
 }
 
-.glyphicon {
-	float: right;
-}
-
 .profileThumbnail{
 width: 200px;
 height:130px;
@@ -347,7 +343,6 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
     resize: none;
 }
 
-<<<<<<< Updated upstream
 #modalVideo{
 	width: 474.32px;
 	height: 242.55px;
@@ -378,8 +373,6 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 }
 
 
-
-=======
 .profileVideo {
 	text-align: center;
 }
@@ -404,4 +397,6 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	padding: 10px;
 	color: black;
 	width: 100%;
+
 }
+

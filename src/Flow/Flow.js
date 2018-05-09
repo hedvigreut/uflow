@@ -158,7 +158,7 @@ render(){
     </div>
     <div className="modal-footer">
     <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="button" className="btn btn-primary" onClick={() => modelInstance.shareVideo(this.state.currentVideo, this.state.currentUser.id)}>Share this on Uflow</button>
+    <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={() => modelInstance.shareVideo(this.state.currentVideo, this.state.currentUser.id)}>Share this on Uflow</button>
     </div>
     </div>
     </div>

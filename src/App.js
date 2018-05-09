@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from 'react-router-dom'
 import Welcome from './Welcome/Welcome';
 import { modelInstance } from './data/model';
 import Explore from "./Explore/Explore";
