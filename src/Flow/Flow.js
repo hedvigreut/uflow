@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Slide } from 'react-slideshow-image';
+import { modelInstance } from '../data/model';
 
 let images = [
 'https://img.youtube.com/vi/g3zsMnNpgsA/maxresdefault.jpg',
@@ -26,8 +27,15 @@ class Flow extends Component {
 
     this.props.model.addObserver(this);
     this.paint();
-    
+    modelInstance.createApp();
+    var firebase = require("firebase");
+    firebase.auth().onAuthStateChanged(user => {
+      firebase.database().ref('/users/' + user.uid).once('value', snapshot => {
+        this.setState({currentUser: snapshot.val()})
+      })
+    })
   }
+
 
   componentWillUnmount() {
     this.props.model.removeObserver(this);
@@ -40,7 +48,7 @@ class Flow extends Component {
       filter : this.props.model.getFilter()
     })
     this.paint();
-    
+
   }
 
   paint() {
@@ -65,14 +73,14 @@ class Flow extends Component {
     //button.type = "button";
     //button.id = "shareButton";
     //button.value="Share on Uflow";
-    
+
     //var here = document.getElementById(event.target.id);
     //var parentDiv = document.getElementsByClassName("youtube col-md-8");
     //document.body.appendChild(button);
     //console.log(here);
 
     //document.body.insertBefore(here, div);
-    
+
 
   }
 
@@ -90,7 +98,7 @@ modalVideo(event) {
 
   var position = document.getElementById("shareVideoArea");
   if(position.firstChild){
-    position.firstChild.remove(); 
+    position.firstChild.remove();
   }
   var inputField = document.getElementById("modalDescriptionBoxShare");
   if(inputField.value){
@@ -100,6 +108,7 @@ modalVideo(event) {
   var index = event.target.attributes.getNamedItem("index").value;
   var src = this.state.resultyt[index];
   video.src = src;
+  this.setState({currentVideo: src})
   //video.className = "col-md-7";
   video.id = "modalVideo";
   position.appendChild(video);
@@ -107,14 +116,13 @@ modalVideo(event) {
 
 render(){
 
-
   return(
     <div>
 
     <div className="col-md-1"></div>
     <div className="promotedArea col-md-10">
     <iframe className="exploreChosenYoutube" id="promotedVideo" src={this.state.resultyt[0]} frameBorder="0" allowFullScreen></iframe>
-    <input className="row exploreSmallYoutubeButton" type="button" id="sharePromotedVideo" index={0} value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>  
+    <input className="row exploreSmallYoutubeButton" type="button" id="sharePromotedVideo" index={0} value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>
     </div>
 
     {
@@ -150,7 +158,7 @@ render(){
     </div>
     <div className="modal-footer">
     <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="button" className="btn btn-primary">Share this on Uflow</button>
+    <button type="button" className="btn btn-primary" onClick={() => modelInstance.shareVideo(this.state.currentVideo, this.state.currentUser.id)}>Share this on Uflow</button>
     </div>
     </div>
     </div>
