@@ -9,6 +9,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      users: [],
       profile_pic: null,
       profile_videos: ['https://www.youtube.com/embed/sjyghgaE3wY', 'https://www.youtube.com/embed/zlgtkA6cORk', 'https://www.youtube.com/embed/c2NmyoXBXmE'],
       texts: ['Den här videon var rolig och därför ville jag dela den.', 'Zara Larsson <3333', 'Pluggtips!']
@@ -44,6 +45,18 @@ class Profile extends Component {
             })
           );
         }
+      })
+      var allUsers = [];
+      firebase.database().ref('/users/').once('value', snapshot => {
+        var key = Object.keys(snapshot.val());
+        //console.log(key);
+        key.map((key) =>
+        firebase.database().ref('/users/' + key + '/username').once('value', username => {
+          allUsers.push(username.val());
+          //console.log(allUsers);
+          this.setState({users: allUsers});
+        })
+        )
       })
     })
 
@@ -85,6 +98,19 @@ class Profile extends Component {
             <div className="col-md-5">
               <img id="profilePicture" src={profile_pic} alt="profilePicture" />
             </div>
+
+            <div id="users">
+              {this.state.users.map((user, i) => {
+                var userDiv =
+                <div>
+                  <p id={i}>{user}</p>
+                  <button className="followButton">Follow</button>
+                </div>
+                return userDiv;
+                })
+              }
+            </div>
+
           </div>
 
           <div id="profileFlow">

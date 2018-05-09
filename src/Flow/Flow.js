@@ -108,7 +108,9 @@ modalVideo(event) {
   var index = event.target.attributes.getNamedItem("index").value;
   var src = this.state.resultyt[index];
   video.src = src;
-  this.setState({currentVideo: src})
+  this.setState({
+    currentVideo: src,
+    currentText: inputField.value})
   //video.className = "col-md-7";
   video.id = "modalVideo";
   position.appendChild(video);

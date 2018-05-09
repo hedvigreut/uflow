@@ -90,6 +90,9 @@ const Model = function () {
       firebase.database().ref().update(updates);
     }
 
+    this.follow = function() {
+      
+    }
 
 
   this.googleLogin = function() {
