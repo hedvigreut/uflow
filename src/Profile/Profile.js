@@ -36,12 +36,14 @@ class Profile extends Component {
       var flow_videos = [];
       firebase.database().ref('/shares/' + user.uid).once('value', snapshot => {
         var key = Object.keys(snapshot.val());
-        key.map((key) =>
-          firebase.database().ref('/shares/' + user.uid + '/' + key).once('value', videos => {
-            flow_videos.push(videos.val());
-            this.setState({profile_videos: flow_videos});
-          })
-        );
+        if (key !== undefined) {
+          key.map((key) =>
+            firebase.database().ref('/shares/' + user.uid + '/' + key).once('value', videos => {
+              flow_videos.push(videos.val());
+              this.setState({profile_videos: flow_videos});
+            })
+          );
+        }
       })
     })
 
