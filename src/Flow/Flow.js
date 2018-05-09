@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Slide } from 'react-slideshow-image';
 import { modelInstance } from '../data/model';
 
-
 class Flow extends Component {
 
   constructor(props){
@@ -35,7 +34,7 @@ class Flow extends Component {
   }
 
   update() {
-    console.log("update: " + this.props.model.getFilter());
+    //console.log("update: " + this.props.model.getFilter());
     this.setState({
       filter : this.props.model.getFilter()
     })

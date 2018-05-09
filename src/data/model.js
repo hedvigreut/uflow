@@ -39,49 +39,49 @@ const Model = function () {
     var storage = firebase.storage();
     var storageRef = firebase.storage().ref();
     var imagesRef = storageRef.child('images');
-      evt.stopPropagation();
-      evt.preventDefault();
-      var file = evt.target.files[0];
-      var metadata = {
-        'contentType': file.type
-      };
+    evt.stopPropagation();
+    evt.preventDefault();
+    var file = evt.target.files[0];
+    var metadata = {
+      'contentType': file.type
+    };
       // Push to child path.
       // [START oncomplete]
       storageRef.child('images/' + file.name).put(file, metadata).then(function(snapshot) {
         console.log('Uploaded', snapshot.totalBytes, 'bytes.');
         console.log('File metadata:', snapshot.metadata);
-        }).catch(function(error) {
+      }).catch(function(error) {
           // [START onfailure]
           console.error('Upload failed:', error);
           // [END onfailure]
         });
         // [END oncomplete]
-    }
+      }
 
   //This function is called when a user logs in via Google. It adds the user in
   //the database.
   this.writeUserData = function(email, id, profile_pic, username, fullName) {
-      var name = email;
-      name = name.substring(0,username.indexOf("@"));
-      name = name.replace(/[^a-z0-9]+|\s+/gmi, "");
-      console.log(name);
+    var name = email;
+    name = name.substring(0,username.indexOf("@"));
+    name = name.replace(/[^a-z0-9]+|\s+/gmi, "");
+    //console.log(name);
 
-      firebase.database().ref('/users/' + id).set({
-        email: email,
-        id: id,
-        profile_pic : profile_pic,
-        username: name,
-        fullName: fullName,
-      });
+    firebase.database().ref('/users/' + id).set({
+      email: email,
+      id: id,
+      profile_pic : profile_pic,
+      username: name,
+      fullName: fullName,
+    });
 
-    }
+  }
 
-    this.shareVideo = function(video, id) {
+  this.shareVideo = function(video, id) {
 
-      this.createApp();
-      var sharesRef = firebase.database().ref('shares/' + id);
+    this.createApp();
+    var sharesRef = firebase.database().ref('shares/' + id);
 
-      var newShareKey = firebase.database().ref().child('shares').push().key;
+    var newShareKey = firebase.database().ref().child('shares').push().key;
 
       // Write the new post's data simultaneously in the posts list and the user's post list.
       var updates = {};
@@ -92,19 +92,19 @@ const Model = function () {
 
 
 
-  this.googleLogin = function() {
+    this.googleLogin = function() {
       const provider = new firebase.auth.GoogleAuthProvider();
 
       firebase.auth().signInWithPopup(provider)
 
-        .then(result => {
-          const user = result.user;
-          window.location = 'signup';
-          console.log(user)
-        })
-        .catch(console.log);
+      .then(result => {
+        const user = result.user;
+        window.location = 'signup';
+        console.log(user)
+      })
+      .catch(console.log);
 
-  }
+    }
 
   // API Calls
 
@@ -118,20 +118,51 @@ const Model = function () {
 
   this.getVideos = function (filter) {
     const result = 12;
+    var temp = [];
     if(filter){
       var youtubeURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet,id&q=${filter}&order=relevance&maxResults=${result}`;
-      var firebaseURL = ["hej","hejsan", "hejdå"];
-
       var resYoutube = this.map(youtubeURL);
-      //resFirebase = ....
-      var res = resYoutube;
-      return res;
+
+      var resUsers = this.getUsers(filter);
+      console.log(resUsers);
+      // Här returneras något konstigt firebase objekt...
+      
+      return resYoutube;
     }
+    //console.log(temp);
     const channelID = 'UCEQi1ZNJiw3YMRwni0OLsTQ'
     var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&channelId=${channelID}&part=snippet,id&order=date&maxResults=${result}`
 
     return this.map(finalURL);
 
+  }
+
+  this.getUsers = function (filter) {
+    var allUsers = [];
+    modelInstance.createApp();
+    firebase.database().ref('/users/').once('value', snapshot => {
+      var key = Object.keys(snapshot.val());
+      key.map((key) =>
+        firebase.database().ref('/users/' + key + '/username').once('value', username => {
+          allUsers.push(username.val()); 
+
+        })
+        )
+
+    })
+
+    //Efter detta block är allUsers tomt, av någon anledning
+    //console.log(allUsers)
+
+    modelInstance.createApp();
+    firebase.database().ref('/users/').orderByChild('username').equalTo('beabranemark').on("value", function(snapshot) {
+    console.log(snapshot.val());
+    snapshot.forEach(function(data) {
+        console.log(data.key);
+    });
+});
+
+    return allUsers;
   }
 
 
