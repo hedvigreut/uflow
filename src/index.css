@@ -299,7 +299,6 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	background-color: #3a3a3a;
 	color: #d6d6d6;
 	border: 0.5px solid #262626;
-
 }
 
 #myModalLabel{
@@ -390,13 +389,20 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	font-style: italic;
 }
 
-.shareButton {
-	display: block;
+.shareButton{
+	/*display: block;
 	background-color: #c8d9ec;
 	border-radius: 5px;
 	padding: 10px;
 	color: black;
-	width: 100%;
-
+	width: 100%;*/
+	width: 758px;
+	height: 60px;
+	margin-top: -5px;
+	opacity: 100%;
+	background-color: #3a3a3a;
+	color: #d6d6d6;
+	border: 0.5px solid #262626;
 }
+
 

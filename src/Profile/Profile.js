@@ -100,10 +100,10 @@ class Profile extends Component {
 
                   <div className="col-md-1"></div>
                   <div className="col-md-10">
-                    <iframe className='profileVideo col-md-12' height="472.5" key={'video' + i} src={link} frameBorder="0" allowFullScreen >
+                    <iframe className='profileVideo col-md-12' width= "840" height="472.5" key={'video' + i} src={link} frameBorder="0" allowFullScreen >
                     </iframe>
                     <div className="col-md-12">
-                    <button className="shareButton" onClick={ () => {this.shareVideo(link)}}>Share on uflow</button>
+                    <button className="shareButton" id="test" onClick={ () => {this.shareVideo(link)}}>Share on uflow</button>
                     </div>
                   </div>
                 </div>
