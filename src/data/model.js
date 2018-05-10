@@ -76,42 +76,17 @@ const Model = function () {
 
   }
 
-
   this.shareVideo = function(video, id) {
-
-    this.shareVideo = function(video, id, text) {
-
 
     this.createApp();
     var sharesRef = firebase.database().ref('shares/' + id);
 
-
     var newShareKey = firebase.database().ref().child('shares').push().key;
-
-      var newShareKey = firebase.database().ref().child('videos').push().key;
-      var newShareTextKey = firebase.database().ref().child('texts').push().key;
-
 
       // Write the new post's data simultaneously in the posts list and the user's post list.
       var updates = {};
       //updates['/shares/' + newShareKey] = video;
-      updates['/shares/' + id + '/videos/' + newShareKey] = video;
-      updates['/shares/' + id + '/texts/' + newShareTextKey] = text;
-      firebase.database().ref().update(updates);
-    }
-
-    this.follow = function(user_id, follow_id) {
-      this.createApp();
-      console.log(follow_id);
-
-      var followRef = firebase.database().ref('follow/' + user_id);
-      var newFollowKey = firebase.database().ref().child('following').push().key;
-      var newFollowerKey = firebase.database().ref().child('followers').push().key;
-
-      var updates = {};
-
-      updates['/follow/' + user_id + '/following/' + newFollowKey] = follow_id;
-      updates['/follow/' + follow_id + '/followers/' + newFollowKey] = user_id;
+      updates['/shares/' + id + '/' + newShareKey] = video;
       firebase.database().ref().update(updates);
     }
 
@@ -142,21 +117,15 @@ const Model = function () {
   }
 
   this.getVideos = function (filter) {
-
     const result = 12;
     var temp = [];
     if(filter){
-
-
-
-    if(filter){
-
       var youtubeURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet,id&q=${filter}&order=relevance&maxResults=${result}`;
       var resYoutube = this.map(youtubeURL);
 
       var resUsers = this.getUsers(filter);
       console.log(resUsers);
-      // Här returneras något konstigt firebase objekt...
+      // Här returneras något konstigt firebase object
       
       return resYoutube;
     }
