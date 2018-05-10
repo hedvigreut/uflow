@@ -74,9 +74,9 @@ class OtherProfile extends Component {
         key.map((key) =>
         firebase.database().ref('/users/' + key + '/id').once('value', id => {
           if(id.match(userId)){
-            console.log(
+            console.log();
           }
-          allUsers.push(username.val());
+          //allUsers.push(username.val());
           //console.log(allUsers);
           allUsersId.push(key)
           //console.log(allUsersId)
