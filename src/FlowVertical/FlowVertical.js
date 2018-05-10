@@ -9,10 +9,20 @@ class FlowVertical extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      FlowVertical_pic: null,
-      FlowVertical_videos: ['https://www.youtube.com/embed/sjyghgaE3wY', 'https://www.youtube.com/embed/zlgtkA6cORk', 'https://www.youtube.com/embed/c2NmyoXBXmE'],
-      texts: ['Den här videon var rolig och därför ville jag dela den.', 'Zara Larsson <3333', 'Pluggtips!']
+      users: [],
+      keys: [],
+      FlowVertical_pic: [],
+      FlowVertical_videos: [],
+      currentText: '',
+      texts: [],
+      following_id: []
     };
+    this.modalVideo = this.modalVideo.bind(this);
+    this.handleChangeDescription = this.handleChangeDescription.bind(this);
+}
+
+handleChangeDescription(event) {
+  this.setState({currentText: event.target.value});
 }
 
   componentDidMount() {
@@ -33,18 +43,54 @@ class FlowVertical extends Component {
       firebase.database().ref('/users/' + user.uid).once('value', snapshot => {
         this.setState({currentUser: snapshot.val()})
       })
-      var flow_videos = [];
-      firebase.database().ref('/shares/' + user.uid).once('value', snapshot => {
+      var allUsers = [];
+      var allUsersId = [];
+      firebase.database().ref('/users/').once('value', snapshot => {
         var key = Object.keys(snapshot.val());
+        //console.log(key);
+        key.map((key) =>
+          firebase.database().ref('/users/' + key + '/username').once('value', username => {
+            allUsers.push(username.val());
+            //console.log(allUsers);
+            allUsersId.push(key)
+            //console.log(allUsersId)
+            this.setState({
+              users: allUsers,
+              keys: allUsersId});
+          })
+        )
+      })
+      var following = [];
+      firebase.database().ref('/follow/' + user.uid + '/following').once('value', people => {
+        var key = Object.keys(people.val());
         if (key !== undefined) {
-          key.map((key) =>
-            firebase.database().ref('/shares/' + user.uid + '/' + key).once('value', videos => {
-              flow_videos.push(videos.val());
-              this.setState({FlowVertical_videos: flow_videos});
-            })
-          );
+          firebase.database().ref('/follow/' + user.uid + '/following/' + key).once('value', person => {
+            following.push(person.val());
+            this.setState({following_id: following})
+          })
         }
       })
+      var flow_videos = [];
+      var flow_texts = [];
+      if (following !== []) {
+        following.map((id) =>
+          firebase.database().ref('/shares/' + id).once('value', snapshot => {
+            var key = Object.keys(snapshot.val());
+            if (key !== undefined) {
+              key.map((key) =>
+                firebase.database().ref('/shares/' + id + '/' + key + '/videos').once('value', videos => {
+                  flow_videos.push(videos.val());
+                  this.setState({FlowVertical_videos: flow_videos});
+                }),
+                firebase.database().ref('/shares/' + id + '/' + key + '/texts').once('value', shareTexts => {
+                  flow_texts.push(shareTexts.val());
+                  this.setState({texts: flow_texts});
+                })
+              )
+            }
+          })
+        )
+      }
     })
 
   }
@@ -55,19 +101,38 @@ class FlowVertical extends Component {
     }
   }
 
+  modalVideo(event) {
+    var position = document.getElementById("shareVideoArea");
+    if(position.firstChild){
+      position.firstChild.remove();
+    }
+    var inputField = document.getElementById("modalDescriptionBoxShare");
+    if(inputField.value){
+     inputField.value = [];
+    }
+    var video = document.createElement("iframe");
+    var index = event.target.attributes.getNamedItem("index").value;
+    var src = this.state.profile_videos[index];
+    video.src = src;
+    this.setState({
+      currentVideo: src})
+    //video.className = "col-md-7";
+    video.id = "modalVideo";
+    position.appendChild(video);
+  }
+
   render() {
     var currentUser = this.state.currentUser;
 
     if (currentUser !== undefined) {
-      console.log(currentUser)
-      var FlowVertical_pic = currentUser.FlowVertical_pic;
+      //console.log(currentUser)
+      var FlowVertical_pic = currentUser.profile_pic;
       var username = currentUser.email;
       username = username.substring(0,username.indexOf("@"));
       username = username.replace(/[^a-z0-9]+|\s+/gmi, "");
       var ID = currentUser.id;
-      var videos = currentUser.shares;
     }
-
+    console.log(this.state.following_id);
 
     return (
       <div className="FlowVertical">
@@ -77,6 +142,18 @@ class FlowVertical extends Component {
         </div>
 
         <div className="col-md-10">
+          <div id="users">
+            {this.state.users.map((user, i) => {
+              var userDiv =
+              <div>
+                <p id={i}>{user}</p>
+                <button className="followButton" onClick={ () => modelInstance.follow(this.state.currentUser.id, this.state.keys[i])}>Follow</button>
+                <button onClick={() => modelInstance.stopFollow(this.state.currentUser.id, this.state.keys[i])}>Stop Following</button>
+              </div>
+              return userDiv;
+              })
+            }
+          </div>
 
           <div id="FlowVerticalFlow">
             {
@@ -89,7 +166,7 @@ class FlowVertical extends Component {
                 <div className="friendFlowArea">
                   <div className="youtubePostHead row">
                     <img id="FlowVerticalPictureSmall" className="col-md-6" src={FlowVertical_pic} alt="FlowVerticalPictureSmall" />
-                    <h2 className="col-md-6">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h2>
+                    <h2 className="col-md-6">{this.state.following_id[i]}<p></p><p className="postText">{this.state.texts[i]}</p></h2>
                   </div>
 
                   <div className="col-md-1"></div>
@@ -97,7 +174,7 @@ class FlowVertical extends Component {
                     <iframe className='FlowVerticalVideo col-md-12' width= "840" height="472.5" key={'video' + i} src={link} frameBorder="0" allowFullScreen >
                     </iframe>
                     <div className="col-md-12">
-                    <button className="shareButton" id="test" onClick={ () => {this.shareVideo(link)}}>Share on uflow</button>
+                    <button className="shareButtonProfile" index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
                     </div>
                   </div>
                 </div>
@@ -107,6 +184,34 @@ class FlowVertical extends Component {
                 return frame;
               })
             }
+            <div>
+              <div id="shareModal" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+                      <h4 className="modal-title" id="myModalLabel">Share video</h4>
+                    </div>
+                    <div className="modal-body">
+                      <div className="col-md-1">
+                      </div>
+                      <div id="shareVideoArea">
+                      </div>
+                      <div className="col-md-1">
+                      </div>
+                      <h5 id="modalDescription">Description</h5>
+                      <div className="col-md-1">
+                      </div>
+                      <textarea className="modalDescriptionBox" id="modalDescriptionBoxShare" placeholder="Write a description for this video" onChange={this.handleChangeDescription}></textarea>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={() => modelInstance.shareVideo(this.state.currentVideo, this.state.currentUser.id, this.state.currentText)}>Share this on Uflow</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
     </div>
