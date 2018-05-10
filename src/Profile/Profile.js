@@ -159,7 +159,7 @@ class Profile extends Component {
 
           <div id="profileFlow">
             {
-              this.state.profile_videos.reverse().map((link, i) => {
+              this.state.profile_videos.map((link, i) => {
 
                 var frame =
                 <div>
