@@ -115,7 +115,12 @@ modalVideo(event) {
   position.appendChild(video);
 }
 
-    render(){
+navigateToUser(event) {
+  this.props.model.setProfileUser = event.target.attributes.getNamedItem("username").value;
+}
+
+
+    render() {
 
       return(
         <div>
@@ -125,6 +130,9 @@ modalVideo(event) {
             <iframe className="exploreChosenYoutube" id="promotedVideo" src={this.state.resultyt[0]} frameBorder="0" allowFullScreen></iframe>
             <input className="row exploreSmallYoutubeButton" type="button" id="sharePromotedVideo" index={0} value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>
           </div>
+
+    <input href="/profile" username="sabinavonessen" type="button" value="En annan profil" onClick={this.navigateToUser}></input>
+
 
           {
             this.state.resultyt.map((link, i) => {
@@ -175,37 +183,8 @@ modalVideo(event) {
 
         </div>
       );
-
-navigateToUser(event) {
-  this.props.model.setProfileUser = event.target.attributes.getNamedItem("username").value;
-}
-
-render(){
-
-  return(
-    <div>
-
-    <div className="col-md-1"></div>
-    <div className="promotedArea col-md-10">
-    <iframe className="exploreChosenYoutube" id="promotedVideo" src={this.state.resultyt[0]} frameBorder="0" allowFullScreen></iframe>
-    <input className="row exploreSmallYoutubeButton" type="button" id="sharePromotedVideo" index={0} value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>
-    </div>
-
-
-    <input href="/profile" username="sabinavonessen" type="button" value="En annan profil" onClick={this.navigateToUser}></input>
-
-    {
-      this.state.resultyt.map((link, i) => {
-        var frame =
-        <div className="exploreSmallYoutubeArea col-md-2">
-        <iframe className="exploreSmallYoutube row" id= {"exploreSmallYoutube " + i} src={link} frameBorder="0" onMouseOver={this.displayShare} onMouseLeave={this.hideShare} allowFullScreen >
-        </iframe>
-         <input className="row exploreSmallYoutubeButton" type="button" id="shareSingleVideo" index={i} value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>
-         </div>
-        return frame;
-      })
-
     }
   }
+    
 
 export default Flow;
