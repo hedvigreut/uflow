@@ -26,17 +26,6 @@ class Profile extends Component {
 
   componentDidMount() {
 
-    /*this.props.model.getVideos().then(video => {
-      this.setState({
-        status: 'LOADED',
-        resultyt: video,
-
-      })
-    }).catch(() => {
-      this.setState({
-        status: 'ERROR'
-      })
-    })*/
     modelInstance.createApp()
     firebase.auth().onAuthStateChanged(user => {
       firebase.database().ref('/users/' + user.uid).once('value', snapshot => {
@@ -120,7 +109,12 @@ class Profile extends Component {
   }
 
   render() {
+
+    if(this.props.model.getProfileUser() !== null){
+      console.log("hej");
+    }
     var currentUser = this.state.currentUser;
+    //var currentUser = this.props.model.getProfileUser;
 
     if (currentUser !== undefined) {
       //console.log(currentUser)

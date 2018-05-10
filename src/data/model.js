@@ -4,6 +4,7 @@ const Model = function () {
   let observers = [];
   var firebase = require("firebase");
   const key = 'AIzaSyAOYG1Ai4mZy6L-ifZgQ8bzS87vA6v3JdA';
+  var profileUser = [];
 
   var config = {
     apiKey: "AIzaSyAGocayAMdpzxz17dLWbfxb6v_2IGqLPbw",
@@ -256,6 +257,15 @@ const Model = function () {
 });
 
     return allUsers;
+  }
+
+  this.getProfileUser = function () {
+    return profileUser;
+  }
+
+  this.setProfileUser = function (username) {
+    profileUser = username;
+    //notifyObservers();
   }
 
 
