@@ -11,11 +11,12 @@ class FlowVertical extends Component {
     this.state = {
       users: [],
       keys: [],
-      FlowVertical_pic: [],
+      FlowVertical_pics: [],
       FlowVertical_videos: [],
       currentText: '',
       texts: [],
-      following_id: []
+      following_id: [],
+      usernames: []
     };
     this.modalVideo = this.modalVideo.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
@@ -62,36 +63,68 @@ handleChangeDescription(event) {
       })
       var following = [];
       firebase.database().ref('/follow/' + user.uid + '/following').once('value', people => {
-        var key = Object.keys(people.val());
-        if (key !== undefined) {
-          firebase.database().ref('/follow/' + user.uid + '/following/' + key).once('value', person => {
-            following.push(person.val());
-            this.setState({following_id: following})
-          })
+        console.log(people.val())
+        if (people.val() !== null) {
+          var key = Object.keys(people.val());
+          if (key !== undefined) {
+            key.map((key) =>
+            firebase.database().ref('/follow/' + user.uid + '/following/' + key).once('value', person => {
+              console.log(person.val())
+              following.push(person.val());
+              this.setState({following_id: following})
+              var flow_videos = [];
+              var flow_texts = [];
+              var flow_usernames = [];
+              var flow_profile_pics = [];
+                this.state.following_id.map((id) =>
+                  firebase.database().ref('/shares/' + id + '/videos').once('value', snapshot => {
+                    if (snapshot.val() !== null) {
+                    var keyTwo = Object.keys(snapshot.val());
+                    console.log(keyTwo)
+                    if (keyTwo !== undefined) {
+                      keyTwo.map((keyTwo) =>
+                        firebase.database().ref('/shares/' + id + '/videos/' + keyTwo).once('value', videos => {
+                          flow_videos.unshift(videos.val());
+                          console.log(videos.val())
+                          this.setState({FlowVertical_videos: flow_videos});
+                          firebase.database().ref('/users/' + id + '/username').once('value', usernames => {
+                            flow_usernames.unshift(usernames.val());
+                            this.setState({usernames: flow_usernames});
+                          })
+                          firebase.database().ref('/users/' + id + '/profile_pic').once('value', profile_pic => {
+                            flow_profile_pics.unshift(profile_pic.val());
+                            this.setState({FlowVertical_pics: flow_profile_pics});
+                          })
+                        })
+                      )
+                    }
+                  }
+                  })
+                )
+
+                this.state.following_id.map((id) =>
+                  firebase.database().ref('/shares/' + id + '/texts').once('value', snapshot => {
+                    if (snapshot.val() !== null) {
+                    var keyTwo = Object.keys(snapshot.val());
+                    if (keyTwo !== undefined) {
+                      keyTwo.map((keyTwo) =>
+                        firebase.database().ref('/shares/' + id  + '/texts/' + keyTwo).once('value', shareTexts => {
+                          flow_texts.unshift(shareTexts.val());
+                          this.setState({texts: flow_texts});
+                        })
+                      )
+                    }
+                  }
+                  })
+                )
+
+            })
+          )
+          }
         }
       })
-      var flow_videos = [];
-      var flow_texts = [];
-      if (following !== []) {
-        following.map((id) =>
-          firebase.database().ref('/shares/' + id).once('value', snapshot => {
-            var key = Object.keys(snapshot.val());
-            if (key !== undefined) {
-              key.map((key) =>
-                firebase.database().ref('/shares/' + id + '/' + key + '/videos').once('value', videos => {
-                  flow_videos.push(videos.val());
-                  this.setState({FlowVertical_videos: flow_videos});
-                }),
-                firebase.database().ref('/shares/' + id + '/' + key + '/texts').once('value', shareTexts => {
-                  flow_texts.push(shareTexts.val());
-                  this.setState({texts: flow_texts});
-                })
-              )
-            }
-          })
-        )
-      }
     })
+
 
   }
 
@@ -126,13 +159,11 @@ handleChangeDescription(event) {
 
     if (currentUser !== undefined) {
       //console.log(currentUser)
-      var FlowVertical_pic = currentUser.profile_pic;
       var username = currentUser.email;
       username = username.substring(0,username.indexOf("@"));
       username = username.replace(/[^a-z0-9]+|\s+/gmi, "");
       var ID = currentUser.id;
     }
-    console.log(this.state.following_id);
 
     return (
       <div className="FlowVertical">
@@ -165,8 +196,8 @@ handleChangeDescription(event) {
                 <div className="youtubePost">
                 <div className="friendFlowArea">
                   <div className="youtubePostHead row">
-                    <img id="FlowVerticalPictureSmall" className="col-md-6" src={FlowVertical_pic} alt="FlowVerticalPictureSmall" />
-                    <h2 className="col-md-6">{this.state.following_id[i]}<p></p><p className="postText">{this.state.texts[i]}</p></h2>
+                    <img id="profilePictureSmall" className="col-md-6" src={this.state.FlowVertical_pics[i]} alt="FlowVerticalPictureSmall" />
+                    <h2 className="col-md-6">{this.state.usernames[i]}<p></p><p className="postText">{this.state.texts[i]}</p></h2>
                   </div>
 
                   <div className="col-md-1"></div>
