@@ -129,7 +129,6 @@ class Profile extends Component {
       username = username.substring(0,username.indexOf("@"));
       username = username.replace(/[^a-z0-9]+|\s+/gmi, "");
       var ID = currentUser.id;
-      var videos = currentUser.shares;
     }
 
     return (

@@ -435,3 +435,7 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 .youtubePostVideo{
 	margin-bottom: 30px;
 }
+
+.FlowVertical {
+	margin-top: 70px;
+}

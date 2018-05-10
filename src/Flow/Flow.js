@@ -8,10 +8,16 @@ class Flow extends Component {
     super(props);
 
     this.state = {
-      resultyt: []
+      resultyt: [],
+      currentText: '',
     };
 
     this.modalVideo = this.modalVideo.bind(this);
+    this.handleChangeDescription = this.handleChangeDescription.bind(this);
+  }
+
+  handleChangeDescription(event) {
+    this.setState({currentText: event.target.value});
   }
 
   componentDidMount() {
