@@ -6,6 +6,7 @@ import { modelInstance } from './data/model';
 import Explore from "./Explore/Explore";
 import Profile from "./Profile/Profile";
 import EditProfile from "./Profile/EditProfile";
+import OtherProfile from "./Profile/OtherProfile";
 import Signup from "./Signup/Signup";
 import Flow from './Flow/Flow';
 import FriendFlow from './FriendFlow/FriendFlow';
@@ -49,6 +50,7 @@ class App extends Component {
           <Route path="/explore" render={() => <Explore model={modelInstance} currentUser={this.state.currentUser}/>}/>
           <Route path="/friendflow" render={() => <FriendFlow model={modelInstance} currentUser={this.state.currentUser}/>}/>
           <Route path="/profile" render={() => <Profile model={modelInstance} currentUser={this.state.currentUser}/>}/>
+          <Route path="/otherProfile" render={() => <OtherProfile model={modelInstance} currentUser={this.state.currentUser}/>}/>
           <Route path="/edit" render={() => <EditProfile model={modelInstance} currentUser={this.state.currentUser}/>}/>
 
         </header>

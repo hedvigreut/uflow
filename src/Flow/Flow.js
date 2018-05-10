@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Slide } from 'react-slideshow-image';
 import { modelInstance } from '../data/model';
 
+import { Link } from 'react-router-dom';
+
 class Flow extends Component {
 
   constructor(props){
@@ -116,7 +118,7 @@ modalVideo(event) {
 }
 
 navigateToUser(event) {
-  this.props.model.setProfileUser = event.target.attributes.getNamedItem("username").value;
+  this.props.model.setProfileUser(event.target.id);
 }
 
 
@@ -124,15 +126,13 @@ navigateToUser(event) {
 
       return(
         <div>
-
           <div className="col-md-1"></div>
           <div className="promotedArea col-md-10">
             <iframe className="exploreChosenYoutube" id="promotedVideo" src={this.state.resultyt[0]} frameBorder="0" allowFullScreen></iframe>
             <input className="row exploreSmallYoutubeButton" type="button" id="sharePromotedVideo" index={0} value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>
           </div>
 
-    <input href="/profile" username="sabinavonessen" type="button" value="En annan profil" onClick={this.navigateToUser}></input>
-
+<Link to="/otherProfile"><input id="KixDJLM5RNayyBh5gHeUOD3yS952" type="button" value="En annan profil" onClick={this.navigateToUser}></input></Link>
 
           {
             this.state.resultyt.map((link, i) => {
@@ -140,7 +140,7 @@ navigateToUser(event) {
               <div key={i} className="exploreSmallYoutubeArea col-md-2">
                 <iframe className="exploreSmallYoutube row" id= {"exploreSmallYoutube " + i} src={link} frameBorder="0" onMouseOver={this.displayShare} onMouseLeave={this.hideShare} allowFullScreen >
                 </iframe>
-                <input className="row exploreSmallYoutubeButton" type="button" id="shareSingleVideo" index={i} value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>
+                <input className="row exploreSmallYoutubeButton" type="button" id="shareSingleVideo" index={i} value="Share on U-flow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>
               </div>
               return frame;
             })

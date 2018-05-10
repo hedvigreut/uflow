@@ -4,7 +4,7 @@ import NavBar from "../Navbar/Navbar";
 import { modelInstance } from '../data/model';
 import firebase from 'firebase';
 
-class Profile extends Component {
+class OtherProfile extends Component {
 
   constructor(props) {
     super(props);
@@ -62,13 +62,20 @@ class Profile extends Component {
           }
         }
       })
+
+
+    var userId = this.props.model.getProfileUser();
+
       var allUsers = [];
       var allUsersId = [];
       firebase.database().ref('/users/').once('value', snapshot => {
         var key = Object.keys(snapshot.val());
         //console.log(key);
         key.map((key) =>
-        firebase.database().ref('/users/' + key + '/username').once('value', username => {
+        firebase.database().ref('/users/' + key + '/id').once('value', id => {
+          if(id.match(userId)){
+            console.log(
+          }
           allUsers.push(username.val());
           //console.log(allUsers);
           allUsersId.push(key)
@@ -111,7 +118,7 @@ class Profile extends Component {
   render() {
 
     if(this.props.model.getProfileUser() !== null){
-      console.log("hej");
+      //console.log("hej");
     }
     var currentUser = this.state.currentUser;
     //var currentUser = this.props.model.getProfileUser;
@@ -126,7 +133,7 @@ class Profile extends Component {
     }
 
     return (
-      <div className="Profile">
+      <div className="otherProfile">
         <NavBar />
 
         <div className="col-md-1">
@@ -135,7 +142,7 @@ class Profile extends Component {
         <div className="col-md-10">
           <div className="row" id="profileNamePictureArea">
             <div className="col-md-7">
-              <h3 id="profileName"> {username} <Link to="/edit"><span className="glyphicon glyphicon-cog"></span></Link></h3>
+              <h3 id="profileName"> {username}</h3>
             </div>
 
             <div className="col-md-5">
@@ -156,10 +163,10 @@ class Profile extends Component {
             </div>
 
           </div>
-         
+
           <div id="profileFlow">
             {
-              this.state.profile_videos.map((link, i) => {
+              this.state.profile_videos.reverse().map((link, i) => {
 
                 var frame =
                 <div>
@@ -219,4 +226,4 @@ class Profile extends Component {
 }
 }
 
-export default Profile;
+export default OtherProfile;

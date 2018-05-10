@@ -26,7 +26,7 @@ class Navbar extends Component {
       key.map((key) =>
       firebase.database().ref('/users/' + key + '/username').once('value', username => {
         allUsers.push(username.val());
-        console.log(allUsers);
+        //console.log(allUsers);
         this.setState({
           users: allUsers});
       })

@@ -23,12 +23,10 @@ const Model = function () {
     }
   }
 
-
   this.createDatabase = function() {
     // Get a reference to the database service
     var database = firebase.database();
   }
-
 
   this.createStorage = function() {
     var storage = firebase.storage();
@@ -263,9 +261,8 @@ const Model = function () {
     return profileUser;
   }
 
-  this.setProfileUser = function (username) {
-    profileUser = username;
-    //notifyObservers();
+  this.setProfileUser = function (userId) {
+    profileUser = userId;
   }
 
 
