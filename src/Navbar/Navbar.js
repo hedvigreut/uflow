@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import NavLogo from '../images/navLogo.jpg';
+import { modelInstance } from '../data/model';
 class Navbar extends Component {
 
   constructor(props) {
@@ -16,6 +17,21 @@ class Navbar extends Component {
 
   componentDidMount = () => {
     //this.props.model.addObserver(this);
+    modelInstance.createApp();
+    var firebase = require("firebase");
+    var allUsers = [];
+    firebase.database().ref('/users/').once('value', snapshot => {
+      var key = Object.keys(snapshot.val());
+      //console.log(key);
+      key.map((key) =>
+      firebase.database().ref('/users/' + key + '/username').once('value', username => {
+        allUsers.push(username.val());
+        console.log(allUsers);
+        this.setState({
+          users: allUsers});
+      })
+      )
+    })
   }
 
   componentWillUnmount() {
@@ -51,7 +67,7 @@ class Navbar extends Component {
 
               </div>
 
-              <form className="navbar-form navbar-left" onSubmit={this.handleSearch}>
+              <form className="navbar-form navbar-left" onSubmit={this.handleSearch} onClick={() => modelInstance.setAllUsers(this.state.users)}>
                 <a className="navbar-brand" href="/explore"><img src={NavLogo} id="logo" alt="logo"/></a>
                 <div className="input-group">
                   <input type="text" className="form-control" placeholder="Search for a video or a user" onChange={this.handleFilter} name="search" />

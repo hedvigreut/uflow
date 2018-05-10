@@ -50,7 +50,7 @@ class Profile extends Component {
           if (key !== undefined) {
             key.map((key) =>
               firebase.database().ref('/shares/' + user.uid + '/videos/' + key).once('value', videos => {
-                flow_videos.push(videos.val());
+                flow_videos.unshift(videos.val());
                 this.setState({profile_videos: flow_videos});
               })
             );
@@ -65,7 +65,7 @@ class Profile extends Component {
           if (key !== undefined) {
             key.map((key) =>
               firebase.database().ref('/shares/' + user.uid + '/texts/' + key).once('value', snapshot => {
-                videoTexts.push(snapshot.val());
+                videoTexts.unshift(snapshot.val());
                 console.log(snapshot.val())
                 this.setState({texts: videoTexts});
               })
@@ -155,6 +155,7 @@ class Profile extends Component {
                 <div>
                   <p id={i}>{user}</p>
                   <button className="followButton" onClick={ () => modelInstance.follow(this.state.currentUser.id, this.state.keys[i])}>Follow</button>
+                  <button onClick={() => modelInstance.stopFollow(this.state.currentUser.id, this.state.keys[i])}>Stop Following</button>
                 </div>
                 return userDiv;
                 })
@@ -174,6 +175,7 @@ class Profile extends Component {
                     <img id="profilePictureSmall" className="col-md-6" src={profile_pic} alt="profilePictureSmall" />
                     <h2 className="col-md-6">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h2>
                   </div>
+                  <button className="removeShareButton" onClick={() => modelInstance.removeShare(this.state.currentUser.id, link, this.state.texts[i])}>X</button>
 
                   <div className="col-md-1"></div>
                   <div className="col-md-10">

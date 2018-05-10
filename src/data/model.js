@@ -76,23 +76,101 @@ const Model = function () {
 
   }
 
-  this.shareVideo = function(video, id) {
+  this.shareVideo = function(video, id, text) {
 
     this.createApp();
     var sharesRef = firebase.database().ref('shares/' + id);
 
-    var newShareKey = firebase.database().ref().child('shares').push().key;
-
+      var newShareKey = firebase.database().ref().child('videos').push().key;
+      var newShareTextKey = firebase.database().ref().child('texts').push().key;
       // Write the new post's data simultaneously in the posts list and the user's post list.
       var updates = {};
       //updates['/shares/' + newShareKey] = video;
-      updates['/shares/' + id + '/' + newShareKey] = video;
+      updates['/shares/' + id + '/videos/' + newShareKey] = video;
+      updates['/shares/' + id + '/texts/' + newShareKey] = text;
       firebase.database().ref().update(updates);
     }
 
+    this.follow = function(user_id, follow_id) {
+      this.createApp();
+      console.log(follow_id);
 
+      var followRef = firebase.database().ref('follow/' + user_id);
+      var newFollowKey = firebase.database().ref().child('following').push().key;
+      var newFollowerKey = firebase.database().ref().child('followers').push().key;
 
-    this.googleLogin = function() {
+      var updates = {};
+
+      updates['/follow/' + user_id + '/following/' + newFollowKey] = follow_id;
+      updates['/follow/' + follow_id + '/followers/' + newFollowKey] = user_id;
+      firebase.database().ref().update(updates);
+    }
+
+    this.stopFollow = function(user_id, follow_id) {
+      firebase.database().ref('/follow/' + user_id + '/following/').once('value', snapshot => {
+        if (snapshot.val() !== null) {
+          var key = Object.keys(snapshot.val());
+          if (key !== undefined) {
+            key.map((key) =>
+              firebase.database().ref('/follow/' + user_id + '/following/' + key).once('value', persons => {
+                if (persons.val() === follow_id) {
+                  firebase.database().ref('/follow/' + user_id + '/following/' + key).remove();
+                }
+              })
+            );
+          }
+        }
+      })
+      firebase.database().ref('/follow/' + follow_id + '/followers/').once('value', snapshot => {
+        if (snapshot.val() !== null) {
+          var key = Object.keys(snapshot.val());
+          if (key !== undefined) {
+            key.map((key) =>
+              firebase.database().ref('/follow/' + follow_id + '/followers/' + key).once('value', persons => {
+                if (persons.val() === user_id) {
+                  firebase.database().ref('/follow/' + follow_id + '/followers/' + key).remove();
+                }
+              })
+            );
+          }
+        }
+      })
+    }
+
+  this.removeShare = function(user_id, video, text) {
+    firebase.database().ref('/shares/' + user_id + '/videos').once('value', snapshot => {
+      console.log(snapshot.val())
+      if (snapshot.val() !== null) {
+        var key = Object.keys(snapshot.val());
+        if (key !== undefined) {
+          key.map((key) =>
+            firebase.database().ref('/shares/' + user_id + '/videos/' + key).once('value', videos => {
+              if (videos.val() === video) {
+                firebase.database().ref('/shares/' + user_id + '/videos/' + key).remove();
+              }
+            })
+          );
+        }
+      }
+    })
+    firebase.database().ref('/shares/' + user_id + '/texts').once('value', snapshot => {
+      console.log(snapshot.val())
+      if (snapshot.val() !== null) {
+        var key = Object.keys(snapshot.val());
+        if (key !== undefined) {
+          key.map((key) =>
+            firebase.database().ref('/shares/' + user_id + '/texts/' + key).once('value', snapshot => {
+              if (snapshot.val() === text) {
+                firebase.database().ref('/shares/' + user_id + '/texts/' + key).remove();
+              }
+            })
+          );
+        }
+      }
+    })
+  }
+
+  this.googleLogin = function() {
       const provider = new firebase.auth.GoogleAuthProvider();
 
       firebase.auth().signInWithPopup(provider)
@@ -116,18 +194,33 @@ const Model = function () {
 
   }
 
+  let allUsers = [];
+
+  this.setAllUsers = function(users) {
+    allUsers = users;
+    console.log(allUsers);
+  }
+
+  this.checkUser = function(filter) {
+    var trueOrFalse = allUsers.includes(filter);
+    if (trueOrFalse === true) {
+      return filter;
+    }
+  }
+
   this.getVideos = function (filter) {
+
     const result = 12;
-    var temp = [];
     if(filter){
+
       var youtubeURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet,id&q=${filter}&order=relevance&maxResults=${result}`;
       var resYoutube = this.map(youtubeURL);
-
-      var resUsers = this.getUsers(filter);
+      var resUsers = this.checkUser(filter);
       console.log(resUsers);
-      // Här returneras något konstigt firebase object
-      
-      return resYoutube;
+      // Här returneras något konstigt firebase objekt...
+      //resFirebase = ....
+      var res = resYoutube;
+      return res;
     }
     //console.log(temp);
     const channelID = 'UCEQi1ZNJiw3YMRwni0OLsTQ'
@@ -144,7 +237,7 @@ const Model = function () {
       var key = Object.keys(snapshot.val());
       key.map((key) =>
         firebase.database().ref('/users/' + key + '/username').once('value', username => {
-          allUsers.push(username.val()); 
+          allUsers.push(username.val());
 
         })
         )
