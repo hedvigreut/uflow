@@ -132,7 +132,7 @@ navigateToUser(event) {
             <input className="row exploreSmallYoutubeButton" type="button" id="sharePromotedVideo" index={0} value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>
           </div>
 
-<Link to="/otherProfile"><input id="KixDJLM5RNayyBh5gHeUOD3yS952" type="button" value="En annan profil" onClick={this.navigateToUser}></input></Link>
+<Link to="/otherProfile"><input id="EkdiCovIEuYypBUDm5guGHJ9PMn2" type="button" value="En annan profil" onClick={this.navigateToUser}></input></Link>
 
           {
             this.state.resultyt.map((link, i) => {

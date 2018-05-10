@@ -26,19 +26,22 @@ class OtherProfile extends Component {
 
   componentDidMount() {
 
+    var userId = this.props.model.getProfileUser();
+
     modelInstance.createApp()
     firebase.auth().onAuthStateChanged(user => {
-      firebase.database().ref('/users/' + user.uid).once('value', snapshot => {
-        this.setState({currentUser: snapshot.val()})
+      firebase.database().ref('/users/' + userId).once('value', snapshot => {
+        //console.log(userId);
+        this.setState({profileUser: snapshot.val()})
       })
       var flow_videos = [];
-      firebase.database().ref('/shares/' + user.uid + '/videos').once('value', snapshot => {
-        console.log(snapshot.val())
+      firebase.database().ref('/shares/' + userId + '/videos').once('value', snapshot => {
+        //console.log(snapshot.val())
         if (snapshot.val() !== null) {
           var key = Object.keys(snapshot.val());
           if (key !== undefined) {
             key.map((key) =>
-              firebase.database().ref('/shares/' + user.uid + '/videos/' + key).once('value', videos => {
+              firebase.database().ref('/shares/' + userId + '/videos/' + key).once('value', videos => {
                 flow_videos.unshift(videos.val());
                 this.setState({profile_videos: flow_videos});
               })
@@ -47,24 +50,21 @@ class OtherProfile extends Component {
         }
       })
       var videoTexts = [];
-      firebase.database().ref('/shares/' + user.uid + '/texts').once('value', snapshot => {
-        console.log(snapshot.val())
+      firebase.database().ref('/shares/' + userId + '/texts').once('value', snapshot => {
+        //console.log(snapshot.val())
         if (snapshot.val() !== null) {
           var key = Object.keys(snapshot.val());
           if (key !== undefined) {
             key.map((key) =>
-              firebase.database().ref('/shares/' + user.uid + '/texts/' + key).once('value', snapshot => {
+              firebase.database().ref('/shares/' + userId + '/texts/' + key).once('value', snapshot => {
                 videoTexts.unshift(snapshot.val());
-                console.log(snapshot.val())
+                //console.log(snapshot.val())
                 this.setState({texts: videoTexts});
               })
             );
           }
         }
       })
-
-
-    var userId = this.props.model.getProfileUser();
 
       var allUsers = [];
       var allUsersId = [];
@@ -73,25 +73,25 @@ class OtherProfile extends Component {
         //console.log(key);
         key.map((key) =>
         firebase.database().ref('/users/' + key + '/id').once('value', id => {
-          if(id.match(userId)){
-            console.log();
-          }
-          //allUsers.push(username.val());
+          allUsers.push(id.val());
           //console.log(allUsers);
-          allUsersId.push(key)
-          //console.log(allUsersId)
+          allUsersId.push(key);
+          //console.log(allUsersId);
           this.setState({
             users: allUsers,
             keys: allUsersId});
         })
         )
       })
+      firebase.database().ref('/users/' + user.uid).once('value', snapshot => {
+        this.setState({currentUser: snapshot.val()})
+      })
     })
   }
 
   shareVideo(video) {
-    if (this.state.currentUser !== null) {
-      modelInstance.shareVideo(video, this.props.currentUser.uid);
+    if (this.state.profileUser !== null) {
+      modelInstance.shareVideo(video, this.props.profileuserId);
     }
   }
 
@@ -117,53 +117,46 @@ class OtherProfile extends Component {
 
   render() {
 
-    if(this.props.model.getProfileUser() !== null){
-      //console.log("hej");
-    }
-    var currentUser = this.state.currentUser;
-    //var currentUser = this.props.model.getProfileUser;
+    var profileUser = this.state.profileUser;
+    //var profileUser = this.props.model.getProfileUser;
 
-    if (currentUser !== undefined) {
-      //console.log(currentUser)
-      var profile_pic = currentUser.profile_pic;
-      var username = currentUser.email;
+    if (profileUser !== undefined) {
+      //console.log(profileUser)
+      var profile_pic = profileUser.profile_pic;
+      var username = profileUser.email;
       username = username.substring(0,username.indexOf("@"));
       username = username.replace(/[^a-z0-9]+|\s+/gmi, "");
-      var ID = currentUser.id;
+      var ID = profileUser.id;
     }
 
     return (
       <div className="otherProfile">
         <NavBar />
 
-        <div className="col-md-1">
+        <div className="col-md-2">
         </div>
 
         <div className="col-md-10">
           <div className="row" id="profileNamePictureArea">
-            <div className="col-md-7">
+           
+            <div className="col-md-6">
               <h3 id="profileName"> {username}</h3>
+              <div id="followButtons">
+                  <button className="followButton exploreSmallYoutubeButton" id="follow" onClick={ () => modelInstance.follow(this.state.currentUser.id, this.state.profileUser.id)}>Follow</button>
+                  <button className="exploreSmallYoutubeButton" id="follow" onClick={() => modelInstance.stopFollow(this.state.currentUser.id, this.state.profileUser.id)}>Stop Following</button>
+                </div>
             </div>
 
-            <div className="col-md-5">
+            <div className="ProfilePictureArea col-md-5">
               <img id="profilePicture" src={profile_pic} alt="profilePicture" />
             </div>
-
-            <div id="users">
-              {this.state.users.map((user, i) => {
-                var userDiv =
-                <div>
-                  <p id={i}>{user}</p>
-                  <button className="followButton" onClick={ () => modelInstance.follow(this.state.currentUser.id, this.state.keys[i])}>Follow</button>
-                  <button onClick={() => modelInstance.stopFollow(this.state.currentUser.id, this.state.keys[i])}>Stop Following</button>
-                </div>
-                return userDiv;
-                })
-              }
-            </div>
+                
+            
 
           </div>
 
+          <div className="col-md-2">
+          </div>
           <div id="profileFlow">
             {
               this.state.profile_videos.reverse().map((link, i) => {
@@ -175,7 +168,7 @@ class OtherProfile extends Component {
                     <img id="profilePictureSmall" className="col-md-6" src={profile_pic} alt="profilePictureSmall" />
                     <h2 className="col-md-6">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h2>
                   </div>
-                  <button className="removeShareButton" onClick={() => modelInstance.removeShare(this.state.currentUser.id, link, this.state.texts[i])}>X</button>
+                  <button className="removeShareButton" onClick={() => modelInstance.removeShare(this.state.profileUser.id, link, this.state.texts[i])}>X</button>
 
                   <div className="col-md-1"></div>
                   <div className="col-md-10">
@@ -213,7 +206,7 @@ class OtherProfile extends Component {
                     </div>
                     <div className="modal-footer">
                       <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={() => modelInstance.shareVideo(this.state.currentVideo, this.state.currentUser.id, this.state.currentText)}>Share this on Uflow</button>
+                      <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={() => modelInstance.shareVideo(this.state.currentVideo, this.state.profileUser.id, this.state.currentText)}>Share this on Uflow</button>
                     </div>
                   </div>
                 </div>

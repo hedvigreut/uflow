@@ -129,20 +129,20 @@ class Profile extends Component {
       <div className="Profile">
         <NavBar />
 
-        <div className="col-md-1">
+        <div className="col-md-2">
         </div>
 
         <div className="col-md-10">
           <div className="row" id="profileNamePictureArea">
-            <div className="col-md-7">
+            <div className="col-md-6">
               <h3 id="profileName"> {username} <Link to="/edit"><span className="glyphicon glyphicon-cog"></span></Link></h3>
             </div>
 
-            <div className="col-md-5">
+            <div className="ProfilePictureArea col-md-5">
               <img id="profilePicture" src={profile_pic} alt="profilePicture" />
             </div>
 
-            <div id="users">
+            {/*<div id="users">
               {this.state.users.map((user, i) => {
                 var userDiv =
                 <div>
@@ -153,10 +153,10 @@ class Profile extends Component {
                 return userDiv;
                 })
               }
-            </div>
+            </div>*/}
 
           </div>
-         
+
           <div id="profileFlow">
             {
               this.state.profile_videos.map((link, i) => {
@@ -169,7 +169,6 @@ class Profile extends Component {
                     <h2 className="col-md-6">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h2>
                   </div>
                   <button className="removeShareButton" onClick={() => modelInstance.removeShare(this.state.currentUser.id, link, this.state.texts[i])}>X</button>
-
                   <div className="col-md-1"></div>
                   <div className="col-md-10">
                     <iframe className='profileVideo col-md-12' width= "840" height="472.5" key={'video' + i} src={link} frameBorder="0" allowFullScreen >

@@ -173,19 +173,6 @@ handleChangeDescription(event) {
         </div>
 
         <div className="col-md-10">
-          <div id="users">
-            {this.state.users.map((user, i) => {
-              var userDiv =
-              <div>
-                <p id={i}>{user}</p>
-                <button className="followButton" onClick={ () => modelInstance.follow(this.state.currentUser.id, this.state.keys[i])}>Follow</button>
-                <button onClick={() => modelInstance.stopFollow(this.state.currentUser.id, this.state.keys[i])}>Stop Following</button>
-              </div>
-              return userDiv;
-              })
-            }
-          </div>
-
           <div id="FlowVerticalFlow">
             {
               this.state.FlowVertical_videos.map((link, i) => {
