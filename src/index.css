@@ -426,13 +426,13 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 }
 
 .friendFlowArea{
-	margin-top: 100px;
+	margin-top: 0px;
 }
 
 .youtubePostHead {
-	margin-top: 30px;
-	margin-bottom: 60px;
-	margin-left: 150px;
+	margin-left: 100px;
+	margin-top: 20px;
+	margin-bottom: 30px;
 }
 
 .youtubePostVideo{

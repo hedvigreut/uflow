@@ -171,7 +171,6 @@ handleChangeDescription(event) {
 
         <div className="col-md-1">
         </div>
-
         <div className="col-md-10">
           <div id="FlowVerticalFlow">
             {
