@@ -27,6 +27,7 @@ class OtherProfile extends Component {
   componentDidMount() {
 
     var userId = this.props.model.getProfileUser();
+    console.log(userId);
 
     modelInstance.createApp()
     firebase.auth().onAuthStateChanged(user => {
@@ -138,7 +139,7 @@ class OtherProfile extends Component {
 
         <div className="col-md-10">
           <div className="row" id="profileNamePictureArea">
-           
+
             <div className="col-md-6">
               <h3 id="profileName"> {username}</h3>
               <div id="followButtons">
@@ -150,8 +151,8 @@ class OtherProfile extends Component {
             <div className="ProfilePictureArea col-md-5">
               <img id="profilePicture" src={profile_pic} alt="profilePicture" />
             </div>
-                
-            
+
+
 
           </div>
           </div>
@@ -160,7 +161,7 @@ class OtherProfile extends Component {
 
           <div id="profileFlow">
             {
-              this.state.profile_videos.reverse().map((link, i) => {
+              this.state.profile_videos.map((link, i) => {
 
                 var frame =
                 <div>
@@ -169,7 +170,6 @@ class OtherProfile extends Component {
                     <img id="profilePictureSmall" className="col-md-6" src={profile_pic} alt="profilePictureSmall" />
                     <h2 className="col-md-6">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h2>
                   </div>
-                  <button className="removeShareButton" onClick={() => modelInstance.removeShare(this.state.profileUser.id, link, this.state.texts[i])}>X</button>
 
                   <div className="col-md-1"></div>
                   <div className="col-md-10">
@@ -186,11 +186,11 @@ class OtherProfile extends Component {
               })
             }
             <div>
-              <div id="shareModal" className="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div id="shareModal" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                   <div className="modal-content">
                     <div className="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+                      <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
                       <h4 className="modal-title" id="myModalLabel">Share video</h4>
                     </div>
                     <div className="modal-body">

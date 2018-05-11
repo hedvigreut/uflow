@@ -25,7 +25,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-
+    modelInstance.getProfileUser();
     modelInstance.createApp()
     firebase.auth().onAuthStateChanged(user => {
       firebase.database().ref('/users/' + user.uid).once('value', snapshot => {

@@ -20,6 +20,7 @@ class FlowVertical extends Component {
     };
     this.modalVideo = this.modalVideo.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
+    this.navigateToUser = this.navigateToUser.bind(this);
 }
 
 handleChangeDescription(event) {
@@ -76,6 +77,7 @@ handleChangeDescription(event) {
               var flow_texts = [];
               var flow_usernames = [];
               var flow_profile_pics = [];
+              var flow_id_navigate = [];
                 this.state.following_id.map((id) =>
                   firebase.database().ref('/shares/' + id + '/videos').once('value', snapshot => {
                     if (snapshot.val() !== null) {
@@ -84,6 +86,8 @@ handleChangeDescription(event) {
                     if (keyTwo !== undefined) {
                       keyTwo.map((keyTwo) =>
                         firebase.database().ref('/shares/' + id + '/videos/' + keyTwo).once('value', videos => {
+                          flow_id_navigate.unshift(id);
+                          this.setState({navigate_id: flow_id_navigate})
                           flow_videos.unshift(videos.val());
                           console.log(videos.val())
                           this.setState({FlowVertical_videos: flow_videos});
@@ -154,6 +158,10 @@ handleChangeDescription(event) {
     position.appendChild(video);
   }
 
+  navigateToUser(event) {
+    this.props.model.setProfileUser(event.target.id);
+  }
+
   render() {
     var currentUser = this.state.currentUser;
 
@@ -164,6 +172,7 @@ handleChangeDescription(event) {
       username = username.replace(/[^a-z0-9]+|\s+/gmi, "");
       var ID = currentUser.id;
     }
+    console.log(this.state.navigate_id)
 
     return (
       <div className="FlowVertical">
@@ -183,7 +192,7 @@ handleChangeDescription(event) {
                 <div className="friendFlowArea">
                   <div className="youtubePostHead row">
                     <img id="profilePictureSmall" className="col-md-6" src={this.state.FlowVertical_pics[i]} alt="FlowVerticalPictureSmall" />
-                    <h2 className="col-md-6">{this.state.usernames[i]}<p></p><p className="postText">{this.state.texts[i]}</p></h2>
+                    <Link to="/otherProfile" className="clickableUsername"><h2 className="col-md-6" id={this.state.navigate_id[i]} onClick={this.navigateToUser}>{this.state.usernames[i]}<p></p><p className="postText">{this.state.texts[i]}</p></h2></Link>
                   </div>
 
                   <div className="col-md-1"></div>

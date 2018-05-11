@@ -263,6 +263,7 @@ const Model = function () {
 
   this.setProfileUser = function (userId) {
     profileUser = userId;
+    console.log(profileUser)
   }
 
 

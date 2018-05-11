@@ -135,6 +135,13 @@ transform: translate(-50%, -50%);
 	color: #8e8e8e;
 }
 
+.clickableUsername:hover {
+	color: white;
+}
+
+.clickableUsername {
+	color: white;
+}
 
 .material-icons:active{
 	color: #8e8e8e;
