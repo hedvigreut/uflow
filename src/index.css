@@ -429,10 +429,14 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	margin-top: 0px;
 }
 
+.otherProfile {
+	margin-top: 10px;
+}
+
 .youtubePostHead {
-	margin-left: 100px;
+	margin-left: 10px;
 	margin-top: 20px;
-	margin-bottom: 30px;
+	margin-bottom: 0px;
 }
 
 .youtubePostVideo{
