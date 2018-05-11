@@ -154,9 +154,10 @@ class OtherProfile extends Component {
             
 
           </div>
-
-          <div className="col-md-2">
           </div>
+          <div className="col-md-1"></div>
+          <div  className="col-md-10">
+
           <div id="profileFlow">
             {
               this.state.profile_videos.reverse().map((link, i) => {
@@ -174,8 +175,8 @@ class OtherProfile extends Component {
                   <div className="col-md-10">
                     <iframe className='profileVideo col-md-12' width= "840" height="472.5" key={'video' + i} src={link} frameBorder="0" allowFullScreen >
                     </iframe>
-                    <div className="col-md-12">
-                    <button className="shareButtonProfile" index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
+                    <div className="col-md-12" id="youtubePostButton">
+                    <button className="shareButtonProfile " index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
                     </div>
                   </div>
                 </div>
