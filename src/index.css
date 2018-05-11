@@ -375,6 +375,7 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 
 .profileVideo {
 	text-align: center;
+	margin-bottom: 5px;
 }
 
 .youtubePost {
@@ -445,6 +446,10 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 
 .FlowVertical {
 	margin-top: 70px;
+}
+
+.FlowVerticalVideo {
+	margin-bottom: 5px;
 }
 
 .followButtons{
