@@ -481,3 +481,25 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 #youtubePostButton {
 	margin-bottom: 40px;
 }
+
+.resUserPicture{
+	width: 180px;
+height: 18 0px;
+border-radius: 50%;
+object-fit: cover;
+margin-top: 60px;
+}
+
+.resUsername{
+	margin-top: 20px;
+	margin-left: 140px;
+}
+
+.resUsers{
+	color: #d6d6d6;
+}
+
+.resUsersText{
+	margin-top: 50px;
+	margin-left: 200px;
+}

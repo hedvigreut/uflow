@@ -33,6 +33,7 @@ class OtherProfile extends Component {
     firebase.auth().onAuthStateChanged(user => {
       firebase.database().ref('/users/' + userId).once('value', snapshot => {
         //console.log(userId);
+        console.log(snapshot.val());
         this.setState({profileUser: snapshot.val()})
       })
       var flow_videos = [];
