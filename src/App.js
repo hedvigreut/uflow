@@ -10,6 +10,7 @@ import OtherProfile from "./Profile/OtherProfile";
 import Signup from "./Signup/Signup";
 import Flow from './Flow/Flow';
 import FriendFlow from './FriendFlow/FriendFlow';
+import Chat from './Chat/Chat';
 
 class App extends Component {
   constructor(props) {
@@ -52,6 +53,7 @@ class App extends Component {
           <Route path="/profile" render={() => <Profile model={modelInstance} currentUser={this.state.currentUser}/>}/>
           <Route path="/otherProfile" render={() => <OtherProfile model={modelInstance} currentUser={this.state.currentUser}/>}/>
           <Route path="/edit" render={() => <EditProfile model={modelInstance} currentUser={this.state.currentUser}/>}/>
+          <Route path="/chatroom" render={() => <Chat model={modelInstance} currentUser={this.state.currentUser}/>}/>
 
         </header>
       </div>

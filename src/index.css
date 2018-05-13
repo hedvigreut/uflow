@@ -119,7 +119,7 @@ transform: translate(-50%, -50%);
 	width: 300px;
 }
 .navbarIcons{
-	margin-left: 950px;
+	margin-left: 850px;
 	padding-left: 30px;
 }
 
@@ -484,10 +484,10 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 
 .resUserPicture{
 	width: 180px;
-height: 18 0px;
-border-radius: 50%;
-object-fit: cover;
-margin-top: 60px;
+	height: 18 0px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-top: 60px;
 }
 
 .resUsername{

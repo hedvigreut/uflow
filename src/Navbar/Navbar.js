@@ -80,6 +80,7 @@ class Navbar extends Component {
               </form>
 
               <div className="navbarIcons">
+                <a href="/chatroom"><i className="material-icons">chat_bubble</i></a>
                 <a href="/explore"><i className="material-icons">explore</i></a>
                 <a href="/friendflow"><i className="material-icons">people</i></a>
                 <a href="/profile"><i className="material-icons">person</i></a>

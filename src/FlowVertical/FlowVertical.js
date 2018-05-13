@@ -163,6 +163,8 @@ handleChangeDescription(event) {
   }
 
   render() {
+
+    console.log(this.state.usernames);
     var currentUser = this.state.currentUser;
 
     if (currentUser !== undefined) {

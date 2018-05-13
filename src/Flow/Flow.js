@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Slide } from 'react-slideshow-image';
 import { modelInstance } from '../data/model';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
@@ -81,7 +80,7 @@ class Flow extends Component {
     var allPictures = [];
     var allObjects = [];
 
-    modelInstance.createApp;
+    modelInstance.createApp();
     //Store objects, usernames and id:s
     firebase.auth().onAuthStateChanged(user => {
       //Store objects, usernames and id:s
@@ -111,7 +110,6 @@ class Flow extends Component {
           })
           )
       })
-
     })
 
 
@@ -252,7 +250,7 @@ render() {
     <h5 id="modalDescription">Description</h5>
     <div className="col-md-1">
     </div>
-    <textarea className="modalDescriptionBox" id="modalDescriptionBoxShare" placeholder="Write a description for this video" onChange={this.handleChangeDescription}></textarea>
+    <textarea className="modalDescriptionBox" id="modalDescriptionBoxShare" placeholder="Write a description for this video" onChange={this.handleChangeDescription} required></textarea>
     </div>
     <div className="modal-footer">
     <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
