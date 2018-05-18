@@ -7,14 +7,15 @@ const Model = function () {
   var profileUser = [];
 
   var config = {
-    apiKey: "AIzaSyAGocayAMdpzxz17dLWbfxb6v_2IGqLPbw",
-    currentDomain: "uflow-b640f.firebaseapp.com",
-    databaseURL: "https://uflow-b640f.firebaseio.com",
-    projectId: "uflow-b640f",
-    storageBucket: "uflow-b640f.appspot.com",
-    messagingSenderId: "889611883337",
-    authDomain: "uflow-b640f.firebaseapp.com"
+    apiKey: "AIzaSyDep4MzWGodn_n7kcInVQu2Doy6YD92Mng",
+    authDomain: "uflow-app.firebaseapp.com",
+    currentDomain: "uflow-app.firebaseapp.com",
+    databaseURL: "https://uflow-app.firebaseio.com",
+    projectId: "uflow-app",
+    storageBucket: "uflow-app.appspot.com",
+    messagingSenderId: "948849625393"
   };
+
 
   this.createApp = function() {
 
@@ -205,7 +206,7 @@ const Model = function () {
 
   this.getVideos = function (filter) {
 
-    const result = 30;
+    const result = 3;
     if(filter){
         //videos
         var youtubeURL = `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet,id&q=${filter}&order=relevance&maxResults=${result}`;      

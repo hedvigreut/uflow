@@ -97,15 +97,16 @@ transform: translate(-50%, -50%);
 }
 
 #logo{
-	margin-top: -25px;
-	padding: 0px;
-	width: 130px;
-	height: 65px;
+	margin-top: -8%;
+	margin-left: 55%;
+	padding-bottom: -0%;
+	width: 91px;
+	height: 45.5px;
 }
 
 .navbar{
 	background-color: white;
-	height: 70px;
+	height: 50px;
 	border-width: 2px;
 	color: #d1d1d1;
 	border-color: #d1d1d1;
@@ -502,4 +503,8 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 .resUsersText{
 	margin-top: 50px;
 	margin-left: 200px;
+}
+
+.navbar-collapse{
+	margin-left: 30%;
 }

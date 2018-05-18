@@ -61,12 +61,35 @@ class Navbar extends Component {
 
         <div className="row" id="navbarLogoSearchIcons">
 
-          <nav className="navbar navbar-fixed-top">
+        <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a className="navbar-brand" href="/explore"><img src={NavLogo} id="logo" alt="logo"/></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/explore"><span className="material-icons">explore</span>Explore</a></li>
+        <li><a href="/friendflow"><span className="material-icons">people</span>Friendflow</a></li>
+        <li><a href="/chatroom"><span className="material-icons">chat_bubble</span>Chatt</a></li>
+        <li><a href="/profile"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+          {/*<nav className="navbar navbar-fixed-top">
             <div className="container-fluid">
               <div className="navbar-header">
 
               </div>
-
               <form className="navbar-form navbar-left" onSubmit={this.handleSearch} onClick={() => modelInstance.setAllUsers(this.state.users)}>
                 <a className="navbar-brand" href="/explore"><img src={NavLogo} id="logo" alt="logo"/></a>
                 <div className="input-group">
@@ -86,7 +109,7 @@ class Navbar extends Component {
                 <a href="/profile"><i className="material-icons">person</i></a>
               </div>
             </div>
-          </nav>
+          </nav>*/}
 
         </div>
       </div>
