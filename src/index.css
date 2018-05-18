@@ -168,7 +168,10 @@ transform: translate(-50%, -50%);
 
 .jumbotron {
 	background-color: white;
-	height: 100%;
+	margin-top: 20%;
+	margin-left: 10%; 
+	height: 600px;
+	width: 80%;
 }
 
 #welcome {

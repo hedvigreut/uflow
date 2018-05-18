@@ -22,8 +22,9 @@ class Welcome extends Component {
               <br/>
 
               <button className="actionButton" onClick={() => modelInstance.googleLogin()}>Sign up with Google</button>
-
+              <br></br>
               <p id="or">OR</p>
+              <br></br>
               <Link to="/explore">
                   <button className="actionButton">Log in</button>
               </Link>
