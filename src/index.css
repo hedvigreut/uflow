@@ -6,6 +6,15 @@ html,body {
 }
 
 #profilePicture{
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-top: 30px;
+	margin-left: 38%;
+}
+
+#sigupPicture{
 	width: 250px;
 	height: 250px;
 	border-radius: 50%;
@@ -21,8 +30,8 @@ html,body {
 }
 
 #profileName{
-	margin-top: 200px;
-	font-size: 45px;
+	margin-top: 5%;
+	font-size: 25px;
 }
 
 #profileNamePictureArea {
@@ -38,7 +47,8 @@ html,body {
 }
 
 #logo{
-	margin-top: -25px;
+	margin-top: -15px;
+	margin-left: 80%;
 	padding: 0px;
 	width: 130px;
 	height: 65px;
@@ -336,7 +346,7 @@ html,body {
 }
 
 .followButtons{
-	margin-top: 20px;
+	margin-top: 50px;
 }
 
 .ProfilePictureArea{
@@ -436,9 +446,10 @@ html,body {
 
 .changeProfilePicUndertext {
 	color: #d6d6d6;
-	font-size: 14px;
+	font-size: 10px;
 	float: center;
 	font-style: italic;
+	margin-left: 5%;
 }
 
 .collapse{
@@ -532,5 +543,12 @@ textarea:focus, input:focus{
 }
 
 #welcomeJumbotron{
-		height: 80vh;
+	height: 80vh;
+}
+
+
+.changeProfilePic{
+	margin-top: 5%;
+	margin-left: 20%;
+	font-size: 15px;
 }
