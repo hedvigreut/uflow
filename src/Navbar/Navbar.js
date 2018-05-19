@@ -29,14 +29,11 @@ class Navbar extends Component {
         //console.log(allUsers);
         this.setState({
           users: allUsers});
-      })
+        })
       )
     })
   }
 
-  componentWillUnmount() {
-    //this.props.model.removeObserver(this);
-  }
 
   update() {
     this.setState({
@@ -48,11 +45,18 @@ class Navbar extends Component {
     event.preventDefault();
     this.props.model.setFilter(this.state.filter);
     //alert("Vi har nu sparat: " + this.props.model.getFilter() + " i modellen");
+    var position = document.getElementById("exploreHeadline");
+    position.innerHTML = "Results found for <b>videos</b>";
   }
 
   handleFilter = (event) => {
-    //alert("Vi sparar: " + event.target.value + " i statet");
-    this.state.filter = event.target.value;
+    this.setState({filter: event.target.value});
+  }
+
+  handleLocation() {
+    if (window.location.pathname !== "/explore") {
+      window.location = "explore";
+    }
   }
 
   render() {
@@ -61,52 +65,15 @@ class Navbar extends Component {
 
         <div className="row" id="navbarLogoSearchIcons">
 
-
-<nav className="navbar navbar-inverse navbar-static-top">
-  <div className="container-fluid">
-    <div className="navbar-header">
-      
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span className="icon-bar"></span>
-        <span className="icon-bar"></span>
-        <span className="icon-bar"></span>                        
-      </button>
-      <a className="navbar-brand" href="/explore"><img src={NavLogo} id="logo" alt="logo"/></a>
-    </div>
-
-    <div className="collapse navbar-collapse" id="myNavbar">
-      <ul className="nav navbar-nav">
-      <form className="navbar-form navbar-left" onSubmit={this.handleSearch} onClick={() => modelInstance.setAllUsers(this.state.users)}>
-                <div className="input-group">
-                  <input type="text" className="form-control" placeholder="Search for a video or a user" onChange={this.handleFilter} name="search" />
-                  <div className="input-group-btn">
-                    <button className="btn btn-default" type="submit" value="Submit">
-                      <i className="glyphicon glyphicon-search"></i>
-                    </button>
-                  </div>
-                </div>
-              </form>
-        <li><a id="dropdownElements"href="/explore"><span className="material-icons">explore</span>Explore</a></li>
-        <li><a id="dropdownElements"href="/friendflow"><span className="material-icons">people</span>Friendflow</a></li>
-        <li><a id="dropdownElements"href="/chatroom"><span className="material-icons">chat_bubble</span>Chatt</a></li>
-        <li><a id="dropdownElements"href="/profile"><span className="material-icons">people</span>Profile</a></li>
-      </ul>
-      <ul className="nav navbar-nav navbar-right">
-        <li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Log out</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-
-          {/*<nav className="navbar navbar-fixed-top">
+          <nav className="navbar navbar-fixed-top">
             <div className="container-fluid">
               <div className="navbar-header">
 
               </div>
-              <form className="navbar-form navbar-left" onSubmit={this.handleSearch} onClick={() => modelInstance.setAllUsers(this.state.users)}>
-                <a className="navbar-brand" href="/explore"><img src={NavLogo} id="logo" alt="logo"/></a>
-                <div className="input-group">
+
+              <form className="navbar-form navbar-left" onSubmit={this.handleSearch}>
+                <a className="navbar-brand" href="/explore"><img src="https://uflow-b640f.firebaseapp.com/static/media/navLogo.f5d48d60.jpg" id="logo" alt="logo"/></a>
+                <div className="input-group" onClick={this.handleLocation}>
                   <input type="text" className="form-control" placeholder="Search for a video or a user" onChange={this.handleFilter} name="search" />
                   <div className="input-group-btn">
                     <button className="btn btn-default" type="submit" value="Submit">
@@ -116,14 +83,14 @@ class Navbar extends Component {
                 </div>
               </form>
 
-              <div className="navbarIcons">
-                <a href="/chatroom"><i className="material-icons">chat_bubble</i></a>
+              <div className="navbarIcons navbar-right">
                 <a href="/explore"><i className="material-icons">explore</i></a>
                 <a href="/friendflow"><i className="material-icons">people</i></a>
                 <a href="/profile"><i className="material-icons">person</i></a>
+                <Link to="/"><i className="material-icons" onClick={() => modelInstance.googleLogout()}>settings_power</i></Link>
               </div>
             </div>
-          </nav>*/}
+          </nav>
 
         </div>
       </div>

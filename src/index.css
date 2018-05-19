@@ -1,19 +1,19 @@
 html,body {
-font-family: 'Lato', sans-serif;
-background: #f0d0b9;
-background-color: #4B4B4B;
+	font-family: 'Lato', sans-serif;
+	background: #f0d0b9;
+	background-color: #4B4B4B;
 
 }
 
 #profilePicture{
-width: 250px;
-height: 250px;
-border-radius: 50%;
-object-fit: cover;
-margin-top: 30px;
+	width: 250px;
+	height: 250px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-top: 30px;
 }
 
-#profilePictureSmall {
+.profilePictureSmall {
 	width: 160px;
 	height: 130px;
 	border-radius: 50%;
@@ -33,80 +33,20 @@ margin-top: 30px;
 
 }
 
-.profileThumbnail{
-width: 200px;
-height:130px;
-border: 0.5px solid #ddd; /* Gray border */
-border-radius: 3px;  /* Rounded border */
-padding: 3px; /* Some padding */
-}
-
-.profileThumbnail:hover{
-width: 200px;
-height:130px;
-box-shadow: 0 0 2px 1px rgba(220,220,220,1);
-
-}
-
-#profileVideosAreaLeft{
-margin-top: 50px;
-margin-left: -30px;
-}
-
-#profileVideosAreaRight{
-margin-top: 50px;
-margin-left: -30px;
-}
-
-#profileVideosAreaLeftBottom{
-margin-top: 20px;
-}
-
-#editPicture{
-margin-left: 65px;
-}
-
-.editProfileFields{
-border: 2px;
-}
-
-.videoCategory{
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-/*background-image:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url('//spin.atomicobject.com/wp-content/uploads/20170324102432/portfolio-tips-feature-image.jpg');*/
-}
-
-.video_area{
-	position: relative;
-	text-align: center;
-
-}
-/*h4{
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-}*/
-
-.editProfileButtonArea{
-	margin-top: 30px;
+.pushRight {
+	margin-left: 80px;
 }
 
 #logo{
-	margin-top: -8%;
-	margin-left: 55%;
-	padding-bottom: -0%;
-	width: 91px;
-	height: 45.5px;
+	margin-top: -25px;
+	padding: 0px;
+	width: 130px;
+	height: 65px;
 }
 
 .navbar{
 	background-color: white;
-	height: 50px;
+	height: 70px;
 	border-width: 2px;
 	color: #d1d1d1;
 	border-color: #d1d1d1;
@@ -115,19 +55,14 @@ transform: translate(-50%, -50%);
 }
 
 .input-group{
-	margin-left: 20px;
+	margin-left: 300px;
 	margin-top: 8px;
-	width: 250px;
-}
-.navbarIcons{
-	margin-left: 850px;
-	padding-left: 30px;
+	width: 300px;
 }
 
 .material-icons{
-	margin-top: -5%;
-	margin-left: 1%;
-	margin-right: 3%;
+	margin-top: 15px;
+	margin-right: 40px;
 	font-size: 30px;
 	color: #d6d6d6;
 
@@ -150,8 +85,7 @@ transform: translate(-50%, -50%);
 }
 
 .input-group-btn{
-	margin-left: 40px;
-	border-color: white;
+	float: center;
 }
 
 
@@ -161,7 +95,6 @@ transform: translate(-50%, -50%);
 	margin-left: 100px;
 	/*display: flex;*/
 	/*box-sizing: border-box;*/
-
 }
 
 .welcomeLogo {
@@ -170,10 +103,30 @@ transform: translate(-50%, -50%);
 
 .jumbotron {
 	background-color: white;
-	margin-top: 20%;
-	margin-left: 10%; 
-	height: 600px;
-	width: 80%;
+	height: 1000px;
+}
+
+.emptyResText {
+	margin-top: 100px;
+	color: white;
+	font-size: 30px;
+	text-align: center;
+}
+
+#logInButton {
+	height: 20%;
+	width: 40%;
+	background-color: #c8d9ec;
+	border-radius: 5px;
+	padding: 10px;
+	color: black;
+	font-size: 25px;
+	font-weight: bold;
+	margin-top: 100px;
+}
+
+.Welcome {
+	height: 100%;
 }
 
 #welcome {
@@ -191,10 +144,6 @@ transform: translate(-50%, -50%);
 	color: black;
 }
 
-#or {
-	margin: 40px;
-}
-
 .EditProfile {
 	margin-top: 70px;
 }
@@ -204,115 +153,38 @@ transform: translate(-50%, -50%);
 }
 
 .Profile {
-		margin-top: 50px;
+	margin-top: 50px;
 }
 
 /* Flow.js */
 
 .exploreSmallYoutube{
-	width: 308px;
-	height: 157.5px;
+	width: 270px;
+	height: 150px;
 }
 
-/*.exploreSmallYoutube{
-	width:280px;
-	height: 157.5px;
-	margin-top: 3%;
-	margin-bottom: 3%;
-	-webkit-transition-property: height, width;
-	-webkit-transition-duration: 0.5s;
-	-moz-transition-property: height, width;
-	-moz-transition-duration: 0.5s;
-	transition-property: height, width;
-	transition-duration: 0.5s;
-}*/
-
-/*.exploreSmallYoutube:hover {
-	width: 336px;
-	height: 189px;
-	-webkit-transition-property: height, width;
-	-webkit-transition-duration: 0.5s;
-	-moz-transition-property: height, width;
-	-moz-transition-duration: 0.5s;
-	transition-property: height, width;
-	transition-duration: 0.5s;
-
-}
-
-
-.exploreSmallYoutube:hover ~ .exploreSmallYoutube{
-	-webkit-transition-property: height, width;
-	-webkit-transition-duration: 0.5s;
-	-moz-transition-property: height, width;
-	-moz-transition-duration: 0.5s;
-	transition-property: height, width;
-	transition-duration: 0.5s;
-	transform: translate(3em,0);
-	-webkit-transform: translate(3em,0);
-	-moz-transform: translate(3em,0);
-	-o-transform: translate(3em,0);
-	-ms-transform: translate(3em,0);
-}
-
-div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
-	-webkit-transition-property: height, width;
-	-webkit-transition-duration: 0.5s;
-	-moz-transition-property: height, width;
-	-moz-transition-duration: 0.5s;
-	transition-property: height, width;
-	transition-duration: 0.5s;
-	transform: translate(3em,0);
-	-webkit-transform: translate(3em,0);
-	-moz-transform: translate(3em,0);
-	-o-transform: translate(3em,0);
-	-ms-transform: translate(3em,0);
-}
-
-
-
-.exploreSmallYoutube:onMouseLeave {
-	width: 280px;
-	height: 157.5px;
-	-webkit-transition-property: height, width;
-	-webkit-transition-duration: 0.5s;
-	-moz-transition-property: height, width;
-	-moz-transition-duration: 0.5s;
-	transition-property: height, width;
-	transition-duration: 0.5s;
-}
-
-
-.exploreSmallYoutube:onMouseLeave ~ .exploreSmallYoutube{
-	width: 280px;
-	height: 157.5px;
-	-webkit-transition-property: height, width;
-	-webkit-transition-duration: 0.5s;
-	-moz-transition-property: height, width;
-	-moz-transition-duration: 0.5s;
-	transition-property: height, width;
-	transition-duration: 0.5s;
-}*/
 
 #file {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	width: 25%;
-	}
+}
 
 .exploreSmallYoutubeArea{
-	margin-right: 69px;
-	margin-left: 25px;
+	margin-right: 55px;
+	margin-left: 40px;
 }
 
 .exploreSmallYoutubeButton{
-	width: 308px;
-	height: 60px;
+	width: 270px;
+	height: 45px;
 	margin-top: -5px;
 	opacity: 100%;
 	background-color: #3a3a3a;
 	color: #d6d6d6;
 	border: 0.5px solid #262626;
+	margin-bottom: 30px;
 }
 
 #myModalLabel{
@@ -338,22 +210,22 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 
 #message input,
 #message textarea {
-    width: 250px;
-    height: 40px;
-    padding: 10px;
+	width: 250px;
+	height: 40px;
+	padding: 10px;
 }
 
 #message li input[type=text],
 #message li textarea {
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border: none;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border: none;
 }
 
 #message li textarea {
-    height: 150px;
-    resize: none;
+	height: 150px;
+	resize: none;
 }
 
 #modalVideo{
@@ -370,7 +242,7 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	margin-right: 3px;
 }
 
-.promotedArea{
+#promotedArea{
 	margin-top: 20px;
 	margin-left: 90px;
 }
@@ -378,11 +250,12 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 #promotedVideo{
 	width: 840px;
 	height: 472.5px;
+	margin-left: 100px;
 }
 
 #sharePromotedVideo{
 	width: 840px;
-	margin-left: 0px;
+	margin-left: 100px;
 }
 
 
@@ -407,12 +280,6 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 }
 
 .shareButton{
-	/*display: block;
-	background-color: #c8d9ec;
-	border-radius: 5px;
-	padding: 10px;
-	color: black;
-	width: 100%;*/
 	width: 758px;
 	height: 60px;
 	margin-top: -5px;
@@ -444,13 +311,14 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 }
 
 .otherProfile {
-	margin-top: 10px;
+	margin-top: 50px;
 }
 
 .youtubePostHead {
 	margin-left: 10px;
 	margin-top: 20px;
 	margin-bottom: 0px;
+	color: #d6d6d6;
 }
 
 .youtubePostVideo{
@@ -458,7 +326,7 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 }
 
 .FlowVertical {
-	margin-top: 70px;
+	margin-top: 50px;
 }
 
 .FlowVerticalVideo {
@@ -493,12 +361,11 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	height: 18 0px;
 	border-radius: 50%;
 	object-fit: cover;
-	margin-top: 60px;
+	margin-top: 20px;
 }
 
 .resUsername{
-	margin-top: 20px;
-	margin-left: 140px;
+	color: #d6d6d6;
 }
 
 .resUsers{
@@ -506,8 +373,70 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 }
 
 .resUsersText{
+	color: #d6d6d6;
 	margin-top: 50px;
-	margin-left: 200px;
+	text-align: center;
+}
+
+#exploreHeadline{
+	color: #d6d6d6;
+	text-align: center;
+	color: #d6d6d6;
+	margin-top: 25px;
+}
+
+.relativeDiv {
+	position: relative;
+}
+
+.img__description {
+	position: absolute;
+	top: 55px;
+	bottom: 0;
+	left: 95px;
+	right: 0;
+	color: #fff;
+	visibility: hidden;
+	opacity: 0;
+	font-size: 30px;
+
+	/* transition effect. not necessary */
+	transition: opacity .5s, visibility .5s;
+}
+
+.relativeDiv:hover .img__description {
+	visibility: visible;
+	opacity: 1;
+}
+
+.loaderIcon {
+	width:100%;
+	height: 35px;
+	font-size: 20px;
+	background-color: #363636;
+	margin-top:20px;
+	text-align: center;
+	color: white;
+	font-style: italic;
+}
+
+.changeProfilePic {
+	color: #d6d6d6;
+	font-size: 16px;
+	float: center;
+	padding-top: 8px;
+	height: 40px;
+	width: 200px;
+	margin-bottom: 10px;
+	margin-left: 140px;
+	background-color: #3a3a3a;
+}
+
+.changeProfilePicUndertext {
+	color: #d6d6d6;
+	font-size: 14px;
+	float: center;
+	font-style: italic;
 }
 
 .collapse{

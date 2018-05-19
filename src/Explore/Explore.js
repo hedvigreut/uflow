@@ -6,7 +6,6 @@ class Explore extends Component {
   render() {
     return (
       <div className="SelectProfile">
-        {/* We pass the model as property to the Sidebar component */}
         <Navbar model={this.props.model}/>
         <Flow model={this.props.model}/>
       </div>

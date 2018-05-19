@@ -1,40 +1,27 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import logo from '../images/logo.jpg';
 import { modelInstance } from '../data/model';
-import NavBar from "../Navbar/Navbar";
 
 class Welcome extends Component {
 
-  constructor(props) {
-    super(props)
-  }
-    render() {
+  render() {
 
-      console.log('test push');
+    return (
+      <div className="Welcome">
+        <div className="col-md-2">
+        </div>
+        <div className="col-md-8 jumbotron">
+          <div id="welcome">
+            <img className="img-responsive welcomeLogo" src="https://uflow-b640f.firebaseapp.com/static/media/logo.b59931ba.jpg" alt="logo"/>
+            <br/>
 
-      return (
-        <div className="Welcome">
-          {/*<NavBar/>*/}
-          <div className="col-md-2">
-          </div>
-          <div className="col-md-8 jumbotron">
-            <div id="welcome">
-              <img className="img-responsive welcomeLogo" src={logo} alt="logo"/>
-              <br/>
+            <button id="logInButton" onClick={() => modelInstance.googleLogin()}>Log in with Google</button>
 
-              <button className="actionButton" onClick={() => modelInstance.googleLogin()}>Sign up with Google</button>
-              <br></br>
-              <p id="or">OR</p>
-              <br></br>
-              <Link to="/explore">
-                  <button className="actionButton">Log in</button>
-              </Link>
-            </div>
           </div>
         </div>
-      );
-    }
+      </div>
+    );
+  }
 }
 
 export default Welcome;

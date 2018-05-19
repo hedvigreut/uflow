@@ -27,7 +27,7 @@ class Chatroom extends React.Component {
     this.props.model.addObserver(this);
       //this.paintVideos();
 
-      
+
       modelInstance.createApp();
 
       //Set current user
@@ -40,7 +40,7 @@ class Chatroom extends React.Component {
        // Fetch usernames, id:s
        var usernames = [];
        var userIds = [];
-       var userPictures = [];  
+       var userPictures = [];
        firebase.database().ref('/users/').once('value', snapshot => {
         var key = Object.keys(snapshot.val());
         //console.log(key);
@@ -70,7 +70,7 @@ class Chatroom extends React.Component {
      })
       console.log("hejsan");
 
-        
+
       //Fetch messages
       var storedMessages = [];
       this.state.keys.map((id) =>
@@ -243,7 +243,7 @@ console.log(this.state);
 
     //   var messageTexts = [];
     //   firebase.database().ref('/messages/').once('value', message => {
-    //     console.log("HAJ"); 
+    //     console.log("HAJ");
     //     console.log(message.val());
     //     //var key = Object.keys(message.val());
     //     if(message.val() != null){
