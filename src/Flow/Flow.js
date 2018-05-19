@@ -190,19 +190,6 @@ render() {
     })
   }
 
-  var topVideo = [];
-  if (this.state.resultyt.length > 0) {
-    topVideo =
-    <div>
-      <iframe className="exploreChosenYoutube" id="promotedVideo" src={this.state.resultyt[0]} title="promotedVideo" frameBorder="0" allowFullScreen></iframe>
-      <input className="row exploreSmallYoutubeButton" type="button" id="sharePromotedVideo" index={0} value="Share on Uflow" data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}></input>
-    </div>
-  } else {
-    topVideo =
-    <div>
-      <h4 className="resUsersText">No results found.</h4>
-    </div>
-  };
 
   let loadingIndicator = null;
 
@@ -223,10 +210,6 @@ render() {
       {loadingIndicator}
       {resUsers}
       <h3 id="exploreHeadline">Start Exploring by searching for a video or a user in the search box above!</h3>
-      <div className="col-md-1"></div>
-      <div className="promotedArea col-md-10">
-        {topVideo}
-      </div>
 
       {
         this.state.resultyt.map((link, i) => {

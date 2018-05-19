@@ -46,6 +46,7 @@ html,body {
 
 .navbar{
 	background-color: white;
+	margin-top: 0px;
 	height: 70px;
 	border-width: 2px;
 	color: #d1d1d1;

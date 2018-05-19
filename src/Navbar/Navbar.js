@@ -65,14 +65,21 @@ class Navbar extends Component {
 
         <div className="row" id="navbarLogoSearchIcons">
 
-          <nav className="navbar navbar-fixed-top">
-            <div className="container-fluid">
-              <div className="navbar-header">
+        <nav className="navbar navbar-inverse navbar-static-top">
+  <div className="container-fluid">
+    <div className="navbar-header">
+      
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span className="icon-bar"></span>
+        <span className="icon-bar"></span>
+        <span className="icon-bar"></span>                        
+      </button>
+      <a className="navbar-brand" href="/explore"><img src={NavLogo} id="logo" alt="logo"/></a>
+    </div>
 
-              </div>
-
-              <form className="navbar-form navbar-left" onSubmit={this.handleSearch}>
-                <a className="navbar-brand" href="/explore"><img src="https://uflow-b640f.firebaseapp.com/static/media/navLogo.f5d48d60.jpg" id="logo" alt="logo"/></a>
+    <div className="collapse navbar-collapse" id="myNavbar">
+      <ul className="nav navbar-nav">
+      <form className="navbar-form navbar-left" onSubmit={this.handleSearch} onClick={() => modelInstance.setAllUsers(this.state.users)}>
                 <div className="input-group" onClick={this.handleLocation}>
                   <input type="text" className="form-control" placeholder="Search for a video or a user" onChange={this.handleFilter} name="search" />
                   <div className="input-group-btn">
@@ -82,15 +89,18 @@ class Navbar extends Component {
                   </div>
                 </div>
               </form>
-
-              <div className="navbarIcons navbar-right">
-                <a href="/explore"><i className="material-icons">explore</i></a>
-                <a href="/friendflow"><i className="material-icons">people</i></a>
-                <a href="/profile"><i className="material-icons">person</i></a>
-                <Link to="/"><i className="material-icons" onClick={() => modelInstance.googleLogout()}>settings_power</i></Link>
-              </div>
-            </div>
-          </nav>
+        <li><a id="dropdownElements"href="/explore"><span className="material-icons">explore</span>Explore</a></li>
+        <li><a id="dropdownElements"href="/friendflow"><span className="material-icons">people</span>Friendflow</a></li>
+        <li><a id="dropdownElements"href="/chatroom"><span className="material-icons">chat_bubble</span>Chatt</a></li>
+        <li><a id="dropdownElements"href="/profile"><span className="material-icons">people</span>Profile</a></li>
+      </ul>
+      <ul className="nav navbar-nav navbar-right">
+        <li><Link to="/"><span className="material-icons" onClick={() => modelInstance.googleLogout()}></span> Log out</Link></li>
+        <i className="material-icons" onClick={() => modelInstance.googleLogout()}>settings_power</i>
+      </ul>
+    </div>
+  </div>
+</nav>
 
         </div>
       </div>

@@ -247,6 +247,8 @@ const Model = function () {
     notifyObservers();
   }
 
+  
+
   this.addObserver = function (observer) {
     observers.push(observer);
   };
