@@ -209,7 +209,7 @@ render() {
     <div className="Explore">
       {loadingIndicator}
       {resUsers}
-    //  <h5 id="exploreHeadline">Start Exploring by searching for a video or a user in the search box above!</h5>
+      <h5 id="exploreHeadline">Start Exploring by searching for a video or a user in the box above!</h5>
 
       {
         this.state.resultyt.map((link, i) => {
