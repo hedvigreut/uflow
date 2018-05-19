@@ -1,3 +1,13 @@
+
+@media (orientation: portrait) {
+  body {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+  }
+}
 html,body {
 	font-family: 'Lato', sans-serif;
 	background: #f0d0b9;
@@ -103,8 +113,10 @@ html,body {
 }
 
 .jumbotron {
+	margin-top: 0%;
 	background-color: white;
-	height: 1000px;
+	width: 80%;
+	height: 80%;
 }
 
 .emptyResText {

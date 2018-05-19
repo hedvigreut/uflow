@@ -247,6 +247,24 @@ const Model = function () {
     notifyObservers();
   }
 
+
+  this.message = function(id, text) {
+
+    this.createApp();
+    //var sharesRef = firebase.database().ref('shares/' + id);
+
+    //var newShareKey = firebase.database().ref().child('videos').push().key;
+    var newShareTextKey = firebase.database().ref().child('text').push().key;
+      // Write the new post's data simultaneously in the posts list and the user's post list.
+      var updates = {};
+      //updates['/shares/' + newShareKey] = video;
+      //updates['/shares/' + id + '/videos/' + newShareKey] = video;
+      updates['/messages/' + id + '/text/' + newShareTextKey] = text;
+      firebase.database().ref().update(updates);
+    
+    console.log("message!");
+  }
+
   
 
   this.addObserver = function (observer) {
