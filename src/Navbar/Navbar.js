@@ -65,11 +65,11 @@ class Navbar extends Component {
 
         <div className="row" id="navbarLogoSearchIcons">
 
-        <nav className="navbar navbar-inverse navbar-static-top">
+        <nav className="navbar navbar-inverse navbar-static-top navbar-fixed-top">
   <div className="container-fluid">
     <div className="navbar-header">
       
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span className="icon-bar"></span>
         <span className="icon-bar"></span>
         <span className="icon-bar"></span>                        
