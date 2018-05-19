@@ -79,7 +79,7 @@ class Navbar extends Component {
 
     <div className="collapse navbar-collapse" id="myNavbar">
       <ul className="nav navbar-nav">
-      <form className="navbar-form navbar-left" onSubmit={this.handleSearch} onClick={() => modelInstance.setAllUsers(this.state.users)}>
+      <form className="navbar-form navbar-left" onSubmit={this.handleSearch}>
                 <div className="input-group" onClick={this.handleLocation}>
                   <input type="text" className="form-control" placeholder="Search for a video or a user" onChange={this.handleFilter} name="search" />
                   <div className="input-group-btn">
