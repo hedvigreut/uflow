@@ -10,16 +10,14 @@ class Chatroom extends React.Component {
     super(props);
 
     this.state = {
-      message : [],
-      storedMessages : [],
+      currentUser: [],
       users: [],
       keys: [],
-      FlowVertical_pics: [],
-      FlowVertical_videos: [],
+      pictures: [],
+      message : [],
+      storedMessages : [],
       currentText: '',
       texts: [],
-      following_id: [],
-      usernames: []
     };
 
     this.submitMessage = this.submitMessage.bind(this);
@@ -29,105 +27,177 @@ class Chatroom extends React.Component {
     this.props.model.addObserver(this);
       //this.paintVideos();
 
-    modelInstance.createApp();
-    firebase.auth().onAuthStateChanged(user => {
-      firebase.database().ref('/users/' + user.uid).once('value', snapshot => {
-        this.setState({currentUser: snapshot.val()})
-      })
-      var allUsers = [];
-      var allUsersId = [];
-      firebase.database().ref('/users/').once('value', snapshot => {
+      
+      modelInstance.createApp();
+
+      //Set current user
+      firebase.auth().onAuthStateChanged(user => {
+        firebase.database().ref('/users/' + user.uid).once('value', snapshot => {
+          this.setState({currentUser: snapshot.val()})
+        })
+
+
+       // Fetch usernames, id:s
+       var usernames = [];
+       var userIds = [];
+       var userPictures = [];  
+       firebase.database().ref('/users/').once('value', snapshot => {
         var key = Object.keys(snapshot.val());
         //console.log(key);
         key.map((key) =>
           firebase.database().ref('/users/' + key + '/username').once('value', username => {
-            allUsers.push(username.val());
-            //console.log(allUsers);
-            allUsersId.push(key)
-            //console.log(allUsersId)
+            usernames.push(username.val());
+            userIds.push(key)
             this.setState({
-              users: allUsers,
-              keys: allUsersId});
+              users: usernames,
+              keys: userIds});
+          })
+          )
+
+        //Fetch profile pictures
+
+        key.map((key) =>
+          firebase.database().ref('/users/' + key + '/profile_pic').once('value', profile_pic => {
+            userPictures.unshift(profile_pic.val());
+            this.setState({pictures: userPictures});
+
+          })
+          )
+
+          console.log(this.state);
+      })
+       console.log(this.state);
+     })
+      console.log("hejsan");
+
+        
+      //Fetch messages
+      var storedMessages = [];
+      this.state.keys.map((id) =>
+        firebase.database().ref('/messages/' + id + '/text').once('value', snapshot => {
+          //console.log("hej");
+          //console.log(id);
+          //console.log(Object.keys(snapshot.val()));
+            if (snapshot.val() !== null) {
+              var keyTwo = Object.keys(snapshot.val());
+              console.log("hallå");
+              console.log(keyTwo);
+              if (keyTwo !== undefined) {
+                // keyTwo.map((keyTwo) =>
+                //   firebase.database().ref('/shares/' + id  + '/texts/' + keyTwo).once('value', shareTexts => {
+                //     console.log(shareTexts.val());
+                //     storedMessages.unshift(shareTexts.val());
+                //     this.setState({storedMessages: storedMessages});
+                //   })
+                //   )
+              }
+            }
           })
         )
-      })
-      var following = [];
-      firebase.database().ref('/follow/' + user.uid + '/following').once('value', people => {
-        console.log(people.val())
-        if (people.val() !== null) {
-          var key = Object.keys(people.val());
-          if (key !== undefined) {
-            key.map((key) =>
-            firebase.database().ref('/follow/' + user.uid + '/following/' + key).once('value', person => {
-              console.log(person.val())
-              following.push(person.val());
-              this.setState({following_id: following})
-              var flow_videos = [];
-              var flow_texts = [];
-              var flow_usernames = [];
-              var flow_profile_pics = [];
-              var flow_id_navigate = [];
-                this.state.following_id.map((id) =>
-                  firebase.database().ref('/shares/' + id + '/videos').once('value', snapshot => {
-                    if (snapshot.val() !== null) {
-                    var keyTwo = Object.keys(snapshot.val());
-                    console.log(keyTwo)
-                    if (keyTwo !== undefined) {
-                      keyTwo.map((keyTwo) =>
-                        firebase.database().ref('/shares/' + id + '/videos/' + keyTwo).once('value', videos => {
-                          flow_id_navigate.unshift(id);
-                          this.setState({navigate_id: flow_id_navigate})
-                          flow_videos.unshift(videos.val());
-                          //console.log(videos.val())
-                          this.setState({FlowVertical_videos: flow_videos});
-                          firebase.database().ref('/users/' + id + '/username').once('value', usernames => {
-                            flow_usernames.unshift(usernames.val());
-                            this.setState({usernames: flow_usernames});
-                          })
-                          firebase.database().ref('/users/' + id + '/profile_pic').once('value', profile_pic => {
-                            flow_profile_pics.unshift(profile_pic.val());
-                            this.setState({FlowVertical_pics: flow_profile_pics});
-                          })
-                        })
-                      )
-                    }
-                  }
-                  })
-                )
-
-                this.state.users.map((id) =>
-                  firebase.database().ref('/messages/' + id + '/text').once('value', snapshot => {
-                    console.log("hej");
-                    console.log(id);
-                    //console.log(Object.keys(snapshot.val()));
-                    if (snapshot.val() !== null) {
-                    var keyTwo = Object.keys(snapshot.val());
-                    console.log("hallå");
-                    console.log(keyTwo);
-                    if (keyTwo !== undefined) {
-                      keyTwo.map((keyTwo) =>
-                        firebase.database().ref('/shares/' + id  + '/texts/' + keyTwo).once('value', shareTexts => {
-                          console.log(shareTexts.val());
-                          flow_texts.unshift(shareTexts.val());
-                          this.setState({texts: flow_texts});
-                        })
-                      )
-                    }
-                  }
-                  })
-                )
-
-            })
-          )
-          }
-        }
-      })
-    })
 
 
 
 
-console.log(this.state.texts);
+
+      // modelInstance.createApp();
+      // firebase.auth().onAuthStateChanged(user => {
+      //   firebase.database().ref('/users/' + user.uid).once('value', snapshot => {
+      //     this.setState({currentUser: snapshot.val()})
+      //   })
+      //   var allUsers = [];
+      //   var allUsersId = [];
+      //   firebase.database().ref('/users/').once('value', snapshot => {
+      //     var key = Object.keys(snapshot.val());
+      //   //console.log(key);
+      //   key.map((key) =>
+      //     firebase.database().ref('/users/' + key + '/username').once('value', username => {
+      //       allUsers.push(username.val());
+      //       //console.log(allUsers);
+      //       allUsersId.push(key)
+      //       //console.log(allUsersId)
+      //       this.setState({
+      //         users: allUsers,
+      //         keys: allUsersId});
+      //     })
+      //     )
+      // })
+      //   var following = [];
+      //   firebase.database().ref('/follow/' + user.uid + '/following').once('value', people => {
+      //     console.log(people.val())
+      //     if (people.val() !== null) {
+      //       var key = Object.keys(people.val());
+      //       if (key !== undefined) {
+      //         key.map((key) =>
+      //           firebase.database().ref('/follow/' + user.uid + '/following/' + key).once('value', person => {
+      //             console.log(person.val())
+      //             following.push(person.val());
+      //             this.setState({following_id: following})
+      //             var flow_videos = [];
+      //             var flow_texts = [];
+      //             var flow_usernames = [];
+      //             var flow_profile_pics = [];
+      //             var flow_id_navigate = [];
+      //             this.state.following_id.map((id) =>
+      //               firebase.database().ref('/shares/' + id + '/videos').once('value', snapshot => {
+      //                 if (snapshot.val() !== null) {
+      //                   var keyTwo = Object.keys(snapshot.val());
+      //                   console.log(keyTwo)
+      //                   if (keyTwo !== undefined) {
+      //                     keyTwo.map((keyTwo) =>
+      //                       firebase.database().ref('/shares/' + id + '/videos/' + keyTwo).once('value', videos => {
+      //                         flow_id_navigate.unshift(id);
+      //                         this.setState({navigate_id: flow_id_navigate})
+      //                         flow_videos.unshift(videos.val());
+      //                     //console.log(videos.val())
+      //                     this.setState({FlowVertical_videos: flow_videos});
+      //                     firebase.database().ref('/users/' + id + '/username').once('value', usernames => {
+      //                       flow_usernames.unshift(usernames.val());
+      //                       this.setState({usernames: flow_usernames});
+      //                     })
+      //                     firebase.database().ref('/users/' + id + '/profile_pic').once('value', profile_pic => {
+      //                       flow_profile_pics.unshift(profile_pic.val());
+      //                       this.setState({FlowVertical_pics: flow_profile_pics});
+      //                     })
+      //                   })
+      //                       )
+      //                   }
+      //                 }
+      //               })
+      //               )
+
+      //             this.state.users.map((id) =>
+      //               firebase.database().ref('/messages/' + id + '/text').once('value', snapshot => {
+      //                 console.log("hej");
+      //                 console.log(id);
+      //               //console.log(Object.keys(snapshot.val()));
+      //               if (snapshot.val() !== null) {
+      //                 var keyTwo = Object.keys(snapshot.val());
+      //                 console.log("hallå");
+      //                 console.log(keyTwo);
+      //                 if (keyTwo !== undefined) {
+      //                   keyTwo.map((keyTwo) =>
+      //                     firebase.database().ref('/shares/' + id  + '/texts/' + keyTwo).once('value', shareTexts => {
+      //                       console.log(shareTexts.val());
+      //                       flow_texts.unshift(shareTexts.val());
+      //                       this.setState({texts: flow_texts});
+      //                     })
+      //                     )
+      //                 }
+      //               }
+      //             })
+      //               )
+
+      //           })
+      //           )
+      //       }
+      //     }
+      //   })
+      // })
+
+
+
+
+console.log(this.state);
 
 
 
@@ -255,7 +325,7 @@ console.log(this.state.texts);
   }
 
   submitMessage(e) {
-      e.preventDefault();
+    e.preventDefault();
       //console.log(this.state.currentUser);
       modelInstance.message(this.state.currentUser.id, this.state.message);
 
