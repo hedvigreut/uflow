@@ -186,10 +186,8 @@ modalVideo(event) {
                 <h3 id="profileName"> {username}
                 </h3>
                 <FileUpload><p className="changeProfilePic">Change profile picture</p></FileUpload>
-                <p className="changeProfilePicUndertext">Drag an image to the box or click on it</p>
+                <p className="changeProfilePicUndertext">Press the button above to change profile picture or click on it</p>
               </div>
-
-              
 
               </div>
             </div>

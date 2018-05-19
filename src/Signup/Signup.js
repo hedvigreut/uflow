@@ -50,7 +50,7 @@ class Signup extends Component {
           <img className="img-responsive welcomeLogo" src="https://uflow-b640f.firebaseapp.com/static/media/logo.b59931ba.jpg" alt="logo"/>
           <h2>Welcome @{username}!</h2>
           <div id="welcomePhoto">
-            <img id="profilePicture" src={this.state.profile_pic} alt="profilePicture" />
+            <img id="sigupPicture" src={this.state.profile_pic} alt="profilePicture" />
           </div>
           <br></br>
 
