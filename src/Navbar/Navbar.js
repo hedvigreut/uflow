@@ -74,7 +74,7 @@ class Navbar extends Component {
         <span className="icon-bar"></span>
         <span className="icon-bar"></span>                        
       </button>
-      <a className="navbar-brand" href="/explore"><img src={NavLogo} id="logo" alt="logo"/></a>
+      <a className="navbar-brand" href="/explore"><img src="https://uflow-b640f.firebaseapp.com/static/media/navLogo.f5d48d60.jpg" id="logo" alt="logo"/></a>
     </div>
 
     <div className="collapse navbar-collapse" id="myNavbar">
