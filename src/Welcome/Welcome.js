@@ -8,9 +8,9 @@ class Welcome extends Component {
 
     return (
       <div className="Welcome">
-        <div className="col-md-2">
+        <div className="col-xs-2">
         </div>
-        <div className="col-md-8 jumbotron">
+        <div className="col-xs-8 jumbotron">
           <div id="welcome">
             <img className="img-responsive welcomeLogo" src="https://uflow-b640f.firebaseapp.com/static/media/logo.b59931ba.jpg" alt="logo"/>
             <br/>
