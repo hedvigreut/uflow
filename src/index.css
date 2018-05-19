@@ -6,11 +6,12 @@ html,body {
 }
 
 #profilePicture{
-	width: 250px;
-	height: 250px;
+	width: 150px;
+	height: 150px;
 	border-radius: 50%;
 	object-fit: cover;
 	margin-top: 30px;
+	margin-left: 38%;
 }
 
 .profilePictureSmall {
@@ -21,8 +22,8 @@ html,body {
 }
 
 #profileName{
-	margin-top: 200px;
-	font-size: 45px;
+	margin-top: 5%;
+	font-size: 25px;
 }
 
 #profileNamePictureArea {

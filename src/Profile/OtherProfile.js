@@ -204,6 +204,9 @@ modalVideo(event) {
         </div>
 
         <div className="col-md-10">
+        <div className="ProfilePictureArea">
+              <img id="profilePicture" src={this.state.profile_pic} alt="profilePicture" />
+            </div>
           <div className="row" id="profileNamePictureArea">
 
             <div className="col-md-6">
@@ -214,9 +217,7 @@ modalVideo(event) {
               </div>
             </div>
 
-            <div className="ProfilePictureArea col-md-5">
-              <img id="profilePicture" src={this.state.profile_pic} alt="profilePicture" />
-            </div>
+            
 
 
 

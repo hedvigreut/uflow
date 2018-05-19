@@ -177,6 +177,10 @@ modalVideo(event) {
           {loadingIndicator}
           <div className="col-md-2"></div>
           <div className="col-md-10">
+          <div className="ProfilePictureArea">
+                <img id="profilePicture" src={this.state.profile_pic} alt="profilePicture" />
+                <br></br>
+              </div>
             <div className="row" id="profileNamePictureArea">
               <div className="col-md-6">
                 <h3 id="profileName"> {username}
@@ -185,10 +189,7 @@ modalVideo(event) {
                 <p className="changeProfilePicUndertext">Drag an image to the box or click on it</p>
               </div>
 
-              <div className="ProfilePictureArea col-md-5">
-                <img id="profilePicture" src={this.state.profile_pic} alt="profilePicture" />
-                <br></br>
-              </div>
+              
 
               </div>
             </div>
@@ -209,7 +210,7 @@ modalVideo(event) {
                         <button className="removeShareButton" onClick={() => this.removeShare(this.state.currentUser.id, link, this.state.texts[i])}>X</button>
                         <div className="col-md-1"></div>
                         <div className="col-md-10">
-                          <iframe className='profileVideo col-md-12' width= "840" height="472.5" key={'video' + i} title={'video' + i} src={link} frameBorder="0" allowFullScreen >
+                          <iframe className='profileVideo col-md-12' width= "270px" height="155px" key={'video' + i} title={'video' + i} src={link} frameBorder="0" allowFullScreen >
                           </iframe>
                           <div className="col-md-12" id="youtubePostButton">
                             <button className="shareButtonProfile" index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
