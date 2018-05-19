@@ -47,7 +47,8 @@ html,body {
 }
 
 #logo{
-	margin-top: -25px;
+	margin-top: -15px;
+	margin-left: 80%;
 	padding: 0px;
 	width: 130px;
 	height: 65px;
@@ -480,6 +481,7 @@ html,body {
 #welcomeJumbotron{
 	height: 80vh;
 }
+
 
 .changeProfilePic{
 	margin-top: 5%;
