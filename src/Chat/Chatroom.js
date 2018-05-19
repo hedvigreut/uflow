@@ -108,10 +108,12 @@ render() {
     <div className="Chatroom">
       <h2 id="chatroomHeadline">Welcome to the U-flow chatroom!</h2>
       <h4 id="chatroomInstructions">Type a message in the box below to start chatting</h4>
-      <form className="input" onSubmit={(e) => this.submitMessage(e)}>
-        <input type="text" onChange={this.handleMessage}/>
-        <input type="submit" value="Send"/>
+      <div className="footer">
+      <form className="input row" onSubmit={(e) => this.submitMessage(e)}>
+        <input type="text" className="inputMessage" placeHolder="Type message here"onChange={this.handleMessage}/>
+        <button type="submit" className="submitButton" value="Send">Send</button>
       </form>
+      </div>
       <div id="messageArea">
         {
           this.state.storedMessages.map((message, i) => {
