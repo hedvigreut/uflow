@@ -68,18 +68,18 @@ class Navbar extends Component {
         <nav className="navbar navbar-inverse navbar-static-top navbar-fixed-top">
   <div className="container-fluid">
     <div className="navbar-header">
-      
+
       <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span className="icon-bar"></span>
         <span className="icon-bar"></span>
-        <span className="icon-bar"></span>                        
+        <span className="icon-bar"></span>
       </button>
-      <a className="navbar-brand" href="/explore"><img src={NavLogo} id="logo" alt="logo"/></a>
+      <a className="navbar-brand" href="/explore"><img src="https://uflow-b640f.firebaseapp.com/static/media/navLogo.f5d48d60.jpg" id="logo" alt="logo"/></a>
     </div>
 
     <div className="collapse navbar-collapse" id="myNavbar">
       <ul className="nav navbar-nav">
-      <form className="navbar-form navbar-left" onSubmit={this.handleSearch} onClick={() => modelInstance.setAllUsers(this.state.users)}>
+      <form className="navbar-form navbar-left" onSubmit={this.handleSearch}>
                 <div className="input-group" onClick={this.handleLocation}>
                   <input type="text" className="form-control" placeholder="Search for a video or a user" onChange={this.handleFilter} name="search" />
                   <div className="input-group-btn">
@@ -95,8 +95,7 @@ class Navbar extends Component {
         <li><a id="dropdownElements"href="/profile"><span className="material-icons">people</span>Profile</a></li>
       </ul>
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to="/"><span className="material-icons" onClick={() => modelInstance.googleLogout()}></span> Log out</Link></li>
-        <i className="material-icons" onClick={() => modelInstance.googleLogout()}>settings_power</i>
+        <li><Link to="/"><span className="material-icons" onClick={() => modelInstance.googleLogout()}>settings_power</span> Log out</Link></li>
       </ul>
     </div>
   </div>
