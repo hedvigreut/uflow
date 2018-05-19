@@ -465,3 +465,25 @@ html,body {
 #dropdownelements:hover{
 	color: #8e8e8e;
 }
+
+.chatMessage {
+	margin: 10px;
+	color: white;
+	background: #f0d0b9;
+	margin-left: 30%;
+	margin-right: 30%;
+	text-align: center;
+}
+
+.Chatroom {
+	margin-top: 70px;
+	text-align: center;
+}
+
+#chatroomHeadline {
+	color: white;
+}
+
+#chatroomInstructions {
+	color: white;
+}
