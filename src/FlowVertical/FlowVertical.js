@@ -16,8 +16,7 @@ class FlowVertical extends Component {
       currentText: '',
       texts: [],
       following_id: [],
-      usernames: [],
-      status: 'INITIAL',
+      usernames: []
     };
     this.modalVideo = this.modalVideo.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
@@ -30,6 +29,17 @@ handleChangeDescription(event) {
 
   componentDidMount() {
 
+    /*this.props.model.getVideos().then(video => {
+      this.setState({
+        status: 'LOADED',
+        resultyt: video,
+
+      })
+    }).catch(() => {
+      this.setState({
+        status: 'ERROR'
+      })
+    })*/
     modelInstance.createApp()
     firebase.auth().onAuthStateChanged(user => {
       firebase.database().ref('/users/' + user.uid).once('value', snapshot => {
@@ -39,10 +49,13 @@ handleChangeDescription(event) {
       var allUsersId = [];
       firebase.database().ref('/users/').once('value', snapshot => {
         var key = Object.keys(snapshot.val());
+        //console.log(key);
         key.map((key) =>
           firebase.database().ref('/users/' + key + '/username').once('value', username => {
             allUsers.push(username.val());
+            //console.log(allUsers);
             allUsersId.push(key)
+            //console.log(allUsersId)
             this.setState({
               users: allUsers,
               keys: allUsersId});
@@ -51,15 +64,13 @@ handleChangeDescription(event) {
       })
       var following = [];
       firebase.database().ref('/follow/' + user.uid + '/following').once('value', people => {
-        if (people.val() === null) {
-          this.emptyFollowList();
-          this.setState({status: 'LOADED'})
-        }
-        else {
+        console.log(people.val())
+        if (people.val() !== null) {
           var key = Object.keys(people.val());
           if (key !== undefined) {
             key.map((key) =>
             firebase.database().ref('/follow/' + user.uid + '/following/' + key).once('value', person => {
+              console.log(person.val())
               following.push(person.val());
               this.setState({following_id: following})
               var flow_videos = [];
@@ -71,22 +82,22 @@ handleChangeDescription(event) {
                   firebase.database().ref('/shares/' + id + '/videos').once('value', snapshot => {
                     if (snapshot.val() !== null) {
                     var keyTwo = Object.keys(snapshot.val());
+                    console.log(keyTwo)
                     if (keyTwo !== undefined) {
                       keyTwo.map((keyTwo) =>
                         firebase.database().ref('/shares/' + id + '/videos/' + keyTwo).once('value', videos => {
                           flow_id_navigate.unshift(id);
                           this.setState({navigate_id: flow_id_navigate})
                           flow_videos.unshift(videos.val());
+                          console.log(videos.val())
                           this.setState({FlowVertical_videos: flow_videos});
                           firebase.database().ref('/users/' + id + '/username').once('value', usernames => {
                             flow_usernames.unshift(usernames.val());
                             this.setState({usernames: flow_usernames});
                           })
-                          firebase.database().ref('/images/' + id + '/image').once('value', snapshot => {
-                              flow_profile_pics.unshift(snapshot.val());
-                              this.setState({
-                                FlowVertical_pics: flow_profile_pics
-                              });
+                          firebase.database().ref('/users/' + id + '/profile_pic').once('value', profile_pic => {
+                            flow_profile_pics.unshift(profile_pic.val());
+                            this.setState({FlowVertical_pics: flow_profile_pics});
                           })
                         })
                       )
@@ -97,7 +108,6 @@ handleChangeDescription(event) {
 
                 this.state.following_id.map((id) =>
                   firebase.database().ref('/shares/' + id + '/texts').once('value', snapshot => {
-                    this.setState({status: 'LOADED'});
                     if (snapshot.val() !== null) {
                     var keyTwo = Object.keys(snapshot.val());
                     if (keyTwo !== undefined) {
@@ -111,16 +121,16 @@ handleChangeDescription(event) {
                   }
                   })
                 )
+
             })
           )
           }
-
         }
       })
     })
 
-  }
 
+  }
 
   shareVideo(video) {
     if (this.state.currentUser !== null) {
@@ -139,10 +149,11 @@ handleChangeDescription(event) {
     }
     var video = document.createElement("iframe");
     var index = event.target.attributes.getNamedItem("index").value;
-    var src = this.state.FlowVertical_videos[index];
+    var src = this.state.profile_videos[index];
     video.src = src;
     this.setState({
       currentVideo: src})
+    //video.className = "col-md-7";
     video.id = "modalVideo";
     position.appendChild(video);
   }
@@ -151,39 +162,23 @@ handleChangeDescription(event) {
     this.props.model.setProfileUser(event.target.id);
   }
 
-  emptyFollowList() {
-    var position = document.getElementById("FlowVerticalFlow");
-    var col = document.createElement("div");
-    col.className = "col-md-1";
-    position.appendChild(col);
-
-    var text = document.createElement("p");
-    text.className = "emptyResText";
-    var textNode = document.createTextNode("You are not following any U-flow users yet. Find users by searching for them in Explore!");
-    text.appendChild(textNode);
-    position.appendChild(text);
-  }
-
   render() {
 
-    let loadingIndicator = null;
+    console.log(this.state.usernames);
+    var currentUser = this.state.currentUser;
 
-    switch (this.state.status) {
-      case 'INITIAL':
-      loadingIndicator = <div className="loaderIcon">Data is loading...</div>
-      break;
-      case 'LOADED':
-      loadingIndicator = ""
-      break;
-      default:
-      loadingIndicator = <b>Failed to load data, please try again</b>
-      break;
+    if (currentUser !== undefined) {
+      //console.log(currentUser)
+      var username = currentUser.email;
+      username = username.substring(0,username.indexOf("@"));
+      username = username.replace(/[^a-z0-9]+|\s+/gmi, "");
+      var ID = currentUser.id;
     }
+    console.log(this.state.navigate_id)
 
     return (
       <div className="FlowVertical">
         <NavBar />
-        {loadingIndicator}
 
         <div className="col-md-1">
         </div>
@@ -193,18 +188,18 @@ handleChangeDescription(event) {
               this.state.FlowVertical_videos.map((link, i) => {
 
                 var frame =
-                <div key={i}>
+                <div>
                   <br></br>
                 <div className="youtubePost">
                 <div className="friendFlowArea">
                   <div className="youtubePostHead row">
-                    <img className="col-md-6 profilePictureSmall" src={this.state.FlowVertical_pics[i]} alt="FlowVerticalPictureSmall" />
+                    <img id="profilePictureSmall" className="col-md-6" src={this.state.FlowVertical_pics[i]} alt="FlowVerticalPictureSmall" />
                     <Link to="/otherProfile" className="clickableUsername"><h2 className="col-md-6" id={this.state.navigate_id[i]} onClick={this.navigateToUser}>{this.state.usernames[i]}<p></p><p className="postText">{this.state.texts[i]}</p></h2></Link>
                   </div>
 
                   <div className="col-md-1"></div>
                   <div className="col-md-10 youtubePostVideo">
-                    <iframe className='FlowVerticalVideo col-md-12' width= "840" height="472.5" key={'video' + i} title={'video' + i} src={link} frameBorder="0" allowFullScreen >
+                    <iframe className='FlowVerticalVideo col-md-12' width= "840" height="472.5" key={'video' + i} src={link} frameBorder="0" allowFullScreen >
                     </iframe>
                     <div className="col-md-12">
                     <button className="shareButtonProfile" index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
