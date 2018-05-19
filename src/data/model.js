@@ -5,6 +5,7 @@ const Model = function () {
   var firebase = require("firebase");
   const key = 'AIzaSyAOYG1Ai4mZy6L-ifZgQ8bzS87vA6v3JdA';
   var profileUser = [];
+  var message = [];
 
   var config = {
     apiKey: "AIzaSyDep4MzWGodn_n7kcInVQu2Doy6YD92Mng",
@@ -75,6 +76,25 @@ const Model = function () {
     });
 
   }
+
+
+  this.message = function(id, text) {
+
+    this.createApp();
+    //var sharesRef = firebase.database().ref('shares/' + id);
+
+    //var newShareKey = firebase.database().ref().child('videos').push().key;
+    var newShareTextKey = firebase.database().ref().child('text').push().key;
+      // Write the new post's data simultaneously in the posts list and the user's post list.
+      var updates = {};
+      //updates['/shares/' + newShareKey] = video;
+      //updates['/shares/' + id + '/videos/' + newShareKey] = video;
+      updates['/messages/' + id + '/text/' + newShareTextKey] = text;
+      firebase.database().ref().update(updates);
+    
+    console.log("message!");
+  }
+
 
   this.shareVideo = function(video, id, text) {
 
@@ -270,14 +290,11 @@ const Model = function () {
 
   this.setProfileUser = function (userId) {
     profileUser = userId;
-    console.log(profileUser)
-}
-  this.setProfileUser = function (username) {
-    profileUser = username;
+  
   }
-
-  this.setProfileUser = function (username) {
-    profileUser = username;
+  this.setMessage= function (message) {
+    message = message;
+    notifyObservers();
   }
 
   this.getFilter = function () {

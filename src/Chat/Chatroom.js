@@ -4,99 +4,136 @@ import { Link } from 'react-router-dom';
 import NavBar from "../Navbar/Navbar";
 import { modelInstance } from '../data/model';
 import firebase from 'firebase';
-import Message from './Message.js';
-import '../Chat/chatroom.css';
 
 class Chatroom extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            chats: [{
-                username: "Kevin Hsu",
-                content: <p>Hello World!</p>,
-                img: "http://i.imgur.com/Tj5DGiO.jpg",
-            }, {
-                username: "Alice Chen",
-                content: <p>Love it! :heart:</p>,
-                img: "http://i.imgur.com/Tj5DGiO.jpg",
-            }, {
-                username: "Kevin Hsu",
-                content: <p>Check out my Github at https://github.com/WigoHunter</p>,
-                img: "http://i.imgur.com/Tj5DGiO.jpg",
-            }, {
-                username: "KevHs",
-                content: <p>Lorem ipsum dolor sit amet, nibh ipsum. Cum class sem inceptos incidunt sed sed. Tempus wisi enim id, arcu sed lectus aliquam, nulla vitae est bibendum molestie elit risus.</p>,
-                img: "http://i.imgur.com/ARbQZix.jpg",
-            }, {
-                username: "Kevin Hsu",
-                content: <p>So</p>,
-                img: "http://i.imgur.com/Tj5DGiO.jpg",
-            }, {
-                username: "Kevin Hsu",
-                content: <p>Chilltime is going to be an app for you to view videos with friends</p>,
-                img: "http://i.imgur.com/Tj5DGiO.jpg",
-            }, {
-                username: "Kevin Hsu",
-                content: <p>You can sign-up now to try out our private beta!</p>,
-                img: "http://i.imgur.com/Tj5DGiO.jpg",
-            }, {
-                username: "Alice Chen",
-                content: <p>Definitely! Sounds great!</p>,
-                img: "http://i.imgur.com/Tj5DGiO.jpg",
-            }]
-        };
+    this.state = {
+      message : [],
+      storedMessages : []
+    };
 
-        this.submitMessage = this.submitMessage.bind(this);
-    }
+    this.submitMessage = this.submitMessage.bind(this);
+  }
 
-    componentDidMount() {
-        this.scrollToBot();
+  componentDidMount() {
+    this.props.model.addObserver(this);
+      //this.paintVideos();
+
+    var allUsernames= [];
+    var allUsersId = [];
+    var allPictures = [];
+    var allObjects = [];
+
+    modelInstance.createApp();
+    //Store objects, usernames and id:s
+    firebase.auth().onAuthStateChanged(user => {
+      //Store objects, usernames and id:s
+      firebase.database().ref('/users/').once('value', snapshot => {
+        var key = Object.keys(snapshot.val());
+        allObjects.push(key);
+        this.setState({allObjects: snapshot.val()})
+        allObjects.push(snapshot.val());
+        key.map((key) =>
+          firebase.database().ref('/users/' + key + '/username').once('value', user => {
+            allUsersId.push(key);
+            allUsernames.push(user.val());
+            this.setState({
+              allUsersId: allUsersId,
+              allUsers: allUsernames
+            })
+          })
+        )
+      })
+      //Store profile pictures
+      firebase.database().ref('/users/').once('value', snapshot => {
+        var key = Object.keys(snapshot.val());
+        key.map((key) =>
+          firebase.database().ref('/users/' + key + '/profile_pic').once('value', pic => {
+            allPictures.push(pic.val());
+            this.setState({allPictures: allPictures})
+          })
+          )
+      })
+    })
+
+
+
+
+
+
+
+
+
+      modelInstance.createApp();
+      firebase.auth().onAuthStateChanged(user => {
+        firebase.database().ref('/users/' + user.uid).once('value', snapshot => {
+        this.setState({currentUser: snapshot.val()})
+      })
+        //console.log(Object.keys(snapshot.val());
+        firebase.database().ref('/messages/' + user.uid + '/text').once('value', people => {
+          console.log(people.val());
+          if (people.val() !== null) {
+            // if (key !== undefined) {
+            //   key.map((key) =>
+            //     firebase.database().ref('/follow/' + user.uid + '/following/' + key).once('value', person => {
+            //       // this.state.following_id.map((id) =>
+            //       //   firebase.database().ref('/shares/' + id + '/texts').once('value', snapshot => {
+            //       //     // if (snapshot.val() !== null) {
+            //       //     //   //var keyTwo = Object.keys(snapshot.val());
+            //       //     //   // if (keyTwo !== undefined) {
+            //       //     //   //   keyTwo.map((keyTwo) =>
+            //       //     //   //     firebase.database().ref('/shares/' + id  + '/texts/' + keyTwo).once('value', shareTexts => {
+            //       //     //   //       flow_texts.unshift(shareTexts.val());
+            //       //     //   //       this.setState({texts: flow_texts});
+            //       //     //   //     })
+            //       //     //   //     )
+            //       //     //   // }
+            //       //     // }
+            //       //   })
+            //       //   )
+
+            //     })
+            //     )
+            // }
+          }
+        })
+      })
+
     }
 
     componentDidUpdate() {
-        this.scrollToBot();
     }
 
-    scrollToBot() {
-        ReactDOM.findDOMNode(this.refs.chats).scrollTop = ReactDOM.findDOMNode(this.refs.chats).scrollHeight;
+    handleMessage = (event)=> {
+      this.state.message = event.target.value;
+    }
+
+    getMessages(){
+
     }
 
     submitMessage(e) {
-        e.preventDefault();
+      //e.preventDefault();
+      //console.log(this.state.currentUser);
+      modelInstance.message(this.state.currentUser.id, this.state.message);
 
-        this.setState({
-            chats: this.state.chats.concat([{
-                username: "Kevin Hsu",
-                content: <p>{ReactDOM.findDOMNode(this.refs.msg).value}</p>,
-                img: "http://i.imgur.com/Tj5DGiO.jpg",
-            }])
-        }, () => {
-            ReactDOM.findDOMNode(this.refs.msg).value = "";
-        });
     }
 
     render() {
-        const username = "Kevin Hsu";
-        const { chats } = this.state;
 
-        return (
-            <div className="chatroom">
-                <h3>Chilltime</h3>
-                <ul className="chats" ref="chats">
-                    {
-                        chats.map((chat) => 
-                            <Message chat={chat} user={username} />
-                        )
-                    }
-                </ul>
-                <form className="input" onSubmit={(e) => this.submitMessage(e)}>
-                    <input type="text" ref="msg" />
-                    <input type="submit" value="Submit" />
-                </form>
-            </div>
+
+      return (
+        <div className="chatroom">
+        <h1>Messages</h1>
+        <form className="input" onSubmit={(e) => this.submitMessage(e)}>
+        <input type="text" onChange={this.handleMessage}/>
+        <input type="submit" value="Send"/>
+        </form>
+        </div>
         );
     }
-}
+  }
 
-export default Chatroom;
+  export default Chatroom;

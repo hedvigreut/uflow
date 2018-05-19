@@ -61,29 +61,43 @@ class Navbar extends Component {
 
         <div className="row" id="navbarLogoSearchIcons">
 
-        <nav class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
+
+<nav className="navbar navbar-inverse navbar-static-top">
+  <div className="container-fluid">
+    <div className="navbar-header">
+      
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
+        <span className="icon-bar"></span>
+        <span className="icon-bar"></span>
+        <span className="icon-bar"></span>                        
       </button>
       <a className="navbar-brand" href="/explore"><img src={NavLogo} id="logo" alt="logo"/></a>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/explore"><span className="material-icons">explore</span>Explore</a></li>
-        <li><a href="/friendflow"><span className="material-icons">people</span>Friendflow</a></li>
-        <li><a href="/chatroom"><span className="material-icons">chat_bubble</span>Chatt</a></li>
-        <li><a href="/profile"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+
+    <div className="collapse navbar-collapse" id="myNavbar">
+      <ul className="nav navbar-nav">
+      <form className="navbar-form navbar-left" onSubmit={this.handleSearch} onClick={() => modelInstance.setAllUsers(this.state.users)}>
+                <div className="input-group">
+                  <input type="text" className="form-control" placeholder="Search for a video or a user" onChange={this.handleFilter} name="search" />
+                  <div className="input-group-btn">
+                    <button className="btn btn-default" type="submit" value="Submit">
+                      <i className="glyphicon glyphicon-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+        <li><a id="dropdownElements"href="/explore"><span className="material-icons">explore</span>Explore</a></li>
+        <li><a id="dropdownElements"href="/friendflow"><span className="material-icons">people</span>Friendflow</a></li>
+        <li><a id="dropdownElements"href="/chatroom"><span className="material-icons">chat_bubble</span>Chatt</a></li>
+        <li><a id="dropdownElements"href="/profile"><span className="material-icons">people</span>Profile</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+      <ul className="nav navbar-nav navbar-right">
+        <li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Log out</a></li>
       </ul>
     </div>
   </div>
 </nav>
+
 
           {/*<nav className="navbar navbar-fixed-top">
             <div className="container-fluid">

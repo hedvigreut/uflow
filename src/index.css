@@ -115,9 +115,9 @@ transform: translate(-50%, -50%);
 }
 
 .input-group{
-	margin-left: 300px;
+	margin-left: 20px;
 	margin-top: 8px;
-	width: 300px;
+	width: 250px;
 }
 .navbarIcons{
 	margin-left: 850px;
@@ -125,8 +125,9 @@ transform: translate(-50%, -50%);
 }
 
 .material-icons{
-	margin-top: 15px;
-	margin-right: 40px;
+	margin-top: -5%;
+	margin-left: 1%;
+	margin-right: 3%;
 	font-size: 30px;
 	color: #d6d6d6;
 
@@ -150,6 +151,7 @@ transform: translate(-50%, -50%);
 
 .input-group-btn{
 	margin-left: 40px;
+	border-color: white;
 }
 
 
@@ -508,6 +510,28 @@ div ~ .exploreSmallYoutube + .exploreSmallYoutube:hover {
 	margin-left: 200px;
 }
 
+.collapse{
+	background-color: white;
+	color: #d6d6d6;
+}
+
+.navbar-toggle{
+	color: #d6d6d6;
+}
+
+.navbar-toggle:hover{
+	color: #8e8e8e;
+}
+
 .navbar-collapse{
-	margin-left: 30%;
+	border-color: white;
+}
+
+#dropdownelements{
+	margin-top: 5%;
+	color: #d6d6d6;
+}
+
+#dropdownelements:hover{
+	color: #8e8e8e;
 }
