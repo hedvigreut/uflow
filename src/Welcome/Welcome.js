@@ -11,6 +11,8 @@ class Welcome extends Component {
   }
     render() {
 
+      console.log('test push');
+
       return (
         <div className="Welcome">
           {/*<NavBar/>*/}
