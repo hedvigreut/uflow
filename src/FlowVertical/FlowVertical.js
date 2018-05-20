@@ -199,7 +199,7 @@ handleChangeDescription(event) {
 
                   <div className="col-md-1"></div>
                   <div className="col-md-10 youtubePostVideo">
-                    <iframe className='FlowVerticalVideo col-md-12' width= "840" height="472.5" key={'video' + i} src={link} frameBorder="0" allowFullScreen >
+                    <iframe className='FlowVerticalVideo col-md-12' width= "270px" height="155px" key={'video' + i} src={link} frameBorder="0" allowFullScreen >
                     </iframe>
                     <div className="col-md-12">
                     <button className="shareButtonProfile" index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
