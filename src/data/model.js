@@ -6,6 +6,7 @@ const Model = function () {
   const key = 'AIzaSyAOYG1Ai4mZy6L-ifZgQ8bzS87vA6v3JdA';
   var profileUser = [];
   var message = [];
+  var chatUrl = null;
 
   var config = {
     apiKey: "AIzaSyDep4MzWGodn_n7kcInVQu2Doy6YD92Mng",
@@ -193,6 +194,34 @@ const Model = function () {
     });
   }
 
+  this.handleFileSelectChat = function(files) {
+    var storageRef = firebase.storage().ref();
+
+    var file = files[0];
+    var userId = currentUser;
+    var metadata = {
+      'contentType': file.type
+    };
+
+    storageRef.child('chat/' + userId + '/' + file.name).put(file, metadata).then(function(snapshot) {
+      console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+      console.log('File metadata:', snapshot.metadata);
+      storageRef.child('chat/' + userId + '/' + file.name).getDownloadURL().then(function(url) {
+        // `url` is the download URL for the uploaded image
+        chatUrl = url;
+        firebase.database().ref('/chatImages/' + userId).set({
+          image: url
+        });
+      }).catch(function(error) {
+        console.log(error)
+      });
+    }).catch(function(error) {
+      // [START onfailure]
+      console.error('Upload failed:', error);
+      // [END onfailure]
+    });
+  }
+
   this.addToDatabase = function(file, userId) {
     var storageRef = firebase.storage().ref();
     storageRef.child('images/' + userId + '/' + file.name).getDownloadURL().then(function(url) {
@@ -202,6 +231,10 @@ const Model = function () {
       console.log(error)
     });
     // [END oncomplete]
+  }
+
+  this.getChatUrl = function() {
+    return chatUrl;
   }
 
   // API Calls
@@ -247,8 +280,7 @@ const Model = function () {
     notifyObservers();
   }
 
-
-  this.message = function(id, text) {
+  this.message = function(id, text, imgUrl) {
 
     this.createApp();
     //var sharesRef = firebase.database().ref('shares/' + id);
@@ -259,12 +291,12 @@ const Model = function () {
       var updates = {};
       //updates['/shares/' + newShareKey] = video;
       //updates['/shares/' + id + '/videos/' + newShareKey] = video;
-      updates['/messages/' + id + '/message/' + newShareTextKey] = {text: text, timestamp: firebase.database.ServerValue.TIMESTAMP};
+      updates['/messages/' + id + '/message/' + newShareTextKey] = {text: text, timestamp: firebase.database.ServerValue.TIMESTAMP, image: imgUrl};
       firebase.database().ref().update(updates);
-
+      this.chatKey = newShareTextKey;
+      notifyObservers();
+      chatUrl = null;
   }
-
-
 
   this.addObserver = function (observer) {
     observers.push(observer);

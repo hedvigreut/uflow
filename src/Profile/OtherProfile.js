@@ -233,13 +233,13 @@ modalVideo(event) {
                       <img className="col-xs-1" id="profilePictureSmall" src={this.state.profile_pic} alt="profilePictureSmall" />
                       <h5 className="col-xs-7 profileUsername">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h5>
                     </div>
-                    
-                    <div className="col-xs-12 row">
-                      <iframe className='profileVideo col-xs-12' width= "270px" height="155px" key={'video' + i} title={'video' + i} src={link} frameBorder="0" allowFullScreen >
+
+
+                      <iframe className='OtherProfileVideo col-xs-12' width= "270px" height="155px" key={'video' + i} title={'video' + i} src={link} frameBorder="0" allowFullScreen >
                       </iframe>
                       <div className="col-xs-12" id="youtubePostButton">
-                        <button className="shareButtonProfile col-xs-12" id="shareButtonProfile" index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
-                      </div>
+                        <button className="shareButtonOtherProfile col-xs-12" index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
+
 
                     </div>
                   </div>

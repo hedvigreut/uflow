@@ -36,10 +36,10 @@ class Profile extends Component {
         this.setState({currentUser: snapshot.val()})
       })
       firebase.database().ref('/images/' + user.uid + '/image').once('value', snapshot => {
-          this.setState({
-            profile_pic: snapshot.val(),
-            status: 'LOADED'
-          });
+        this.setState({
+          profile_pic: snapshot.val(),
+          status: 'LOADED'
+        });
       })
       var flow_videos = [];
       firebase.database().ref('/shares/' + user.uid + '/videos').once('value', snapshot => {
@@ -177,73 +177,74 @@ modalVideo(event) {
           {loadingIndicator}
           <div className="col-md-2"></div>
           <div className="col-md-10">
-          <div className="ProfilePictureArea">
-                <img id="profilePicture" src={this.state.profile_pic} alt="profilePicture" />
-                <br></br>
-              </div>
+            <div className="ProfilePictureArea">
+              <img id="profilePicture" src={this.state.profile_pic} alt="profilePicture" />
+              <br></br>
+            </div>
             <div className="row" id="profileNamePictureArea">
-              <div className="col-md-6">
+
                 <h3 id="profileName"> {username}
                 </h3>
+                <div className="row pushDiv">
                 <FileUpload><p className="changeProfilePic">Change profile picture</p></FileUpload>
+                </div>
                 <p className="changeProfilePicUndertext">Press the button above to change profile picture or click on it</p>
-              </div>
 
-              </div>
+
             </div>
-            <div className="col-md-1"></div>
-            <div  className="col-md-10">
+          </div>
+          <div className="col-md-1"></div>
+          <div  className="col-md-10">
 
-              <div id="profileFlow">
-                {
-                  this.state.profile_videos.map((link, i) => {
+            <div id="profileFlow">
+              {
+                this.state.profile_videos.map((link, i) => {
 
-                    var frame =
-                    <div key={i}>
-                      <div className="youtubePost youtubePostProfile">
-                        <div className="youtubePostHead row">
-                          <img className="col-xs-1" id="profilePictureSmall" src={this.state.profile_pic} alt="profilePictureSmall" />
-                          <h5 className="profileUsername col-xs-7">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h5>
-                        </div>
-                        
-                        <div className="col-xs-12">
-                          <iframe className='profileVideo col-xs-12' width="270px" height="155px" key={'video' + i} title={'video' + i} src={link} frameBorder="0" allowFullScreen >
-                          </iframe>
-                          <button className="removeShareButton" onClick={() => this.removeShare(this.state.currentUser.id, link, this.state.texts[i])}>X</button>
-                          <div className="col-xs-12" id="youtubePostButton">
-                            <button className="shareButtonProfile col-xs-12" id="shareButtonProfile" index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
-                          </div>
+                  var frame =
+                  <div key={i}>
+                    <div className="youtubePost youtubePostProfile">
+                      <div className="youtubePostHead row">
+                        <img className="col-xs-1" id="profilePictureSmall" src={this.state.profile_pic} alt="profilePictureSmall" />
+                        <h5 className="profileUsername col-xs-7">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h5>
+                      </div>
+
+                      <div className="col-xs-12">
+                        <iframe className='profileVideo col-xs-12' width="270px" height="155px" key={'video' + i} title={'video' + i} src={link} frameBorder="0" allowFullScreen >
+                        </iframe>
+                        <button className="removeShareButton" onClick={() => this.removeShare(this.state.currentUser.id, link, this.state.texts[i])}>X</button>
+                        <div className="col-xs-12" id="youtubePostButton">
+                          <button className="shareButtonProfile col-xs-12" id="shareButtonProfile" index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
                         </div>
                       </div>
-                      <br></br>
                     </div>
-                    return frame;
-                  })
-                }
-                <div>
-                  <div id="shareModal" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
-                          <h4 className="modal-title" id="myModalLabel">Share video</h4>
+                    <br></br>
+                  </div>
+                  return frame;
+                })
+              }
+              <div>
+                <div id="shareModal" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+                        <h4 className="modal-title" id="myModalLabel">Share video</h4>
+                      </div>
+                      <div className="modal-body">
+                        <div className="col-md-1">
                         </div>
-                        <div className="modal-body">
-                          <div className="col-md-1">
-                          </div>
-                          <div id="shareVideoArea">
-                          </div>
-                          <div className="col-md-1">
-                          </div>
-                          <h5 id="modalDescription">Description</h5>
-                          <div className="col-md-1">
-                          </div>
-                          <textarea className="modalDescriptionBox" id="modalDescriptionBoxShare" placeholder="Write a description for this video" onChange={this.handleChangeDescription}></textarea>
+                        <div id="shareVideoArea">
                         </div>
-                        <div className="modal-footer">
-                          <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                          <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={() => modelInstance.shareVideo(this.state.currentVideo, this.state.currentUser.id, this.state.currentText)}>Share this on Uflow</button>
+                        <div className="col-md-1">
                         </div>
+                        <h5 id="modalDescription">Description</h5>
+                        <div className="col-md-1">
+                        </div>
+                        <textarea className="modalDescriptionBox" id="modalDescriptionBoxShare" placeholder="Write a description for this video" onChange={this.handleChangeDescription}></textarea>
+                      </div>
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={() => modelInstance.shareVideo(this.state.currentVideo, this.state.currentUser.id, this.state.currentText)}>Share this on Uflow</button>
                       </div>
                     </div>
                   </div>
@@ -251,8 +252,9 @@ modalVideo(event) {
               </div>
             </div>
           </div>
-        );
-      }
+        </div>
+      );
     }
+  }
 
-    export default Profile;
+  export default Profile;
