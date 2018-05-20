@@ -52,9 +52,8 @@ class Chatroom extends React.Component {
           })
         )
         //Fetch messages
-        console.log(userIds)
+        console.log(this.state.currentUser.id)
         var storedMessages = [];
-        var images = [];
         this.state.keys.map((id) =>
         firebase.database().ref('/messages/' + id + '/message').once('value', snapshot => {
           if (snapshot.val() !== null) {
@@ -62,15 +61,27 @@ class Chatroom extends React.Component {
             key.map((key) => {
               firebase.database().ref('/messages/' + id + '/message/' + key + '/text').once('value', text => {
                 if (text.val() !== null) {
-                firebase.database().ref('/messages/' + id + '/message/' + key + '/timestamp').once('value', timestamp => {
-                  storedMessages.push([text.val(), timestamp.val()]);
-                  storedMessages.sort(this.comparator);
-                  //firebase.database().ref('/images/' + id + '/image')
-                  this.setState({
-                    storedMessages: storedMessages
+                  firebase.database().ref('/messages/' + id + '/message/' + key + '/timestamp').once('value', timestamp => {
+                    firebase.database().ref('/users/' + id + '/username').once('value', username => {
+                      firebase.database().ref('/images/' + id + '/image').once('value', image => {
+                        if (id === this.state.currentUser.id) {
+                          storedMessages.push([text.val(), timestamp.val(), image.val(), username.val(), 'current']);
+                          storedMessages.sort(this.comparator);
+                          this.setState({
+                            storedMessages: storedMessages
+                          })
+                        }
+                        else {
+                          storedMessages.push([text.val(), timestamp.val(), image.val(), username.val()]);
+                          storedMessages.sort(this.comparator);
+                          this.setState({
+                            storedMessages: storedMessages
+                          })
+                        }
+                      })
+                    })
                   })
-                })
-              }
+                }
               })
             })
           }
@@ -117,18 +128,21 @@ render() {
       <h2 id="chatroomHeadline">Welcome to the U-flow chatroom!</h2>
       <h4 id="chatroomInstructions">Type a message in the box below to start chatting</h4>
       <div className="footer">
-      <form className="input row" onSubmit={(e) => this.submitMessage(e)}>
-        <img className="plusIcon" src={plusIcon}></img>
-        <input type="text" className="inputMessage" placeholder="Type message here"onChange={this.handleMessage}/>
-        <button type="submit" className="submitButton" value="Send">Send</button>
-      </form>
+        <form className="input row" onSubmit={(e) => this.submitMessage(e)}>
+          <img className="plusIcon" src={plusIcon}></img>
+          <input type="text" className="inputMessage" placeholder="Type message here"onChange={this.handleMessage}/>
+          <button type="submit" className="submitButton" value="Send">Send</button>
+        </form>
       </div>
       <div id="messageArea">
         {
           this.state.storedMessages.map((message, i) => {
             var messageDiv =
             <div id={"message " + i} key={i}>
-              <p className="chatMessage" key={"message #" + i}>{message[0]}</p>
+              <div className={"chatPostHead row " + message[4]}>
+                <img className="profilePictureChat col-xs-6" src={message[2]} alt="profilePictureChat" />
+                <h4 className="usernameText" key={"usernameText " + i} >{message[3]}<p></p><p className="postText">{this.state.storedMessages[i][0]}</p></h4>
+              </div>
             </div>
             return messageDiv;
           })
