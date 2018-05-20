@@ -514,6 +514,7 @@ html,body {
 	color: white;
 	text-align: center;
 	border-top: 2px solid #4B4B4B;
+	z-index: 10;
 }
 
 .inputMessage {
@@ -579,15 +580,21 @@ textarea:focus, input:focus{
 
 .usernameText {
 	color: white;
-	width: 200px;
+	width: 50%;
 	display: block;
+	margin-left: -5%;
 }
 
 .chatPostHead {
 	margin-left: 10px;
 	color: #d6d6d6;
+	margin-top: 5px;
 }
 
 .current {
-	margin-left: 45%;
+	margin-left: 40%;
+}
+
+#spaceDiv {
+	padding: 10%;
 }
