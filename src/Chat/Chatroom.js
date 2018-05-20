@@ -140,14 +140,15 @@ render() {
             var messageDiv =
             <div id={"message " + i} key={i}>
               <div className={"chatPostHead row " + message[4]}>
-                <img className="profilePictureChat col-xs-6" src={message[2]} alt="profilePictureChat" />
-                <h4 className="usernameText" key={"usernameText " + i} >{message[3]}<p></p><p className="postText">{this.state.storedMessages[i][0]}</p></h4>
+                <img className="profilePictureChat col-xs-1" src={message[2]} alt="profilePictureChat" />
+                <h4 className="usernameText col-xs-3" key={"usernameText " + i} >{message[3]}<p></p><p className="postText">{this.state.storedMessages[i][0]}</p></h4>
               </div>
             </div>
             return messageDiv;
           })
         }
       </div>
+      <div id="spaceDiv"></div>
     </div>
   );
 }
