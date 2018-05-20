@@ -281,6 +281,9 @@ const Model = function () {
   }
 
   this.message = function(id, text, imgUrl) {
+    if (text === null) {
+      text = " ";
+    }
 
     this.createApp();
     //var sharesRef = firebase.database().ref('shares/' + id);
