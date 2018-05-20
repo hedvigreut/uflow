@@ -23,8 +23,8 @@ html,body {
 }
 
 #profilePictureSmall {
-	width: 160px;
-	height: 130px;
+	width: 70px;
+	height: 40px;
 	border-radius: 50%;
 	object-fit: cover;
 }
@@ -289,6 +289,7 @@ html,body {
 
 .postText {
 	font-style: italic;
+	font-size: small;
 }
 
 .shareButton{

@@ -203,7 +203,7 @@ modalVideo(event) {
                       <div className="youtubePost">
                         <div className="youtubePostHead row">
                           <img className="col-md-6" id= "profilePictureSmall" src={this.state.profile_pic} alt="profilePictureSmall" />
-                          <h2 className="col-md-6">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h2>
+                          <h4 className="col-md-6">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h4>
                         </div>
                         <button className="removeShareButton" onClick={() => this.removeShare(this.state.currentUser.id, link, this.state.texts[i])}>X</button>
                         <div className="col-md-1"></div>
