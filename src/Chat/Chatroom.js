@@ -165,12 +165,12 @@ comparator(a, b) {
 
 submitMessage(e) {
   e.preventDefault();
-  console.log(this.state.message);
   var chatUrl = modelInstance.getChatUrl();
   console.log(chatUrl);
   modelInstance.message(this.state.currentUser.id, this.state.message, chatUrl);
   var inputBox = document.getElementsByClassName("inputMessage");
   inputBox[0].value= "";
+  this.setState({message: null});
 }
 
 render() {
