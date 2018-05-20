@@ -217,10 +217,6 @@ modalVideo(event) {
               </div>
             </div>
 
-            
-
-
-
           </div>
         </div>
         <div className="col-md-1"></div>
@@ -234,17 +230,17 @@ modalVideo(event) {
                 <div>
                   <div className="youtubePost youtubePostProfile">
                     <div className="youtubePostHead row">
-                      <img className="col-md-6" id="profilePictureSmall" src={this.state.profile_pic} alt="profilePictureSmall" />
-                      <h2 className="col-md-6">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h2>
+                      <img className="col-xs-1" id="profilePictureSmall" src={this.state.profile_pic} alt="profilePictureSmall" />
+                      <h5 className="col-xs-7 profileUsername">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h5>
                     </div>
-
-                    <div className="col-md-1"></div>
-                    <div className="col-md-10">
-                      <iframe className='profileVideo col-md-12' width= "270px" height="155px" key={'video' + i} title={'video' + i} src={link} frameBorder="0" allowFullScreen >
+                    
+                    <div className="col-xs-12 row">
+                      <iframe className='profileVideo col-xs-12' width= "270px" height="155px" key={'video' + i} title={'video' + i} src={link} frameBorder="0" allowFullScreen >
                       </iframe>
-                      <div className="col-md-12" id="youtubePostButton">
-                        <button className="shareButtonProfile" id="shareButtonProfile" index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
+                      <div className="col-xs-12" id="youtubePostButton">
+                        <button className="shareButtonProfile col-xs-12" id="shareButtonProfile" index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
                       </div>
+
                     </div>
                   </div>
                   <br></br>

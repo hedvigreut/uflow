@@ -27,8 +27,6 @@ class Chatroom extends React.Component {
   componentDidMount() {
     this.props.model.addObserver(this);
     //this.paintVideos();
-
-
     modelInstance.createApp();
 
     //Set current user
@@ -77,6 +75,7 @@ class Chatroom extends React.Component {
                           this.setState({
                             storedMessages: storedMessages
                           })
+                          this.scrollToBottom();
                         }
                       })
                     })
@@ -88,21 +87,20 @@ class Chatroom extends React.Component {
 
         })
       )
-      //Fetch profile pictures
-
-      /*key.map((key) =>
-      firebase.database().ref('/users/' + key + '/profile_pic').once('value', profile_pic => {
-      userPictures.unshift(profile_pic.val());
-      this.setState({pictures: userPictures});
-
-      })
-      )*/
     })
   })
+}
 
+scrollToBottom = () => {
+  this.messagesEnd.scrollIntoView({ behavior: "smooth" });
 }
 
 componentDidUpdate() {
+  this.scrollToBottom();
+}
+
+update() {
+  this.scrollToBottom();
 }
 
 handleMessage = (event)=> {
@@ -125,15 +123,15 @@ submitMessage(e) {
 render() {
   return (
     <div className="Chatroom">
+      <NavBar />
       <h2 id="chatroomHeadline">Welcome to the U-flow chatroom!</h2>
-      <h4 id="chatroomInstructions">Type a message in the box below to start chatting</h4>
-      <div className="footer">
-        <form className="input row" onSubmit={(e) => this.submitMessage(e)}>
-          <img className="plusIcon" src={plusIcon}></img>
-          <input type="text" className="inputMessage" placeholder="Type message here"onChange={this.handleMessage}/>
-          <button type="submit" className="submitButton" value="Send">Send</button>
-        </form>
-      </div>
+        <div className="footer">
+          <form className="input row" onSubmit={(e) => this.submitMessage(e)}>
+            <img className="plusIcon" src={plusIcon}></img>
+            <input type="text" className="inputMessage" placeholder="Type message here"onChange={this.handleMessage}/>
+            <button type="submit" className="submitButton" value="Send">Send</button>
+          </form>
+        </div>
       <div id="messageArea">
         {
           this.state.storedMessages.map((message, i) => {
@@ -141,14 +139,17 @@ render() {
             <div id={"message " + i} key={i}>
               <div className={"chatPostHead row " + message[4]}>
                 <img className="profilePictureChat col-xs-1" src={message[2]} alt="profilePictureChat" />
-                <h4 className="usernameText col-xs-3" key={"usernameText " + i} >{message[3]}<p></p><p className="postText">{this.state.storedMessages[i][0]}</p></h4>
+                <h5 className={"usernameTextChat col-xs-2 text" + message[4]} key={"usernameText " + i} >{message[3]}<p></p><p className="postTextChat">{this.state.storedMessages[i][0]}</p></h5>
               </div>
             </div>
             return messageDiv;
           })
         }
       </div>
-      <div id="spaceDiv"></div>
+      <div id="spaceDiv" style={{ float:"left", clear: "both" }}
+           ref={(el) => { this.messagesEnd = el; }}>
+      </div>
+
     </div>
   );
 }
