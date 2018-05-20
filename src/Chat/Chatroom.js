@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import NavBar from "../Navbar/Navbar";
 import { modelInstance } from '../data/model';
 import firebase from 'firebase';
+import plusIcon from "../Chat/plus-icon.png";
 
 class Chatroom extends React.Component {
   constructor(props) {
@@ -53,16 +54,23 @@ class Chatroom extends React.Component {
         //Fetch messages
         console.log(userIds)
         var storedMessages = [];
+        var images = [];
         this.state.keys.map((id) =>
-        firebase.database().ref('/messages/' + id + '/text').once('value', snapshot => {
+        firebase.database().ref('/messages/' + id + '/message').once('value', snapshot => {
           if (snapshot.val() !== null) {
             var key = Object.keys(snapshot.val());
             key.map((key) => {
-              firebase.database().ref('/messages/' + id + '/text/' + key).once('value', snapshot => {
-                storedMessages.push(snapshot.val());
-                this.setState({
-                  storedMessages: storedMessages
+              firebase.database().ref('/messages/' + id + '/message/' + key + '/text').once('value', text => {
+                if (text.val() !== null) {
+                firebase.database().ref('/messages/' + id + '/message/' + key + '/timestamp').once('value', timestamp => {
+                  storedMessages.push([text.val(), timestamp.val()]);
+                  storedMessages.sort(this.comparator);
+                  //firebase.database().ref('/images/' + id + '/image')
+                  this.setState({
+                    storedMessages: storedMessages
+                  })
                 })
+              }
               })
             })
           }
@@ -90,8 +98,10 @@ handleMessage = (event)=> {
   this.state.message = event.target.value;
 }
 
-getMessages(){
-
+comparator(a, b) {
+  if (a[1] < b[1]) return -1;
+  if (a[1] > b[1]) return 1;
+  return 0;
 }
 
 submitMessage(e) {
@@ -102,15 +112,14 @@ submitMessage(e) {
 }
 
 render() {
-
-
   return (
     <div className="Chatroom">
       <h2 id="chatroomHeadline">Welcome to the U-flow chatroom!</h2>
       <h4 id="chatroomInstructions">Type a message in the box below to start chatting</h4>
       <div className="footer">
       <form className="input row" onSubmit={(e) => this.submitMessage(e)}>
-        <input type="text" className="inputMessage" placeHolder="Type message here"onChange={this.handleMessage}/>
+        <img className="plusIcon" src={plusIcon}></img>
+        <input type="text" className="inputMessage" placeholder="Type message here"onChange={this.handleMessage}/>
         <button type="submit" className="submitButton" value="Send">Send</button>
       </form>
       </div>
@@ -119,7 +128,7 @@ render() {
           this.state.storedMessages.map((message, i) => {
             var messageDiv =
             <div id={"message " + i} key={i}>
-              <p className="chatMessage" key={i}>{message}</p>
+              <p className="chatMessage" key={"message #" + i}>{message[0]}</p>
             </div>
             return messageDiv;
           })

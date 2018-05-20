@@ -259,13 +259,12 @@ const Model = function () {
       var updates = {};
       //updates['/shares/' + newShareKey] = video;
       //updates['/shares/' + id + '/videos/' + newShareKey] = video;
-      updates['/messages/' + id + '/text/' + newShareTextKey] = text;
+      updates['/messages/' + id + '/message/' + newShareTextKey] = {text: text, timestamp: firebase.database.ServerValue.TIMESTAMP};
       firebase.database().ref().update(updates);
-    
-    console.log("message!");
+
   }
 
-  
+
 
   this.addObserver = function (observer) {
     observers.push(observer);
