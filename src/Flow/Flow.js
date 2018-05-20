@@ -181,8 +181,8 @@ render() {
         <div id={userId[i]} key={i} className="row youtubePostHead" onClick={this.navigateToUser}>
           <Link to="/otherProfile">
             <div className="col-md-3"></div>
-            <img id={userId[i]} className="col-md-6 profilePictureSmall pushRight" src={profilePicture[i]} alt="profilePicture"></img>
-            <h3 id={userId[i]} className="resUsername">{name}</h3>
+            <img id={userId[i]} className="col-md-6 profilePicture" src={profilePicture[i]} alt="profilePicture"></img>
+            <h5 id={userId[i]} className="resUsername">{name}</h5>
           </Link>
         </div>
       )

@@ -212,7 +212,7 @@ modalVideo(event) {
             <div className="col-md-6">
               <h3 id="profileName"> {username}</h3>
               <div id="followButtons">
-                <button className="followButton exploreSmallYoutubeButton" id="follow" onClick={ () => this.startFollow(this.state.currentUser.id, this.state.profileUser.id)}>Follow</button>
+                <button className="exploreSmallYoutubeButton" id="follow" onClick={ () => this.startFollow(this.state.currentUser.id, this.state.profileUser.id)}>Follow</button>
                 <button className="exploreSmallYoutubeButton" id="follow" onClick={() => this.stopFollow(this.state.currentUser.id, this.state.profileUser.id)}>Stop Following</button>
               </div>
             </div>
