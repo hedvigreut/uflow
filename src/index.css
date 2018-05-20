@@ -241,8 +241,9 @@ html,body {
 }
 
 #modalVideo{
-	width: 474.32px;
-	height: 242.55px;
+	width: 270px;
+	height: 155px;
+	margin-left: 9%;
 }
 
 #modalDescriptionBoxShare{
@@ -274,17 +275,16 @@ html,body {
 .profileVideo {
 	text-align: center;
 	margin-bottom: 5px;
+	margin-left: -10%;
+	margin-top: 2%;
 }
 
 .youtubePost {
 	color: #ededed;
 	display: block;
 	margin-bottom: 5px;
-
-}
-
-.youtubePost {
 	margin-left:55px;
+
 }
 
 .postText {
@@ -303,9 +303,11 @@ html,body {
 }
 
 .shareButtonProfile {
-	width: 100%;
-	height: 60px;
+	width: 240px;
+	height: 40px;
+	font-size: 10px;
 	margin-top: -5px;
+	margin-left: -11.5%;
 	opacity: 100%;
 	background-color: #3a3a3a;
 	color: #d6d6d6;
@@ -328,7 +330,7 @@ html,body {
 }
 
 .youtubePostHead {
-	margin-left: 10px;
+	margin-left: -2%;
 	margin-top: 20px;
 	margin-bottom: 0px;
 	color: #d6d6d6;
