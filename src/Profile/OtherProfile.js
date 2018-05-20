@@ -232,7 +232,7 @@ modalVideo(event) {
 
                 var frame =
                 <div>
-                  <div className="youtubePost">
+                  <div className="youtubePost youtubePostProfile">
                     <div className="youtubePostHead row">
                       <img className="col-md-6" id="profilePictureSmall" src={this.state.profile_pic} alt="profilePictureSmall" />
                       <h2 className="col-md-6">{username}<p></p><p className="postText">{this.state.texts[i]}</p></h2>
@@ -243,7 +243,7 @@ modalVideo(event) {
                       <iframe className='profileVideo col-md-12' width= "270px" height="155px" key={'video' + i} title={'video' + i} src={link} frameBorder="0" allowFullScreen >
                       </iframe>
                       <div className="col-md-12" id="youtubePostButton">
-                        <button className="shareButtonProfile " index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
+                        <button className="shareButtonProfile" id="shareButtonProfile" index={i} data-toggle="modal" data-target="#shareModal" onClick={this.modalVideo}>Share on uflow</button>
                       </div>
                     </div>
                   </div>

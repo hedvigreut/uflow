@@ -79,8 +79,8 @@ class Navbar extends Component {
 
     <div className="collapse navbar-collapse" id="myNavbar">
       <ul className="nav navbar-nav">
-      <form className="navbar-form navbar-left" onSubmit={this.handleSearch}>
-                <div className="input-group" onClick={this.handleLocation}>
+      <form className="navbar-form navbar-left" id="form_search" onSubmit={this.handleSearch}>
+                <div className="input-group" id="input-group_search" onClick={this.handleLocation}>
                   <input type="text" className="form-control" placeholder="Search for a video or a user" onChange={this.handleFilter} name="search" />
                   <div className="input-group-btn">
                     <button className="btn btn-default" type="submit" value="Submit">
@@ -89,10 +89,10 @@ class Navbar extends Component {
                   </div>
                 </div>
               </form>
-        <li><a id="dropdownElements"href="/explore"><span className="material-icons">explore</span>Explore</a></li>
-        <li><a id="dropdownElements"href="/friendflow"><span className="material-icons">people</span>Friendflow</a></li>
-        <li><a id="dropdownElements"href="/chatroom"><span className="material-icons">chat_bubble</span>Chatt</a></li>
-        <li><a id="dropdownElements"href="/profile"><span className="material-icons">people</span>Profile</a></li>
+        <li><a id="dropdownElements" href="/explore"><span className="material-icons">explore</span>Explore</a></li>
+        <li><a id="dropdownElements" href="/friendflow"><span className="material-icons">people</span>Friendflow</a></li>
+        <li><a id="dropdownElements" href="/chatroom"><span className="material-icons">chat_bubble</span>Chatt</a></li>
+        <li><a id="dropdownElements" href="/profile"><span className="material-icons">people</span>Profile</a></li>
       </ul>
       <ul className="nav navbar-nav navbar-right">
         <li><Link to="/"><span className="material-icons" onClick={() => modelInstance.googleLogout()}>settings_power</span> Log out</Link></li>
