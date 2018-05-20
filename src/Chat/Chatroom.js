@@ -112,6 +112,7 @@ update() {
   var storedMessages = [];
   this.state.keys.map((id) =>
   firebase.database().ref('/messages/' + id + '/message').once('value', snapshot => {
+    this.scrollToBottomUpdate();
     if (snapshot.val() !== null) {
       var key = Object.keys(snapshot.val());
       key.map((key) => {

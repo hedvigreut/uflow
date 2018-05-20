@@ -658,6 +658,7 @@ textarea:focus, input:focus, button:focus {
 	font-style: italic;
 	font-size: small;
 	margin-top: -2%;
+	height: 14px;
 }
 
 .profileUsername {
