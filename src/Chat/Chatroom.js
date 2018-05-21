@@ -52,7 +52,7 @@ class Chatroom extends React.Component {
           })
         )
         //Fetch messages
-        console.log(this.state.currentUser.id)
+
         var storedMessages = [];
         this.state.keys.map((id) =>
         firebase.database().ref('/messages/' + id + '/message').once('value', snapshot => {
