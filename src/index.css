@@ -699,3 +699,9 @@ textarea:focus, input:focus, button:focus {
 	margin-left: -5%;
 	margin-top: 2%;
 }
+
+#thanks {
+	background-color: #3a3a3a;
+	color: #d6d6d6;
+	border: 0.5px solid #262626;
+}

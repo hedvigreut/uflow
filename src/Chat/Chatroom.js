@@ -6,6 +6,8 @@ import { modelInstance } from '../data/model';
 import firebase from 'firebase';
 import plusIcon from "../Chat/plus-icon.png";
 import FileUploadChat from './FileUploadChat';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 class Chatroom extends React.Component {
   constructor(props) {
@@ -28,6 +30,7 @@ class Chatroom extends React.Component {
 
   componentDidMount() {
     this.props.model.addObserver(this);
+    this.props.model.addObserverChat(this);
     //this.paintVideos();
     modelInstance.createApp();
     //Set current user
@@ -152,6 +155,19 @@ update() {
 
   })
 )
+}
+
+updateChat() {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className='custom-ui'>
+            <p>Upload was successfull!</p>
+            <button id="thanks" onClick={onClose}>Thanks</button>
+          </div>
+        )
+      }
+    })
 }
 
 handleMessage = (event)=> {

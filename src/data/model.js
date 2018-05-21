@@ -2,6 +2,7 @@ const Model = function () {
 
   let filter = "";
   let observers = [];
+  let chatObservers = [];
   var firebase = require("firebase");
   const key = 'AIzaSyAOYG1Ai4mZy6L-ifZgQ8bzS87vA6v3JdA';
   var profileUser = [];
@@ -208,6 +209,7 @@ const Model = function () {
       console.log('File metadata:', snapshot.metadata);
       storageRef.child('chat/' + userId + '/' + file.name).getDownloadURL().then(function(url) {
         // `url` is the download URL for the uploaded image
+        notifyObserversChat();
         chatUrl = url;
         firebase.database().ref('/chatImages/' + userId).set({
           image: url
@@ -313,7 +315,13 @@ const Model = function () {
     observers.forEach(o => o.update());
   };
 
+  this.addObserverChat = function(observer) {
+    chatObservers.push(observer);
+  }
 
+  const notifyObserversChat = function() {
+    chatObservers.forEach(o => o.updateChat());
+  }
 
   }
 
